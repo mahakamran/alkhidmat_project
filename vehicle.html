@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Document</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Koh+Santepheap:wght@100;300;400;700;900&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Konkhmer+Sleokchher&display=swap" rel="stylesheet"/>
+</head>
+<body>
+    <!-- navbar start -->
+  <header id="header">
+    <img src="img1.png" alt="" id="img1" />
+    <div id="main">
+      <h5 id="heading1"><a href="room.html">Room</a></h5>
+      <h5 id="heading2"><a href="status.html">Status</a></h5>
+      <h5 id="heading3"><a href="vehicle.html">Vehicles</a></h5>
+      <button id="btn"><a href="logout.html">Logout</a></button>
+           <div class="account-wrapper">
+  <div id="acc">
+    <img src="image 30.png" alt="" id="accToggle">
+  </div>
+  <div id="accDropdown" class="dropdown">
+    <a href="settings.html">Settings</a>
+    <a href="logout.html">Logout</a>
+  </div>
+</div>
+    </div>
+  </header>
+  <!-- navbar end -->
+  
+
+ <!-- Filter Buttons -->
+
+ <div class="filter-buttons">
+  <button class="filter-btn" data-filter="all">All</button>
+  <button class="filter-btn" data-filter="Alkhidmat Van">Alkhidmat Van</button>
+  <button class="filter-btn" data-filter="Car 1">Car 1 </button>
+  <button class="filter-btn" data-filter="Car 2">Car 2</button>
+  <button class="filter-btn" data-filter="Car 3">Car 3</button>
+
+</div>
+
+
+<!-- Room Section Start -->
+<section class="vehicle-container">
+  <div class="room-card"  >
+    <img src="image 7.png" alt="Alkhidmat Van" />
+    <div class="room-info">
+      <h3>Alkhidmat Van</h3>
+      <p>Driver name : <span>Noman</span></p>
+          <p id="number">03437689277</p>
+      <button class="reserve-btn"><a href="vehicle_reserveform.html">Reserve</a></button>
+    </div>
+  </div>
+
+  <div class="room-card" >
+    <img src="image 8.png" alt="Car 1" />
+    <div class="room-info">
+      <h3>Car 1</h3>
+          <p>Driver name : <span>Ali Khan</span></p>
+          <p id="number">03754827587</p>
+      <button class="reserve-btn">Reserve</button>
+    </div>
+  </div>
+
+  <div class="room-card" >
+<img src="image 9.png" alt="Car 2" />
+    <div class="room-info">
+      <h3>Car 2</h3>
+           <p>Driver name : <span>Jameel Ahmed</span></p>
+          <p id="number">03563966732</p>
+      <button class="reserve-btn">Reserve</button>
+    </div>
+  </div>
+
+  <div class="room-card" >
+    <img src="image 10.png" alt="Car 3" />
+    <div class="room-info">
+      <h3>Car 3</h3>
+            <p>Driver name : <span>Hamza Shiekh</span></p>
+          <p id="number">03733357899</p>
+      <button class="reserve-btn">Reserve</button>
+    </div>
+  </div>
+</section>
+<!-- Room Section End -->
+
+
+  <!-- footer start -->
+  <footer>
+    <div id="main5">
+      <div>
+        <img src="img1.png" alt="" />
+      </div>
+      <div id="main6">
+        <h5>Contact Info</h5>
+        <p>© 2025 Alkhidmat Foundation</p>
+        <p>Vehicle and Board room reservation</p>
+      </div>
+      <div id="main7">
+        <h5>Quick Links</h5>
+        <p>Rooms</p>
+        <p>Vehicles</p>
+        <p>Status</p>
+      </div>
+    </div>
+    <div id="icons">
+      <img src="image 11 (2).png" alt="" />
+      <img src="image 16 (1).png" alt="" />
+      <img src="image 17 (1).png" alt="" />
+      <img src="image 18 (1).png" alt="" />
+      <img src="image 19 (1).png" alt="" />
+    </div>
+  </footer>
+  <!-- footer end -->
+
+
+<script>
+
+
+  // Filter logic
+  const filterButtons = document.querySelectorAll('.filter-btn');
+  const roomCards = document.querySelectorAll('.room-card');
+
+  filterButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      // Remove 'active' from all buttons
+      filterButtons.forEach(btn => btn.classList.remove('active'));
+      button.classList.add('active');
+
+      const filterValue = button.getAttribute('data-filter');
+
+      roomCards.forEach(card => {
+        const roomTitle = card.querySelector('h3').textContent.trim();
+
+        if (filterValue === 'all' || roomTitle === filterValue) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+    const accToggle = document.getElementById("accToggle");
+  const accDropdown = document.getElementById("accDropdown");
+
+  accToggle.addEventListener("click", () => {
+    accDropdown.style.display = accDropdown.style.display === "block" ? "none" : "block";
+  });
+
+  // Close dropdown if clicked outside
+  window.addEventListener("click", function(e) {
+    if (!accToggle.contains(e.target) && !accDropdown.contains(e.target)) {
+      accDropdown.style.display = "none";
+    }
+  });
+
+</script>
+
+
+</body>
+</html>

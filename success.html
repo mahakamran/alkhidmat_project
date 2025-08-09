@@ -1,0 +1,94 @@
+<!-- success.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Success</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f1f1f1;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .popup {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.4);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    .popup-box {
+      background: #fff;
+      border-radius: 16px;
+      padding: 30px 25px;
+      max-width: 320px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      animation: popIn 0.3s ease;
+    }
+
+    .popup-icon img {
+      width: 60px;
+      margin-bottom: 10px;
+    }
+
+    .popup-box h2 {
+      font-size: 20px;
+      color: #2e7d32;
+      margin: 10px 0;
+    }
+
+    .popup-box p {
+      font-size: 14px;
+      color: #555;
+      margin-bottom: 25px;
+    }
+
+    .popup-box button {
+      background-color: #2e7d32;
+      color: white;
+      border: none;
+      padding: 10px 25px;
+      font-size: 15px;
+      border-radius: 25px;
+      cursor: pointer;
+    }
+
+    @keyframes popIn {
+      from {
+        transform: scale(0.85);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="popup" id="popup">
+  <div class="popup-box">
+    <div class="popup-icon">
+      <img src="image copy.png" alt="Success" />
+    </div>
+    <h2>Registration successful!</h2>
+    <p>Your account has been created successfully.</p>
+    <button onclick="window.location.href='login.html'">Login</button>
+  </div>
+</div>
+
+</body>
+</html>

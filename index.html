@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Document</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Koh+Santepheap:wght@100;300;400;700;900&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Konkhmer+Sleokchher&display=swap" rel="stylesheet"/>
+</head>
+<body>
+ <!-- navbar start -->
+  <header id="header">
+    <img src="img1.png" alt="" id="img1" />
+    <div id="main">
+      <h5 id="heading1"><a href="room.html">Room</a></h5>
+      <h5 id="heading2"><a href="status.html">Status</a></h5>
+      <h5 id="heading3"><a href="vehicle.html">Vehicles</a></h5>
+      <button id="btn"><a href="logout.html">Logout</a></button>
+           <div class="account-wrapper">
+  <div id="acc">
+    <img src="image 30.png" alt="" id="accToggle">
+  </div>
+  <div id="accDropdown" class="dropdown">
+    <a href="settings.html">Settings</a>
+    <a href="logout.html">Logout</a>
+  </div>
+</div>
+    </div>
+  </header>
+  <!-- navbar end -->
+
+  <!-- register form start -->
+  <div id="main1">
+    <div id="main2">
+      <h2 id="heading4">Registration</h2>
+    </div>
+    <div id="main3">
+      <form id="registerForm">
+        <input type="text" placeholder="Enter Your FullName" required />
+        <input type="email" placeholder="Enter Your Email" required />
+        <input type="password" placeholder="Enter Your Password" required />
+        <input type="password" placeholder="Enter Your ConfirmPassword" required />
+        <button type="submit" id="btn2">Register</button>
+      </form>
+      <p id="para1">Already have an account ? <span><a href="login.html">Login</a></span></p>
+    </div>
+  </div>
+  <!-- register form end -->
+
+
+  <!-- footer start -->
+  <footer>
+    <div id="main5">
+      <div>
+        <img src="img1.png" alt="" />
+      </div>
+      <div id="main6">
+        <h5>Contact Info</h5>
+        <p>© 2025 Alkhidmat Foundation</p>
+        <p>Vehicle and Board room reservation</p>
+      </div>
+      <div id="main7">
+        <h5>Quick Links</h5>
+        <p>Rooms</p>
+        <p>Vehicles</p>
+        <p>Status</p>
+      </div>
+    </div>
+    <div id="icons">
+      <img src="image 11 (2).png" alt="" />
+      <img src="image 16 (1).png" alt="" />
+      <img src="image 17 (1).png" alt="" />
+      <img src="image 18 (1).png" alt="" />
+      <img src="image 19 (1).png" alt="" />
+    </div>
+  </footer>
+  <!-- footer end -->
+
+
+  <!-- script -->
+ <script>
+  const form = document.getElementById("registerForm");
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    // ✅ Redirect to success page after submit
+    window.location.href = "success.html";
+  });
+</script>
+
+</body>
+</html>
+
+

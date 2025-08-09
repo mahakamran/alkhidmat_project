@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Logout</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Koh+Santepheap:wght@100;300;400;700;900&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Konkhmer+Sleokchher&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+</head>
+<body>
+      <!-- navbar start -->
+  <header id="header">
+    <img src="img1.png" alt="" id="img1" />
+    <div id="main">
+      <h5 id="heading1"><a href="room.html">Room</a></h5>
+      <h5 id="heading2"><a href="status.html">Status</a></h5>
+      <h5 id="heading3"><a href="vehicle.html">Vehicles</a></h5>
+      <button id="btn"><a href="logout.html">Logout</a></button>
+           <div class="account-wrapper">
+  <div id="acc">
+    <img src="image 30.png" alt="" id="accToggle">
+  </div>
+  <div id="accDropdown" class="dropdown">
+    <a href="settings.html">Settings</a>
+    <a href="logout.html">Logout</a>
+  </div>
+</div>
+    </div>
+  </header>
+  <!-- navbar end -->
+
+  <div class="logos">
+    <img src="image 2 (2).png" alt="Alkhidmat Logo">
+    <img src="image 1 (1).png" alt="bano qabil Logo">
+  </div>
+
+  <div class="message">Are you sure you want to logout?</div>
+
+  <a href="index.html" class="logout-btn">
+  <i class="fas fa-sign-out-alt"></i> Logout
+</a>
+<script>
+    const accToggle = document.getElementById("accToggle");
+  const accDropdown = document.getElementById("accDropdown");
+
+  accToggle.addEventListener("click", () => {
+    accDropdown.style.display = accDropdown.style.display === "block" ? "none" : "block";
+  });
+
+  // Close dropdown if clicked outside
+  window.addEventListener("click", function(e) {
+    if (!accToggle.contains(e.target) && !accDropdown.contains(e.target)) {
+      accDropdown.style.display = "none";
+    }
+  });
+
+</script>
+
+</body>
+</html>

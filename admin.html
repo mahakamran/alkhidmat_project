@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+  <style>
+    body {
+      background-color: #f4f7fe;
+      font-family: 'Segoe UI', sans-serif;
+      overflow-x: hidden;
+    }
+
+    .sidebar {
+      width: 240px;
+      position: fixed;
+      height: 100vh;
+      background: linear-gradient(135deg, #004aad, #023e8a);
+      color: white;
+      padding: 30px 20px;
+    }
+
+    .sidebar h3 {
+      font-weight: bold;
+      margin-bottom: 30px;
+    }
+
+    .sidebar a {
+      color: white;
+      display: block;
+      margin: 15px 0;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .sidebar a:hover {
+      color: #ffd700;
+    }
+
+    .topbar {
+      height: 70px;
+      background-color: white;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+      margin-left: 240px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 30px;
+    }
+
+    .main {
+      margin-left: 240px;
+      padding: 40px;
+    }
+
+    .stat-card {
+      background: linear-gradient(145deg, #ffffff, #e3e9f7);
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+      padding: 25px;
+      text-align: center;
+      transition: 0.3s;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+    }
+
+    .stat-card h3 {
+      margin-top: 10px;
+      font-size: 34px;
+      color: #004aad;
+      font-weight: bold;
+    }
+
+    .stat-card p {
+      font-size: 15px;
+      color: #555;
+      margin-bottom: 0;
+    }
+
+    .chart-container {
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+      padding: 30px;
+      margin-top: 40px;
+    }
+
+    .animated-dropdown {
+      animation: dropdownFade 0.3s ease;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    @keyframes dropdownFade {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .shadow:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  transition: 0.3s ease;
+}
+    h2.section-title {
+      text-align: center;
+      margin-top: 50px;
+      margin-bottom: 10px;
+    }
+
+    .table-custom {
+      width: 100%;
+      margin-top: 20px;
+      border-collapse: collapse;
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .table-custom thead {
+      background-color: #004aad;
+      color: white;
+    }
+
+    .table-custom th, .table-custom td {
+      padding: 14px 20px;
+      text-align: center;
+      font-size: 15px;
+    }
+
+    .table-custom tbody tr:nth-child(even) {
+      background-color: white;
+    }
+
+    .table-custom button {
+      border: none;
+      border-radius: 5px;
+      padding: 6px 12px;
+      color: white;
+      font-weight: bold;
+    }
+
+    .btn-approve {
+      background-color: #28A745;
+    }
+
+    .btn-cancel {
+      background-color: #DC3545;
+    }
+
+
+  </style>
+</head>
+<body>
+ <div class="sidebar">
+  <h3>Admin Panel</h3>
+  <a href="admin.html"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a>
+  <a href="bookings.html"><i class="bi bi-calendar-check me-2"></i>Bookings</a>
+  <a href="admin_room.html"><i class="bi bi-door-open me-2"></i>Rooms</a>
+  <a href="admin_vehicle.html"><i class="bi bi-truck-front me-2"></i>Vehicles</a>
+  <a href="admin_setting.html"><i class="bi bi-gear me-2"></i>Settings</a>
+  <a href="admin_logout.html"><i class="bi bi-box-arrow-right me-2"></i>Logout</a>
+</div>
+
+ 
+<div class="topbar">
+  <h5>Welcome, Admin</h5>
+  <div class="dropdown">
+    <img src="admin.png" 
+         class="rounded-circle dropdown-toggle" 
+         width="40" height="40"
+         role="button" 
+         data-bs-toggle="dropdown" 
+         aria-expanded="false" 
+         style="cursor:pointer; object-fit:cover;" />
+    <ul class="dropdown-menu dropdown-menu-end shadow animated-dropdown">
+      <li><a class="dropdown-item" href="admin_setting.html">Account Settings</a></li>
+      <li><a class="dropdown-item text-danger" href="admin_logout.html">Logout</a></li>
+    </ul>
+  </div>
+</div>
+
+
+  <div class="main">
+    <div class="row g-4">
+      <div class="col-md-3">
+        <div class="stat-card">
+          <h3 id="count1">0</h3>
+          <p>Total Bookings</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="stat-card">
+          <h3 id="count2">0</h3>
+          <p>Approved</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="stat-card">
+          <h3 id="count3">0</h3>
+          <p>Pending</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="stat-card">
+          <h3 id="count4">0</h3>
+          <p>Cancelled</p>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="row chart-container mt-5">
+      <div class="col-md-6">
+        <canvas id="modernBarChart"></canvas>
+      </div>
+      <div class="col-md-6 position-relative">
+        <canvas id="modernDonutChart"></canvas>
+        <div style="position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); font-size:20px; font-weight:bold; color:#004aad;">72%</div>
+      </div>
+    </div>
+     <div class="row mt-5">
+      <div class="col-md-12">
+        <h4 class="mb-4" style="font-weight:bold; color:#004aad;"> Departments Reservations</h4>
+        <div class="d-flex flex-wrap gap-3">
+          <div class="p-3 shadow rounded" style="min-width: 180px; background: white;">
+            <h6 class="mb-1">IT Department</h6>
+            <p class="mb-0 text-muted">60 Reservations</p>
+          </div>
+          <div class="p-3 shadow rounded" style="min-width: 180px; background: white;">
+            <h6 class="mb-1">Marketing</h6>
+            <p class="mb-0 text-muted">800 Reservations</p>
+          </div>
+          <div class="p-3 shadow rounded" style="min-width: 180px; background: white;">
+            <h6 class="mb-1">Diagnostic</h6>
+            <p class="mb-0 text-muted">20 Reservations</p>
+          </div>
+           <div class="p-3 shadow rounded" style="min-width: 180px; background: white;">
+            <h6 class="mb-1">Finance</h6>
+            <p class="mb-0 text-muted">30 Reservations</p>
+          </div>
+          <div class="p-3 shadow rounded" style="min-width: 180px; background: white;">
+            <h6 class="mb-1">HR</h6>
+            <p class="mb-0 text-muted">45 Reservations</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+
+    <h2 class="section-title">Boardroom Reservations</h2>
+
+  <table class="table-custom">
+    <thead>
+      <tr>
+        <th>User</th>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Depart</th>
+        <th>Room</th>
+        <th>Emergency</th>
+        <th>Hours</th>
+        <th>Status</th>
+         <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Hussain</td>
+        <td>09-05-2025</td>
+        <td>10:00:00</td>
+        <td>IT</td>
+        <td>Meeting Room A</td>
+        <td>Yes</td>
+        <td>2</td>
+        <td><button class="btn-approve">Approved</button></td>
+        <td><button class="btn-cancel">Cancel</button></td>
+      </tr>
+      <tr>
+        <td>Ali</td>
+        <td>09-05-2025</td>
+        <td>10:00:00</td>
+        <td>HR</td>
+        <td>Meeting Room B</td>
+        <td>No</td>
+        <td>1</td>
+        <td><button class="btn-approve">Approved</button></td>
+        <td><button class="btn-cancel">Cancel</button></td>
+      </tr>
+      <tr>
+        <td>Umer</td>
+        <td>09-05-2025</td>
+        <td>10:00:00</td>
+        <td>Diagnostic</td>
+        <td>Meeting Room A</td>
+        <td>No</td>
+        <td>1</td>
+       <td><button class="btn-approve">Approved</button></td>
+        <td><button class="btn-cancel">Cancel</button></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+
+   <!-- Vehicle Reservations -->
+  <h2 class="section-title">Vehicle Reservations</h2>
+  <table class="table-custom">
+    <thead>
+      <tr>
+        <th>User</th>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Depart</th>
+        <th>Vehicle</th>
+        <th>From</th>
+        <th>To</th>
+        <th>Hours</th>
+        <th>Status</th>
+        <th></th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Zainab</td>
+        <td>09-05-2025</td>
+        <td>12:00:00</td>
+        <td>HR</td>
+        <td>Car A</td>
+        <td>xyz</td>
+        <td>abc</td>
+        <td>3</td>
+        <td><button class="btn-approve">Approved</button></td>
+        <td><button class="btn-cancel">Cancel</button></td>
+      </tr>
+      <tr>
+        <td>Ahsan</td>
+        <td>09-05-2025</td>
+        <td>12:00:00</td>
+        <td>IT</td>
+        <td>Car B</td>
+        <td>xyz</td>
+        <td>abc</td>
+        <td>4</td>
+         <td><button class="btn-approve">Approved</button></td>
+        <td><button class="btn-cancel">Cancel</button></td>
+      </tr>
+    </tbody>
+  </table>
+
+  </div>
+
+  
+  <!-- Bootstrap JS bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    function animateCounter(id, target) {
+      let i = 0;
+      const speed = target > 100 ? 2 : 10;
+      const updateCount = () => {
+        i += speed;
+        if (i >= target) {
+          document.getElementById(id).innerText = target;
+        } else {
+          document.getElementById(id).innerText = i;
+          requestAnimationFrame(updateCount);
+        }
+      };
+      updateCount();
+    }
+
+    animateCounter("count1", 120);
+    animateCounter("count2", 85);
+    animateCounter("count3", 20);
+    animateCounter("count4", 15);
+
+    const barCtx = document.getElementById('modernBarChart').getContext('2d');
+    new Chart(barCtx, {
+      type: 'bar',
+      data: {
+        labels: ['Marketing', 'IT', 'HR', 'Admin', 'Diagnostic'],
+        datasets: [{
+          label: 'Department Usage',
+          data: [100, 180, 120, 80, 60],
+          backgroundColor: ['#6366f1', '#10b981', '#f59e0b', '#3b82f6', '#ef4444'],
+          borderRadius: 8,
+          barThickness: 28
+        }]
+      },
+      options: {
+        plugins: {
+          legend: { display: false }
+        },
+        scales: {
+          x: { grid: { display: false } },
+          y: {
+            beginAtZero: true,
+            grid: { color: '#eee' }
+          }
+        }
+      }
+    });
+
+    const donutCtx = document.getElementById('modernDonutChart').getContext('2d');
+    new Chart(donutCtx, {
+      type: 'doughnut',
+      data: {
+        labels: ['Used', 'Free'],
+        datasets: [{
+          data: [72, 28],
+          backgroundColor: ['#3b82f6', '#e5e7eb'],
+          borderWidth: 0
+        }]
+      },
+      options: {
+        cutout: '78%',
+        plugins: {
+          legend: { display: false },
+          tooltip: { enabled: false }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

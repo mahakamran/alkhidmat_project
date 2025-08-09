@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Document</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Koh+Santepheap:wght@100;300;400;700;900&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Konkhmer+Sleokchher&display=swap" rel="stylesheet"/>
+</head>
+<body>
+    <!-- navbar start -->
+  <header id="header">
+    <img src="img1.png" alt="" id="img1" />
+    <div id="main">
+      <h5 id="heading1"><a href="room.html">Room</a></h5>
+      <h5 id="heading2"><a href="status.html">Status</a></h5>
+      <h5 id="heading3"><a href="vehicle.html">Vehicles</a></h5>
+      <button id="btn"><a href="logout.html">Logout</a></button>
+           <div class="account-wrapper">
+  <div id="acc">
+    <img src="image 30.png" alt="" id="accToggle">
+  </div>
+  <div id="accDropdown" class="dropdown">
+    <a href="settings.html">Settings</a>
+    <a href="logout.html">Logout</a>
+  </div>
+</div>
+    </div>
+  </header>
+  <!-- navbar end -->
+ 
+
+ <!-- Filter Buttons -->
+
+ <div class="filter-buttons">
+  <button class="filter-btn" data-filter="all">All</button>
+  <button class="filter-btn" data-filter="Conference Room">Conference Room</button>
+  <button class="filter-btn" data-filter="Meeting Room A">Meeting Room A</button>
+  <button class="filter-btn" data-filter="Meeting Room B">Meeting Room B</button>
+</div>
+
+
+<!-- Room Section Start -->
+<section class="room-container">
+  <div class="room-card"  >
+    <img src="360_F_80911186_RoBCsyLrNTrG7Y1EOyCsaCJO5DyHgTox 1.png" alt="Conference Room 1" />
+    <div class="room-info">
+      <h3>Conference Room</h3>
+      <p>for 20 members</p>
+      <button class="reserve-btn"><a href="room_reserveform.html">Reserve</a></button>
+    </div>
+  </div>
+
+  <div class="room-card" >
+    <img src="image 4.png" alt="Conference Room 2" />
+    <div class="room-info">
+      <h3>Conference Room</h3>
+      <p>for 15 members</p>
+            <button class="reserve-btn"><a href="room_reserveform.html">Reserve</a></button>
+
+    </div>
+  </div>
+
+  <div class="room-card" >
+<img src="image 5.png" alt="Meeting Room A" />
+    <div class="room-info">
+      <h3>Meeting Room A</h3>
+      <p>for 18 members</p>
+            <button class="reserve-btn"><a href="room_reserveform.html">Reserve</a></button>
+
+    </div>
+  </div>
+
+  <div class="room-card" >
+    <img src="image 6.png" alt="Meeting Room B" />
+    <div class="room-info">
+      <h3>Meeting Room B</h3>
+      <p>for 18 members</p>
+            <button class="reserve-btn"><a href="room_reserveform.html">Reserve</a></button>
+
+    </div>
+  </div>
+</section>
+<!-- Room Section End -->
+
+
+ <!-- footer start -->
+  <footer>
+    <div id="main5">
+      <div>
+        <img src="img1.png" alt="" />
+      </div>
+      <div id="main6">
+        <h5>Contact Info</h5>
+        <p>© 2025 Alkhidmat Foundation</p>
+        <p>Vehicle and Board room reservation</p>
+      </div>
+      <div id="main7">
+        <h5>Quick Links</h5>
+        <p>Rooms</p>
+        <p>Vehicles</p>
+        <p>Status</p>
+      </div>
+    </div>
+    <div id="icons">
+      <img src="image 11 (2).png" alt="" />
+      <img src="image 16 (1).png" alt="" />
+      <img src="image 17 (1).png" alt="" />
+      <img src="image 18 (1).png" alt="" />
+      <img src="image 19 (1).png" alt="" />
+    </div>
+  </footer>
+  <!-- footer end -->
+
+
+<script>
+
+
+  // Filter logic
+  const filterButtons = document.querySelectorAll('.filter-btn');
+  const roomCards = document.querySelectorAll('.room-card');
+
+  filterButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      // Remove 'active' from all buttons
+      filterButtons.forEach(btn => btn.classList.remove('active'));
+      button.classList.add('active');
+
+      const filterValue = button.getAttribute('data-filter');
+
+      roomCards.forEach(card => {
+        const roomTitle = card.querySelector('h3').textContent.trim();
+
+        if (filterValue === 'all' || roomTitle === filterValue) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+    const accToggle = document.getElementById("accToggle");
+  const accDropdown = document.getElementById("accDropdown");
+
+  accToggle.addEventListener("click", () => {
+    accDropdown.style.display = accDropdown.style.display === "block" ? "none" : "block";
+  });
+
+  // Close dropdown if clicked outside
+  window.addEventListener("click", function(e) {
+    if (!accToggle.contains(e.target) && !accDropdown.contains(e.target)) {
+      accDropdown.style.display = "none";
+    }
+  });
+
+</script>
+
+
+</body>
+</html>
+
+
