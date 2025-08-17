@@ -1,0 +1,27 @@
+{
+  "name": "alkhidmat_project",
+  "version": "1.0.0",
+  "main": "setting.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mahakamran/alkhidmat_project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mahakamran/alkhidmat_project/issues"
+  },
+  "homepage": "https://github.com/mahakamran/alkhidmat_project#readme",
+  "description": "",
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "body-parser": "^2.2.0",
+    "express": "^5.1.0",
+    "express-session": "^1.18.2",
+    "mysql2": "^3.14.3"
+  }
+}
