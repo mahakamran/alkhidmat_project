@@ -1,5 +1,5 @@
 
-  // Load from localStorage when page loads
+
   window.onload = () => {
     const userData = JSON.parse(localStorage.getItem('userData'));
     if (userData) {
