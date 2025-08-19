@@ -4,212 +4,19 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Room Booking</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #f5f5f5;
-    }
-
-    /* Navbar */
-    header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: #004aad;
-      color: #fff;
-      padding: 0.8rem 1.5rem;
-    }
-    header img#img1 {
-      height: 40px;
-    }
-    #main {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-    #main h5 {
-      margin: 0;
-    }
-    #main a {
-      color: #fff;
-      text-decoration: none;
-    }
-    #btn {
-      background: #ff4444;
-      border: none;
-      padding: 0.5rem 1rem;
-      border-radius: 6px;
-    }
-    #btn a {
-      color: white;
-      text-decoration: none;
-    }
-    .account-wrapper {
-      position: relative;
-    }
-    .account-wrapper img {
-      height: 35px;
-      width: 35px;
-      cursor: pointer;
-      border-radius: 50%;
-    }
-    .dropdown {
-      display: none;
-      position: absolute;
-      top: 45px;
-      right: 0;
-      background: white;
-      border-radius: 5px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-      min-width: 120px;
-      z-index: 10;
-    }
-    .dropdown a {
-      display: block;
-      padding: 10px;
-      color: #333;
-      text-decoration: none;
-    }
-    .dropdown a:hover {
-      background: #f0f0f0;
-    }
-
-    /* Filter bar */
-    .filter-buttons {
-      display: flex;
-      justify-content: center;
-      padding: 1rem;
-      background: #fff;
-      gap: 10px;
-    }
-    .filter-btn {
-      padding: 0.5rem 1rem;
-      border: none;
-      background: #ddd;
-      cursor: pointer;
-      border-radius: 5px;
-      font-weight: bold;
-    }
-    .filter-btn.active {
-      background: #004aad;
-      color: white;
-    }
-
-    /* Room cards */
-    .room-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      gap: 1rem;
-      padding: 1rem;
-    }
-    .room-card {
-      background: #fff;
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-    .room-card img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-    }
-    .room-info {
-      padding: 1rem;
-    }
-    .room-info h3 {
-      margin: 0 0 0.5rem;
-    }
-    .room-info p {
-      margin: 0 0 1rem;
-      color: #555;
-    }
-    .reserve-btn {
-      display: block;
-      width: 100%;
-      background: #004aad;
-      color: white;
-      padding: 0.7rem;
-      border: none;
-      border-radius: 0 0 8px 8px;
-      cursor: pointer;
-      text-align: center;
-      font-size: 1rem;
-      text-decoration: none;
-    }
-    .reserve-btn:hover {
-      background: #003080;
-    }
-    footer{
-    width: 100%;
-    height: 300px;
-    background-color: #0662AB;
-    margin-top: 100px;
-    color: white;
-    font-family: "Koh Santepheap", serif;
- 
-}
-footer img{
-    width: 170x;
-    height: 170px;
-    margin-top: 40px;
-}
-#main5{
-    display: flex;
-}
-#main6{
-    margin-left: 200px;
-    margin-top: 60px;
-}
-#main6 h5{
-    font-size: 20px;
-    font-family: 'Koh Santepheap', serif;
-    font-weight: 700;
-     font-style: normal;
-}
-#main6 p{
-    font-size: 14px;
-    font-family: 'Koh Santepheap', serif;
-    font-weight: 700;
-     padding-top: 20px;
-}
-#main7{
-    margin-left: 300px;
-    margin-top: 60px;
-}
-#main7 h5{
-    font-size: 20px;
-    font-family: 'Koh Santepheap', serif;
-    font-weight: 700;
-     font-style: normal;
-}
-#main7 p{
-    font-size: 14px;
-    font-family: 'Koh Santepheap', serif;
-    font-weight: 700;
-     padding-top: 20px;
-     
-}
-#icons{
-    display: flex;
-    gap: 30px;
-    margin-left: 500px;
-    /* margin-top: 30px; */
-}
-#icons img{
-    width: 32px;
-    height: 32px;
-}
-  </style>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Koh+Santepheap:wght@100;300;400;700;900&display=swap"
+    rel="stylesheet"
+  />
 </head>
 <body>
   <!-- Navbar -->
   <header id="header">
-    <img src="pic/img1.png" alt="" id="img1" />
+    <img src="pic/img1.png" alt="Logo" id="img1" />
     <div id="main">
       <h5 id="heading1"><a href="room.html">Room</a></h5>
       <h5 id="heading2"><a href="status.html">Status</a></h5>
@@ -217,11 +24,11 @@ footer img{
       <button id="btn"><a href="logout.html">Logout</a></button>
       <div class="account-wrapper">
         <div id="acc">
-          <img src="pic/image 30.png" alt="" id="accToggle">
+          <img src="pic/image 30.png" alt="Account" id="accToggle" />
         </div>
         <div id="accDropdown" class="dropdown">
-          <a href="settings.html" style="color: black;">Settings</a>
-          <a href="logout.html" style="color: black;">Logout</a>
+          <a href="settings.html">Settings</a>
+          <a href="logout.html">Logout</a>
         </div>
       </div>
     </div>
@@ -230,103 +37,122 @@ footer img{
   <!-- Filter Buttons -->
   <div class="filter-buttons">
     <button class="filter-btn active" data-filter="all">All</button>
-    <button class="filter-btn" data-filter="Conference Room">Conference Room</button>
-    <button class="filter-btn" data-filter="Meeting Room A">Meeting Room A</button>
-    <button class="filter-btn" data-filter="Meeting Room B">Meeting Room B</button>
   </div>
 
-  <!-- Rooms will be injected here -->
-  <section class="room-container" id="roomContainer"></section>
+  <!-- Room Section -->
+  <section class="room-container" id="roomContainer">
+    <!-- Rooms will be injected dynamically here -->
+  </section>
 
+  <!-- Footer -->
   <footer>
     <div id="main5">
       <div>
-        <img src="pic/img1.png" alt="" />
+        <img src="pic/img1.png" alt="Logo" />
       </div>
       <div id="main6">
         <h5>Contact Info</h5>
         <p>© 2025 Alkhidmat Foundation</p>
         <p>Vehicle and Board room reservation</p>
       </div>
-      
+      <div id="main7">
+        <h5>Quick Links</h5>
+        <p>Rooms</p>
+        <p>Vehicles</p>
+        <p>Status</p>
+      </div>
+    </div>
+    <div id="icons">
+      <img src="pic/image 11 (2).png" alt="Icon 1" />
+      <img src="pic/image 16 (1).png" alt="Icon 2" />
+      <img src="pic/image 17 (1).png" alt="Icon 3" />
+      <img src="pic/image 18 (1).png" alt="Icon 4" />
+      <img src="pic/image 19 (1).png" alt="Icon 5" />
     </div>
   </footer>
 
   <script>
-    const API_ROOMS = "http://localhost:5000/rooms"; 
-    const container = document.getElementById("roomContainer");
+    const API_ROOMS = "http://localhost:5000/rooms";
+    const roomContainer = document.getElementById("roomContainer");
     const filterButtons = document.querySelectorAll(".filter-btn");
-
+    const filterBar = document.querySelector(".filter-buttons");
     let allRooms = [];
 
-    // Fetch rooms on page load
-    window.addEventListener("DOMContentLoaded", loadRooms);
-
+    // Load rooms from backend
     async function loadRooms() {
       try {
         const res = await fetch(API_ROOMS);
+        if (!res.ok) {
+          throw new Error("Server error or not found");
+        }
         allRooms = await res.json();
-        renderRooms(allRooms);
+        if (allRooms.length === 0) {
+          roomContainer.innerHTML = `<p style="padding:16px;color:#333;">No rooms available</p>`;
+          filterBar.style.display = "none"; // Hide filter buttons if no rooms
+        } else {
+          renderRooms(allRooms);
+          addFilterButtons(allRooms);
+          filterBar.style.display = "flex"; // Show filter buttons if rooms exist
+        }
       } catch (e) {
-        console.error("Failed to load rooms:", e);
-        container.innerHTML = `<p style="padding:16px;color:#c00;">Failed to load rooms.</p>`;
+        roomContainer.innerHTML = `<p style="padding:16px;color:red;">Failed to load rooms: ${e.message}</p>`;
+        filterBar.style.display = "none"; // Hide filter buttons on error
+        console.error(e);
       }
     }
 
+    // Render rooms like static template
     function renderRooms(list) {
-      container.innerHTML = "";
-      if (!list.length) {
-        container.innerHTML = `<p style="padding:16px;">No rooms available.</p>`;
-        return;
-      }
-
+      roomContainer.innerHTML = "";
       list.forEach(room => {
         const card = document.createElement("div");
         card.className = "room-card";
-        card.setAttribute("data-room-name", room.room_name);
 
         const imgSrc = room.photo_url || "pic/default-room.jpg";
 
         card.innerHTML = `
-          <img src="${escapeHtml(imgSrc)}" alt="${escapeHtml(room.room_name)}" />
+          <img src="${imgSrc}" alt="${room.room_name}" />
           <div class="room-info">
-            <h3>${escapeHtml(room.room_name)}</h3>
-            <p>for ${escapeHtml(String(room.capacity))} members</p>
+            <h3>${room.room_name}</h3>
+            <p>for ${room.capacity} members</p>
+            <button class="reserve-btn">
+              <a href="room_reserveform.html?room_id=${encodeURIComponent(room.room_id)}&room_name=${encodeURIComponent(room.room_name)}">Reserve</a>
+            </button>
           </div>
-          <a class="reserve-btn" href="room_reserveform.html?room_id=${encodeURIComponent(room.room_id)}&room_name=${encodeURIComponent(room.room_name)}">Reserve</a>
         `;
 
-        container.appendChild(card);
+        roomContainer.appendChild(card);
       });
     }
 
-    // Filtering
-    filterButtons.forEach(button => {
-      button.addEventListener("click", () => {
-        filterButtons.forEach(btn => btn.classList.remove("active"));
-        button.classList.add("active");
-
-        const filterValue = button.getAttribute("data-filter");
-        if (filterValue === "all") {
-          renderRooms(allRooms);
-          return;
-        }
-        const filtered = allRooms.filter(r => 
-          (r.room_name || "").trim().toLowerCase() === filterValue.trim().toLowerCase()
-        );
-        renderRooms(filtered);
+    // Add filter buttons dynamically based on rooms
+    function addFilterButtons(rooms) {
+      // Clear existing buttons except "All"
+      filterBar.innerHTML = `<button class="filter-btn active" data-filter="all">All</button>`;
+      
+      const uniqueRooms = [...new Set(rooms.map(r => r.room_name))];
+      uniqueRooms.forEach(name => {
+        const btn = document.createElement("button");
+        btn.className = "filter-btn";
+        btn.setAttribute("data-filter", name);
+        btn.textContent = name;
+        filterBar.appendChild(btn);
+        btn.addEventListener("click", () => {
+          filterBar.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+          btn.classList.add("active");
+          renderRooms(allRooms.filter(r => r.room_name === name));
+        });
       });
+    }
+
+    // Show all rooms when 'All' clicked
+    filterBar.addEventListener("click", (e) => {
+      if (e.target.classList.contains("filter-btn") && e.target.dataset.filter === "all") {
+        filterBar.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+        e.target.classList.add("active");
+        renderRooms(allRooms);
+      }
     });
-
-    function escapeHtml(str) {
-      return String(str).replace(/[&<>"']/g, (m) => ({
-        '&':'&amp;',
-        '<':'&lt;',
-        '>':'&gt;',
-        '"':'&quot;',
-        "'":'&#39;'
-      }[m]));
-    }
 
     // Account dropdown
     const accToggle = document.getElementById("accToggle");
@@ -334,11 +160,13 @@ footer img{
     accToggle.addEventListener("click", () => {
       accDropdown.style.display = accDropdown.style.display === "block" ? "none" : "block";
     });
-    window.addEventListener("click", (e) => {
-      if (!e.target.closest(".account-wrapper")) {
+    window.addEventListener("click", e => {
+      if (!accToggle.contains(e.target) && !accDropdown.contains(e.target)) {
         accDropdown.style.display = "none";
       }
     });
+
+    window.addEventListener("DOMContentLoaded", loadRooms);
   </script>
 </body>
 </html>
