@@ -42,7 +42,7 @@ async function connectDB() {
     db = await mysql.createConnection({
       host: "localhost",
       user: "root",
-      password: "arishahkhan123",
+      password: "root",
       database: "alkhidmat_db",
     });
     console.log("Connected to MySQL");
