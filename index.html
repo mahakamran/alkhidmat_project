@@ -13,7 +13,7 @@
 <body>
  <!-- navbar start -->
   <header id="header">
-    <img src="pic/img1.png" alt="" id="img1" />
+    <img src="./images/image_1.png" alt="" id="img1" />
     <div id="main">
       <h5 id="heading1"><a href="room.html">Room</a></h5>
       <h5 id="heading2"><a href="status.html">Status</a></h5>
@@ -21,7 +21,9 @@
       <button id="btn"><a href="logout.html">Logout</a></button>
            <div class="account-wrapper">
   <div id="acc">
-    <img src="image 30.png" alt="" id="accToggle">
+    <img src="./images/image_30.png" alt="" id="accToggle">
+    
+
   </div>
   <div id="accDropdown" class="dropdown">
     <a href="settings.html">Settings</a>
@@ -49,13 +51,12 @@
     </div>
   </div>
   <!-- register form end -->
-
-
+   
   <!-- footer start -->
   <footer>
     <div id="main5">
       <div>
-        <img src="pic/img1.png" alt="" />
+        <img src="./images/image_1.png" alt="" />
       </div>
       <div id="main6">
         <h5>Contact Info</h5>
@@ -70,15 +71,15 @@
       </div>
     </div>
     <div id="icons">
-      <img src="pic/image 11 (2).png" alt="" />
-      <img src="pic/image 16 (1).png" alt="" />
-      <img src="pic/image 17 (1).png" alt="" />
-      <img src="pic/image 18 (1).png" alt="" />
-      <img src="pic/image 19 (1).png" alt="" />
+ <img src="./images/image_11_2.png" alt="" />
+<img src="./images/image_16_1.png" alt="" />
+<img src="./images/image_17_1.png" alt="" />
+<img src="./images/image_18_1.png" alt="" />
+<img src="./images/image_19_1.png" alt="" />
+
     </div>
   </footer>
   <!-- footer end -->
-
 
   <!-- script -->
  <script>
@@ -92,5 +93,32 @@
 
 </body>
 </html>
+<script>
+    const registerForm = document.getElementById("registerForm");
+    registerForm?.addEventListener("submit", async e => {
+      e.preventDefault();
+      const full_name = registerForm.querySelector('input[type="text"]').value.trim();
+      const email = registerForm.querySelector('input[type="email"]').value.trim();
+      const password = registerForm.querySelector('input[type="password"]').value.trim();
 
+      try {
+        const res = await fetch("http://localhost:3000/register", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ full_name, email, password })
+        });
+        const data = await res.json();
+        if (res.ok) {
+          alert("Registration successful! You can now login.");
+          window.location.href = "login.html";
+        } else {
+          alert(data.error);
+        }
+      } catch (err) {
+        alert("Server error: " + err.message);
+      }
+    });
+  </script>
+</body>
+</html>
 
