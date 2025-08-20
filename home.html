@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Document</title>
+  <title>Home</title>
   <link rel="stylesheet" href="style.css" />
   <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -14,90 +14,81 @@
 <body>
   <!-- navbar start -->
   <header id="header">
-    <img src="pic/img1.png" alt="" id="img1" />
+    <img src="./images/image_1.png" alt="" id="img1" />
     <div id="main">
       <h5 id="heading1"><a href="room.html">Room</a></h5>
       <h5 id="heading2"><a href="status.html">Status</a></h5>
       <h5 id="heading3"><a href="vehicle.html">Vehicles</a></h5>
-      <button id="btn"><a href="logout.html">Logout</a></button>
-     <div class="account-wrapper">
-  <div id="acc">
-    <img src="pic/image 30.png" alt="" id="accToggle">
-  </div>
-  <div id="accDropdown" class="dropdown">
-    <a href="settings.html">Settings</a>
-    <a href="logout.html">Logout</a>
-  </div>
-</div>
-
+      <button id="logoutBtn"><a href="#">Logout</a></button>
+      <div class="account-wrapper">
+        <div id="acc">
+          <img src="./images/image_30.png" alt="" id="accToggle">
+        </div>
+        <div id="accDropdown" class="dropdown">
+          <a href="settings.html">Settings</a>
+          <a href="#" id="accLogout">Logout</a>
+        </div>
+      </div>
     </div>
   </header>
   <!-- navbar end -->
 
-
-<!-- main start -->
-<div id="box1">
-     <img src="pic/img2.webp" alt="" id="room-img">
-</div>
-<div id="box2">
-<p id="welcome1">Welocme to the </p>
-<h1 id="room-text1">Boardroom And Vehicle Reservation</h1>
-<button>Reserve now</button>
-</div>
-<br>
-<br>
-<br>
-<br>
-<div class="cards-container">
-  <!-- Card 1: Meeting Room -->
-  <div class="card">
-    <img src="pic/img3" alt="Meeting Room Icon" />
-    <h3>Meeting Room</h3>
-    <p>
-      Book a professional meeting space equipped with all essentials—ideal for discussions, interviews, and presentations.
-    </p>
-    <button>Learn More</button>
+  <!-- main content -->
+  <div id="box1">
+    <img src="./images/image_2.webp" alt="" id="room-img"> <!-- tumhara updated path -->
+  </div>
+  <div id="box2">
+    <p id="welcome1">Welcome to the </p>
+    <h1 id="room-text1">Boardroom And Vehicle Reservation</h1>
+    <button id="reserveBtn">Reserve Now</button> <!-- tumhara button id included -->
   </div>
 
-  <!-- Card 2: Vehicle Reservation -->
-  <div class="card">
-    <img src="pic/img5.png" alt="Vehicle Icon" />
-    <h3>Vehicle Reservation</h3>
-    <p>
-      Reserve official vehicles for business trips, meetings , field visits, or pickups with time and distance tracking.
-    </p>
-    <button>Learn More</button>
+  <div class="cards-container">
+    <!-- Card 1: Meeting Room -->
+    <div class="card">
+      <img src="pic/img3" alt="Meeting Room Icon" />
+      <h3>Meeting Room</h3>
+      <p>
+        Book a professional meeting space equipped with all essentials—ideal for discussions, interviews, and presentations.
+      </p>
+      <button>Learn More</button>
+    </div>
+
+    <!-- Card 2: Vehicle Reservation -->
+    <div class="card">
+      <img src="pic/img5.png" alt="Vehicle Icon" />
+      <h3>Vehicle Reservation</h3>
+      <p>
+        Reserve official vehicles for business trips, meetings, field visits, or pickups with time and distance tracking.
+      </p>
+      <button>Learn More</button>
+    </div>
+
+    <!-- Card 3: Events Space -->
+    <div class="card">
+      <img src="pic/img4" alt="Events Space Icon" />
+      <h3>Events Space</h3>
+      <p>
+        Host corporate events, training sessions, or team-building activities in a fully equipped event hall.
+      </p>
+      <button id="more">Learn More</button>
+    </div>
   </div>
 
-  <!-- Card 3: Events Space -->
-  <div class="card">
-    <img src="pic/img4" alt="Events Space Icon" />
-    <h3>Events Space</h3>
-    <p>
-      Host corporate events, training sessions, or team-building activities in a fully equipped event hall.
-    </p>
-    <button id="more">Learn More</button>
+  <div class="meeting-wrapper">
+    <div class="meeting-image">
+      <img src="pic/image 4.png" alt="Meeting Room" />
+    </div>
+    <div class="meeting-card">
+      <img src="pic/./img3" alt="Meeting Icon" class="icon" />
+      <h2>Meeting Space</h2>
+      <p>
+        Alkhidmat provides a well-equipped meeting space ideal for organizational discussions, strategic planning, and community outreach sessions. The environment is designed to promote productivity and professionalism.
+      </p>
+      <button class="book-btn"><a href="room.html" class="book-btn">Reserve a room</a></button>
+    </div>
   </div>
-</div>
 
-<div class="meeting-wrapper">
-  <div class="meeting-image">
-    <img src="pic/image 4.png" alt="Meeting Room" />
-  </div>
-  <div class="meeting-card">
-    <img src="pic/./img3" alt="Meeting Icon" class="icon" />
-    <h2>Meeting Space</h2>
-    <p>
-      Alkhidmat provides a well-equipped meeting space ideal for organizational discussions, strategic planning, and community outreach sessions. The environment is designed to promote productivity and professionalism.
-    </p>
-    <button class="book-btn"><a href="room.html" class="book-btn">Reserve a room</a></button>
-  </div>
-</div>
-
-<div class="vehicle-wrapper">
-  <div class="vehicle-image">
-    <img src="pic/reserve.jpg" alt="Vehicle Room" />
-  </div>
   <div class="vehicle-cards">
     <img src="pic/img5.png" alt="Vehicle Icon" class="icon" />
     <h2>Vehicle Reservation</h2>
@@ -106,66 +97,16 @@
     </p>
     <button class="book-btn"><a href="vehicle.html" class="book-btn">Reserve a vehicle</a></button>
   </div>
-</div>
 
-<section class="facility-section">
-  <h2>Our Facility for Alkhidmat Staff</h2>
-  <p>We ensure smooth operations and convenience for our dedicated staff through the following facilities:</p>
+  <section class="facility-section">
+    <h2>Our Facility for Alkhidmat Staff</h2>
+    <p>We ensure smooth operations and convenience for our dedicated staff through the following facilities:</p>
+  </section>
 
-  <div class="facility-grid">
-    <div class="facility-box">
-      <span class="iconify" data-icon="mdi:door-sliding" style="color:#4e8cff; font-size:60px;"></span>
-      <h3>Smart Board Rooms</h3>
-      <p>Equipped with screen-sharing and A/V support.</p>
-    </div>
-    <div class="facility-box">
-      <span class="iconify" data-icon="mdi:coffee-outline" style="color:#f78b00; font-size:60px;"></span>
-      <h3>Tea & Coffee Corner</h3>
-      <p>Free beverages available throughout the day.</p>
-    </div>
-    <div class="facility-box">
-      <span class="iconify" data-icon="mdi:car-multiple" style="color:#38b000; font-size:60px;"></span>
-      <h3>Reserved Parking</h3>
-      <p>Secure parking for staff vehicles.</p>
-    </div>
-    <div class="facility-box">
-      <span class="iconify" data-icon="mdi:account-group" style="color:#c1121f; font-size:60px;"></span>
-      <h3>Private Meeting Zones</h3>
-      <p>Dedicated quiet zones for discussions.</p>
-    </div>
-    <div class="facility-box">
-      <span class="iconify" data-icon="mdi:kitchen" style="color:#ff6b6b; font-size:60px;"></span>
-      <h3>Staff Refreshment Area</h3>
-      <p>Clean and comfortable break spaces.</p>
-    </div>
-    <div class="facility-box">
-      <span class="iconify" data-icon="mdi:wifi" style="color:#0077b6; font-size:60px;"></span>
-      <h3>24/7 Internet Access</h3>
-      <p>High-speed internet across the premises.</p>
-    </div>
-    <div class="facility-box">
-     <span class="iconify" data-icon="mdi:application-cog-outline" style="color:#8e44ad; font-size:60px;"></span>
-      <h3>Internal Staff App</h3>
-      <p>For booking rooms & vehicle reservations.</p>
-    </div>
-    <div class="facility-box">
-      <span class="iconify" data-icon="mdi:shield-lock-outline" style="color:#14213d; font-size:60px;"></span>
-      <h3>Secure Access System</h3>
-      <p>Digital ID access for staff and admins.</p>
-    </div>
-  </div>
-</section>
-
-
- <!-- main end -->
-
-
-  <!-- footer start -->
+  <!-- footer -->
   <footer>
     <div id="main5">
-      <div>
-        <img src="img1.png" alt="" />
-      </div>
+      <div><img src="img1.png" alt="" /></div>
       <div id="main6">
         <h5>Contact Info</h5>
         <p>© 2025 Alkhidmat Foundation</p>
@@ -179,51 +120,37 @@
       </div>
     </div>
     <div id="icons">
-      <img src="image 11 (2).png" alt="" />
-      <img src="image 16 (1).png" alt="" />
-      <img src="image 17 (1).png" alt="" />
-      <img src="image 18 (1).png" alt="" />
-      <img src="image 19 (1).png" alt="" />
+      <img src="./images/image_11_2.png" alt="" />
+      <img src="./images/image_16_1.png" alt="" />
+      <img src="./images/image_17_1.png" alt="" />
+      <img src="./images/image_18_1.png" alt="" />
+      <img src="./images/image_19_1.png" alt="" />
     </div>
   </footer>
-  <!-- footer end -->
 
-<button onclick="scrollToTop()" id="scrollTopBtn">
-  <span class="iconify" data-icon="mdi:arrow-up" style="color:white; font-size:24px;"></span>
-</button>
+  <button onclick="scrollToTop()" id="scrollTopBtn">
+    <span class="iconify" data-icon="mdi:arrow-up" style="color:white; font-size:24px;"></span>
+  </button>
 
-<script>
-  // Show button when user scrolls down 200px
-  window.onscroll = function () {
-    let btn = document.getElementById("scrollTopBtn");
-    if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
-      btn.style.display = "block";
-    } else {
-      btn.style.display = "none";
-    }
-  };
+  <script src="auth.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      protectPage("user"); // sirf normal user
 
-  // Scroll to top function
-  function scrollToTop() {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }
+      const storedName = localStorage.getItem("userFullName") || "User";
+      document.getElementById("welcome1").innerText = `Welcome, ${storedName} to the Boardroom`;
 
-  const accToggle = document.getElementById("accToggle");
-  const accDropdown = document.getElementById("accDropdown");
+      document.getElementById("reserveBtn").addEventListener("click", () => {
+        window.location.href = "room.html";
+      });
 
-  accToggle.addEventListener("click", () => {
-    accDropdown.style.display = accDropdown.style.display === "block" ? "none" : "block";
-  });
-
-  // Close dropdown if clicked outside
-  window.addEventListener("click", function(e) {
-    if (!accToggle.contains(e.target) && !accDropdown.contains(e.target)) {
-      accDropdown.style.display = "none";
-    }
-  });
-
-
-</script>
+      document.getElementById("logoutBtn").addEventListener("click", logout);
+      document.getElementById("accLogout")?.addEventListener("click", () => {
+        localStorage.clear();
+        window.location.href = "login.html";
+      });
+    });
+  </script>
 
 </body>
 </html>

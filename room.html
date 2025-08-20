@@ -8,15 +8,13 @@
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Koh+Santepheap:wght@100;300;400;700;900&display=swap"
-    rel="stylesheet"
-  />
+  <link href="https://fonts.googleapis.com/css2?family=Koh+Santepheap:wght@100;300;400;700;900&display=swap" rel="stylesheet"/>
 </head>
 <body>
   <!-- Navbar -->
   <header id="header">
-    <img src="pic/img1.png" alt="Logo" id="img1" />
+    <img src="./images/image_1.png" alt="" id="img1" />
+
     <div id="main">
       <h5 id="heading1"><a href="room.html">Room</a></h5>
       <h5 id="heading2"><a href="status.html">Status</a></h5>
@@ -24,7 +22,7 @@
       <button id="btn"><a href="logout.html">Logout</a></button>
       <div class="account-wrapper">
         <div id="acc">
-          <img src="pic/image 30.png" alt="Account" id="accToggle" />
+          <img src="./images/image_30.png" alt="" id="accToggle">
         </div>
         <div id="accDropdown" class="dropdown">
           <a href="settings.html">Settings</a>
@@ -33,22 +31,60 @@
       </div>
     </div>
   </header>
+  <!-- navbar end -->
 
   <!-- Filter Buttons -->
   <div class="filter-buttons">
-    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="Conference Room">Conference Room</button>
+    <button class="filter-btn" data-filter="Meeting Room A">Meeting Room A</button>
+    <button class="filter-btn" data-filter="Meeting Room B">Meeting Room B</button>
   </div>
 
   <!-- Room Section -->
-  <section class="room-container" id="roomContainer">
-    <!-- Rooms will be injected dynamically here -->
+  <section class="room-container">
+    <div class="room-card">
+      <img src="./images/360_F_80911186_RoBCsyLrNTrG7Y1EOyCsaCJO5DyHgTox_1.png" alt="Conference Room 1" />
+      <div class="room-info">
+        <h3>Conference Room</h3>
+        <p>for 20 members</p>
+        <button class="reserve-btn"><a href="room_reserveform.html">Reserve</a></button>
+      </div>
+    </div>
+
+    <div class="room-card">
+      <img src="./images/image_4.png" alt="Conference Room 2" />
+      <div class="room-info">
+        <h3>Conference Room</h3>
+        <p>for 15 members</p>
+        <button class="reserve-btn"><a href="room_reserveform.html">Reserve</a></button>
+      </div>
+    </div>
+
+    <div class="room-card">
+      <img src="./images/image_5.png" alt="Meeting Room A" />
+      <div class="room-info">
+        <h3>Meeting Room A</h3>
+        <p>for 18 members</p>
+        <button class="reserve-btn"><a href="room_reserveform.html">Reserve</a></button>
+      </div>
+    </div>
+
+    <div class="room-card">
+      <img src="./images/image_6.png" alt="Meeting Room B" />
+      <div class="room-info">
+        <h3>Meeting Room B</h3>
+        <p>for 18 members</p>
+        <button class="reserve-btn"><a href="room_reserveform.html">Reserve</a></button>
+      </div>
+    </div>
   </section>
 
   <!-- Footer -->
   <footer>
     <div id="main5">
       <div>
-        <img src="pic/img1.png" alt="Logo" />
+        <img src="./images/image_1.png" alt="" />
       </div>
       <div id="main6">
         <h5>Contact Info</h5>
@@ -63,97 +99,16 @@
       </div>
     </div>
     <div id="icons">
-      <img src="pic/image 11 (2).png" alt="Icon 1" />
-      <img src="pic/image 16 (1).png" alt="Icon 2" />
-      <img src="pic/image 17 (1).png" alt="Icon 3" />
-      <img src="pic/image 18 (1).png" alt="Icon 4" />
-      <img src="pic/image 19 (1).png" alt="Icon 5" />
+      <img src="./images/image_11_2.png" alt="" />
+      <img src="./images/image_16_1.png" alt="" />
+      <img src="./images/image_17_1.png" alt="" />
+      <img src="./images/image_18_1.png" alt="" />
+      <img src="./images/image_19_1.png" alt="" />
     </div>
   </footer>
 
+  <!-- Script -->
   <script>
-    const API_ROOMS = "http://localhost:5000/rooms";
-    const roomContainer = document.getElementById("roomContainer");
-    const filterButtons = document.querySelectorAll(".filter-btn");
-    const filterBar = document.querySelector(".filter-buttons");
-    let allRooms = [];
-
-    // Load rooms from backend
-    async function loadRooms() {
-      try {
-        const res = await fetch(API_ROOMS);
-        if (!res.ok) {
-          throw new Error("Server error or not found");
-        }
-        allRooms = await res.json();
-        if (allRooms.length === 0) {
-          roomContainer.innerHTML = `<p style="padding:16px;color:#333;">No rooms available</p>`;
-          filterBar.style.display = "none"; // Hide filter buttons if no rooms
-        } else {
-          renderRooms(allRooms);
-          addFilterButtons(allRooms);
-          filterBar.style.display = "flex"; // Show filter buttons if rooms exist
-        }
-      } catch (e) {
-        roomContainer.innerHTML = `<p style="padding:16px;color:red;">Failed to load rooms: ${e.message}</p>`;
-        filterBar.style.display = "none"; // Hide filter buttons on error
-        console.error(e);
-      }
-    }
-
-    // Render rooms like static template
-    function renderRooms(list) {
-      roomContainer.innerHTML = "";
-      list.forEach(room => {
-        const card = document.createElement("div");
-        card.className = "room-card";
-
-        const imgSrc = room.photo_url || "pic/default-room.jpg";
-
-        card.innerHTML = `
-          <img src="${imgSrc}" alt="${room.room_name}" />
-          <div class="room-info">
-            <h3>${room.room_name}</h3>
-            <p>for ${room.capacity} members</p>
-            <button class="reserve-btn">
-              <a href="room_reserveform.html?room_id=${encodeURIComponent(room.room_id)}&room_name=${encodeURIComponent(room.room_name)}">Reserve</a>
-            </button>
-          </div>
-        `;
-
-        roomContainer.appendChild(card);
-      });
-    }
-
-    // Add filter buttons dynamically based on rooms
-    function addFilterButtons(rooms) {
-      // Clear existing buttons except "All"
-      filterBar.innerHTML = `<button class="filter-btn active" data-filter="all">All</button>`;
-      
-      const uniqueRooms = [...new Set(rooms.map(r => r.room_name))];
-      uniqueRooms.forEach(name => {
-        const btn = document.createElement("button");
-        btn.className = "filter-btn";
-        btn.setAttribute("data-filter", name);
-        btn.textContent = name;
-        filterBar.appendChild(btn);
-        btn.addEventListener("click", () => {
-          filterBar.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
-          btn.classList.add("active");
-          renderRooms(allRooms.filter(r => r.room_name === name));
-        });
-      });
-    }
-
-    // Show all rooms when 'All' clicked
-    filterBar.addEventListener("click", (e) => {
-      if (e.target.classList.contains("filter-btn") && e.target.dataset.filter === "all") {
-        filterBar.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
-        e.target.classList.add("active");
-        renderRooms(allRooms);
-      }
-    });
-
     // Account dropdown
     const accToggle = document.getElementById("accToggle");
     const accDropdown = document.getElementById("accDropdown");
@@ -165,8 +120,6 @@
         accDropdown.style.display = "none";
       }
     });
-
-    window.addEventListener("DOMContentLoaded", loadRooms);
   </script>
 </body>
 </html>

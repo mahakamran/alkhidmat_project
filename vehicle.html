@@ -11,7 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Koh+Santepheap:wght@100;300;400;700;900&display=swap" rel="stylesheet"/>
 </head>
 <body>
-  <!-- Navbar (same as room.html) -->
+  <!-- Navbar -->
   <header id="header">
     <img src="pic/img1.png" alt="Logo" id="img1" />
     <div id="main">
@@ -41,7 +41,7 @@
     <!-- Vehicles will be injected dynamically here -->
   </section>
 
-  <!-- Footer (same as room.html) -->
+  <!-- Footer -->
   <footer>
     <div id="main5">
       <div>
@@ -78,34 +78,30 @@
     async function loadVehicles() {
       try {
         const res = await fetch(API_VEHICLES);
-        if (!res.ok) {
-          throw new Error("Server error or not found");
-        }
+        if (!res.ok) throw new Error("Server error or not found");
         allVehicles = await res.json();
         if (allVehicles.length === 0) {
           vehicleContainer.innerHTML = `<p style="padding:16px;color:#333;">No vehicles available</p>`;
-          filterBar.style.display = "none"; // Hide filter buttons if no vehicles
+          filterBar.style.display = "none";
         } else {
           renderVehicles(allVehicles);
           addFilterButtons(allVehicles);
-          filterBar.style.display = "flex"; // Show filter buttons if vehicles exist
+          filterBar.style.display = "flex";
         }
       } catch (e) {
         vehicleContainer.innerHTML = `<p style="padding:16px;color:red;">Failed to load vehicles: ${e.message}</p>`;
-        filterBar.style.display = "none"; // Hide filter buttons on error
+        filterBar.style.display = "none";
         console.error('Error loading vehicles:', e.message);
       }
     }
 
-    // Render vehicles like room cards
+    // Render vehicles dynamically
     function renderVehicles(list) {
       vehicleContainer.innerHTML = "";
       list.forEach(vehicle => {
         const card = document.createElement("div");
         card.className = "vehicle-card";
-
         const imgSrc = vehicle.photo_url || "pic/default-vehicle.jpg";
-
         card.innerHTML = `
           <img src="${imgSrc}" alt="${vehicle.car_name}" />
           <div class="vehicle-info">
@@ -117,21 +113,18 @@
             </button>
           </div>
         `;
-
         vehicleContainer.appendChild(card);
       });
     }
 
-    // Add filter buttons dynamically based on vehicle types
+    // Add filter buttons dynamically
     function addFilterButtons(vehicles) {
-      // Clear existing buttons except "All"
       filterBar.innerHTML = `<button class="filter-btn active" data-filter="all">All</button>`;
-      
       const uniqueTypes = [...new Set(vehicles.map(v => v.vehicle_type))];
       uniqueTypes.forEach(type => {
         const btn = document.createElement("button");
         btn.className = "filter-btn";
-        btn.setAttribute("data-filter", type);
+        btn.dataset.filter = type;
         btn.textContent = type;
         filterBar.appendChild(btn);
         btn.addEventListener("click", () => {
