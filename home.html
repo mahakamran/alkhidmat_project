@@ -35,13 +35,73 @@
 
   <!-- main content -->
   <div id="box1">
-    <img src="./images/image_2.webp" alt="" id="room-img">
+    <img src="./images/image_2.webp" alt="" id="room-img"> <!-- tumhara updated path -->
   </div>
   <div id="box2">
     <p id="welcome1">Welcome to the </p>
     <h1 id="room-text1">Boardroom And Vehicle Reservation</h1>
-    <button id="reserveBtn">Reserve Now</button>
+    <button id="reserveBtn">Reserve Now</button> <!-- tumhara button id included -->
   </div>
+
+  <div class="cards-container">
+    <!-- Card 1: Meeting Room -->
+    <div class="card">
+      <img src="pic/img3" alt="Meeting Room Icon" />
+      <h3>Meeting Room</h3>
+      <p>
+        Book a professional meeting space equipped with all essentials—ideal for discussions, interviews, and presentations.
+      </p>
+      <button>Learn More</button>
+    </div>
+
+    <!-- Card 2: Vehicle Reservation -->
+    <div class="card">
+      <img src="pic/img5.png" alt="Vehicle Icon" />
+      <h3>Vehicle Reservation</h3>
+      <p>
+        Reserve official vehicles for business trips, meetings, field visits, or pickups with time and distance tracking.
+      </p>
+      <button>Learn More</button>
+    </div>
+
+    <!-- Card 3: Events Space -->
+    <div class="card">
+      <img src="pic/img4" alt="Events Space Icon" />
+      <h3>Events Space</h3>
+      <p>
+        Host corporate events, training sessions, or team-building activities in a fully equipped event hall.
+      </p>
+      <button id="more">Learn More</button>
+    </div>
+  </div>
+
+  <div class="meeting-wrapper">
+    <div class="meeting-image">
+      <img src="pic/image 4.png" alt="Meeting Room" />
+    </div>
+    <div class="meeting-card">
+      <img src="pic/./img3" alt="Meeting Icon" class="icon" />
+      <h2>Meeting Space</h2>
+      <p>
+        Alkhidmat provides a well-equipped meeting space ideal for organizational discussions, strategic planning, and community outreach sessions. The environment is designed to promote productivity and professionalism.
+      </p>
+      <button class="book-btn"><a href="room.html" class="book-btn">Reserve a room</a></button>
+    </div>
+  </div>
+
+  <div class="vehicle-cards">
+    <img src="pic/img5.png" alt="Vehicle Icon" class="icon" />
+    <h2>Vehicle Reservation</h2>
+    <p>
+      Alkhidmat staff can now conveniently reserve official vehicles for field visits, operations, or transport needs. The system ensures smooth coordination and transparent usage tracking for efficient mobility.
+    </p>
+    <button class="book-btn"><a href="vehicle.html" class="book-btn">Reserve a vehicle</a></button>
+  </div>
+
+  <section class="facility-section">
+    <h2>Our Facility for Alkhidmat Staff</h2>
+    <p>We ensure smooth operations and convenience for our dedicated staff through the following facilities:</p>
+  </section>
 
   <!-- footer -->
   <footer>
@@ -72,19 +132,6 @@
     <span class="iconify" data-icon="mdi:arrow-up" style="color:white; font-size:24px;"></span>
   </button>
 
-  <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Home</title>
-  <link rel="stylesheet" href="style.css"/>
-</head>
-<body>
-  <h1 id="welcome1"></h1>
-  <button id="reserveBtn">Reserve Now</button>
-  <button id="logoutBtn">Logout</button>
-
   <script src="auth.js"></script>
   <script>
     document.addEventListener("DOMContentLoaded", () => {
@@ -98,32 +145,12 @@
       });
 
       document.getElementById("logoutBtn").addEventListener("click", logout);
+      document.getElementById("accLogout")?.addEventListener("click", () => {
+        localStorage.clear();
+        window.location.href = "login.html";
+      });
     });
   </script>
-  <script>
-document.addEventListener("DOMContentLoaded", () => {
-  const role = localStorage.getItem("userRole");
-  const storedName = localStorage.getItem("userFullName") || "User";
-
-  // Only normal user allowed
-  if (role !== "user") {
-    alert("Access Denied! Admins cannot access user home.");
-    window.location.href = "admin.html"; // Admin ko dashboard pe bhejo
-  } else {
-    document.getElementById("welcome1").innerText = `Welcome, ${storedName} to the`;
-  }
-
-  // Logout buttons
-  document.getElementById("logoutBtn")?.addEventListener("click", () => {
-    localStorage.clear();
-    window.location.href = "login.html";
-  });
-  document.getElementById("accLogout")?.addEventListener("click", () => {
-    localStorage.clear();
-    window.location.href = "login.html";
-  });
-});
-</script>
 
 </body>
 </html>

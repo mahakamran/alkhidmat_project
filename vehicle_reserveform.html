@@ -1,25 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vehicle Reservation</title>
+  <link rel="stylesheet" href="style.css" />
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Koh+Santepheap:wght@100;300;400;700;900&display=swap" rel="stylesheet"/>
   <link href="https://fonts.googleapis.com/css2?family=Konkhmer+Sleokchher&display=swap" rel="stylesheet"/>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
-          <!-- navbar start -->
   <header id="header">
+ asna-contribution
     <img src="./images/image_1.png" alt="" id="img1" />
+
     <div id="main">
       <h5 id="heading1"><a href="room.html">Room</a></h5>
       <h5 id="heading2"><a href="status.html">Status</a></h5>
       <h5 id="heading3"><a href="vehicle.html">Vehicles</a></h5>
       <button id="btn"><a href="logout.html">Logout</a></button>
+ asna-contribution
            <div class="account-wrapper">
   <div id="acc">
     <img src="./images/image_30.png" alt="" id="accToggle">
@@ -29,40 +32,33 @@
     <a href="logout.html">Logout</a>
   </div>
 </div>
+
+ 
     </div>
   </header>
-  <!-- navbar end -->
-   <div id="reserve"></div>
-   <div id="transparent">
-    <h2 id="room-text">Reservation</h2>
-   <form action="">
-     <input type="text" placeholder="Meeting Romm A" id="readonly" readonly  required>
-    <input type="date" placeholder="Enter your Date"required>
-    <input type="time" id="time" placeholder="Enter your Time"required>
-    <input type="text" placeholder="Enter your DepartmentName" required>
-    <input type="number" placeholder="Enter your Duration(hours)" required>
-    <div id="room-check">
-      <input type="checkbox" name="" id="">
-      <p>Emergency reserve</p>
-    </div>
-    <button type="submit"  id="room-btn">Submit</button>
-   </form>
-   </div>
-    <!-- footer start -->
-     <br>
-     <br>
-     <br>
-     <br>
-     <br>
-     <br>
-     <br>
-     <br>
-     <br>
+
+  <div id="reserve"></div>
+  <div id="transparent-vehicle">
+    <h2 id="vehicle-text">Vehicle Reservation</h2> <!-- Changed ID to vehicle-text -->
+    <form id="reservation-form">
+      <input type="hidden" name="user_id" value="1"> <!-- Replace with actual user_id from session -->
+      <input type="hidden" name="vehicle_id" readonly required>
+      <input type="text" name="car_name" readonly required>
+      <input type="date" name="booking_date" placeholder="Enter your Date" required>
+      <input type="time" name="start_time" placeholder="Enter your Time" required>
+      <input type="text" name="department_name" placeholder="Enter your Department Name" required>
+      <input type="number" name="hours" placeholder="Enter Duration (hours)" min="1" max="8" required>
+      <input type="text" name="destination" placeholder="Enter Destination" required>
+      <button type="submit" id="room-btn">Submit</button>
+    </form>
+  </div>
 
   <footer>
     <div id="main5">
       <div>
+        asna-contribution
         <img src="./images/image_1.png" alt="" />
+
       </div>
       <div id="main6">
         <h5>Contact Info</h5>
@@ -77,29 +73,168 @@
       </div>
     </div>
     <div id="icons">
+ asna-contribution
   <img src="./images/image_11_2.png" alt="" />
 <img src="./images/image_16_1.png" alt="" />
 <img src="./images/image_17_1.png" alt="" />
 <img src="./images/image_18_1.png" alt="" />
 <img src="./images/image_19_1.png" alt="" />
+
     </div>
   </footer>
-  <!-- footer end -->
-   <script>
-      const accToggle = document.getElementById("accToggle");
-  const accDropdown = document.getElementById("accDropdown");
 
-  accToggle.addEventListener("click", () => {
-    accDropdown.style.display = accDropdown.style.display === "block" ? "none" : "block";
-  });
+  <script>
+    // Get vehicle_id and car_name from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const vehicleId = urlParams.get('vehicle_id');
+    const carName = urlParams.get('car_name') || 'Vehicle';
 
-  // Close dropdown if clicked outside
-  window.addEventListener("click", function(e) {
-    if (!accToggle.contains(e.target) && !accDropdown.contains(e.target)) {
-      accDropdown.style.display = "none";
+    // Validate vehicle_id
+    if (!vehicleId) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Vehicle ID is missing. Please select a vehicle first.',
+        confirmButtonColor: '#3085d6'
+      }).then(() => {
+        window.location.href = 'vehicle.html'; // Redirect to vehicle selection
+      });
+    } else {
+      document.querySelector('input[name="vehicle_id"]').value = vehicleId;
+      document.querySelector('input[name="car_name"]').value = carName;
+      document.getElementById('vehicle-text').textContent = `Reservation for ${carName}`;
     }
-  });
 
-   </script>
+    // Format time to AM/PM for display
+    function formatTimeToAMPM(timeStr) {
+      if (!timeStr) return 'Unknown Time';
+      const [hours, minutes] = timeStr.split(':');
+      const hoursNum = parseInt(hours);
+      const period = hoursNum >= 12 ? 'PM' : 'AM';
+      const formattedHours = hoursNum % 12 || 12;
+      return `${formattedHours}:${minutes} ${period}`;
+    }
+
+    // Handle form submission
+    document.getElementById('reservation-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      console.log('Form submission started');
+
+      const formData = new FormData(e.target);
+      const data = {
+        user_id: parseInt(formData.get('user_id')),
+        vehicle_id: parseInt(formData.get('vehicle_id')),
+        department_name: formData.get('department_name').trim(),
+        booking_date: formData.get('booking_date'),
+        start_time: formData.get('start_time'),
+        hours: parseInt(formData.get('hours')),
+        destination: formData.get('destination').trim()
+      };
+
+      console.log('Data to send:', data);
+
+      // Validate booking_date (not in the past)
+      const today = new Date();
+      const selectedDate = new Date(data.booking_date);
+      if (selectedDate < today.setHours(0, 0, 0, 0)) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Invalid Date',
+          text: 'Booking date cannot be in the past.',
+          confirmButtonColor: '#3085d6'
+        });
+        return;
+      }
+
+      // Validate hours
+      if (!data.hours || data.hours < 1 || data.hours > 8) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Invalid Duration',
+          text: 'Duration must be between 1 and 8 hours.',
+          confirmButtonColor: '#3085d6'
+        });
+        return;
+      }
+
+      // Validate department_name
+      if (!data.department_name) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Invalid Department',
+          text: 'Please enter a valid department name.',
+          confirmButtonColor: '#3085d6'
+        });
+        return;
+      }
+
+      // Validate destination
+      if (!data.destination) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Invalid Destination',
+          text: 'Please enter a valid destination.',
+          confirmButtonColor: '#3085d6'
+        });
+        return;
+      }
+
+      try {
+        const response = await fetch('http://localhost:5000/reserve_vehicle', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+
+        let result;
+        try {
+          result = await response.json();
+        } catch (e) {
+          throw new Error('Invalid response format from server');
+        }
+
+        console.log('API response:', result);
+
+        if (response.ok) {
+          const formattedTime = formatTimeToAMPM(data.start_time); // Use input time if API doesn't return start_time
+          Swal.fire({
+            icon: 'success',
+            title: 'Reservation Confirmed!',
+            text: `Vehicle reserved for ${data.booking_date} at ${formattedTime} to ${data.destination}`,
+            confirmButtonColor: '#3085d6'
+          }).then(() => {
+            window.location.href = 'status.html';
+          });
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: 'Submission Failed',
+            text: result.error || 'An error occurred. Please try again.',
+            confirmButtonColor: '#3085d6'
+          });
+        }
+      } catch (error) {
+        console.error('Submission error:', error.message);
+        Swal.fire({
+          icon: 'error',
+          title: 'Network Error',
+          text: `Unable to connect to the server: ${error.message}. Please check if the server is running.`,
+          confirmButtonColor: '#3085d6'
+        });
+      }
+    });
+
+    // Account dropdown
+    const accToggle = document.getElementById("accToggle");
+    const accDropdown = document.getElementById("accDropdown");
+    accToggle.addEventListener("click", () => {
+      accDropdown.style.display = accDropdown.style.display === "block" ? "none" : "block";
+    });
+    window.addEventListener("click", e => {
+      if (!accToggle.contains(e.target) && !accDropdown.contains(e.target)) {
+        accDropdown.style.display = "none";
+      }
+    });
+  </script>
 </body>
 </html>
