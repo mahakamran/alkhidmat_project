@@ -9,6 +9,20 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Koh+Santepheap:wght@100;300;400;700;900&display=swap" rel="stylesheet"/>
+  <style>
+    /* Status badge colors */
+    .badge {
+      padding: 4px 8px;
+      border-radius: 4px;
+      color: #fff;
+      font-weight: bold;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+    }
+    .badge.pending { background-color: #f0ad4e; }      /* Yellow */
+    .badge.approved { background-color: #5cb85c; }     /* Green */
+    .badge.cancelled { background-color: #d9534f; }    /* Red */
+  </style>
 </head>
 <body>
   <!-- Navbar -->
@@ -98,6 +112,14 @@
 
     const tbody = document.querySelector(".status-table tbody");
 
+    // Helper to return badge HTML based on status
+    function getStatusBadge(status) {
+      let className = "pending";
+      if (status === "Approved") className = "approved";
+      else if (status === "Cancelled") className = "cancelled";
+      return `<span class="badge ${className}">${status}</span>`;
+    }
+
     // Load all bookings
     async function loadBookings() {
       tbody.innerHTML = "";
@@ -114,7 +136,7 @@
             <td>${b.start_time}</td>
             <td>${b.department_name}</td>
             <td>--</td>
-            <td><span class="badge pending">Pending</span></td>
+            <td>${getStatusBadge(b.status)}</td>
           `;
           tbody.appendChild(row);
         });
@@ -130,7 +152,7 @@
             <td>${b.start_time}</td>
             <td>${b.destination}</td>
             <td>--</td>
-            <td><span class="badge pending">Pending</span></td>
+            <td>${getStatusBadge(b.status)}</td>
           `;
           tbody.appendChild(row);
         });
