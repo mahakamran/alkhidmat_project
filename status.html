@@ -1,18 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-     <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Status Page</title>
+  <link rel="stylesheet" href="style.css" />
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Koh+Santepheap:wght@100;300;400;700;900&display=swap" rel="stylesheet"/>
-  <link href="https://fonts.googleapis.com/css2?family=Konkhmer+Sleokchher&display=swap" rel="stylesheet"/>
 </head>
 <body>
-      <!-- navbar start -->
+  <!-- Navbar -->
   <header id="header">
     <img src="images/image_1.png" alt="" id="img1" />
     <div id="main">
@@ -20,138 +19,127 @@
       <h5 id="heading2"><a href="status.html">Status</a></h5>
       <h5 id="heading3"><a href="vehicle.html">Vehicles</a></h5>
       <button id="btn"><a href="logout.html">Logout</a></button>
-           <div class="account-wrapper">
-  <div id="acc">
-    <img src="images/image_30.png" alt="" id="accToggle">
-  </div>
-  <div id="accDropdown" class="dropdown">
-    <a href="settings.html">Settings</a>
-    <a href="logout.html">Logout</a>
-  </div>
-</div>
+      <div class="account-wrapper">
+        <div id="acc">
+          <img src="images/image_30.png" alt="" id="accToggle">
+        </div>
+        <div id="accDropdown" class="dropdown">
+          <a href="settings.html">Settings</a>
+          <a href="logout.html">Logout</a>
+        </div>
+      </div>
     </div>
   </header>
-  <!-- navbar end -->
+
+  <!-- Status Table -->
   <div id="status-container">
     <img src="images/status.png" alt="" id="Alkhidmat">
-     <section class="status-section">
-  <h2 class="status-heading">Status</h2>
-  <div class="status-table-container">
-    <table class="status-table">
-      <thead>
-        <tr>
-          <th>Type</th>
-          <th>Date</th>
-          <th>Time</th>
-          <th>Purpose</th>
-          <th>Emergency</th>
-          <th>Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Room</td>
-          <td>25-12-05</td>
-          <td>19:00:00</td>
-          <td>IT meeting</td>
-          <td>Yes</td>
-          <td><span class="badge approved">Approved</span></td>
-        </tr>
-        <tr>
-          <td>Room</td>
-          <td>25-10-07</td>
-          <td>19:00:00</td>
-          <td>media meeting</td>
-          <td>No</td>
-          <td><span class="badge pending">Pending</span></td>
-        </tr>
-          <tr>
-          <td>Vehicle</td>
-          <td>25-1-09</td>
-          <td>19:00:00</td>
-          <td>meeting</td>
-          <td>Yes</td>
-          <td><span class="badge approved">Approved</span></td>
-        </tr>
-        <tr>
-          <td>Vehicle</td>
-          <td>25-1-03</td>
-          <td>19:00:00</td>
-          <td>orientation</td>
-          <td>No</td>
-          <td><span class="badge cancel">Cancel</span></td>
-        </tr>
-        <tr>
-          <td>Vehicle</td>
-          <td>25-1-09</td>
-          <td>19:00:00</td>
-          <td>meeting</td>
-          <td>Yes</td>
-          <td><span class="badge approved">Approved</span></td>
-        </tr>
-        <tr>
-          <td>Room</td>
-          <td>25-10-07</td>
-          <td>19:00:00</td>
-          <td>media meeting</td>
-          <td>No</td>
-          <td><span class="badge pending">Pending</span></td>
-        </tr>
-         <tr>
-          <td>Vehicle</td>
-          <td>25-1-09</td>
-          <td>19:00:00</td>
-          <td>meeting</td>
-          <td>Yes</td>
-          <td><span class="badge approved">Approved</span></td>
-        </tr>
-      </tbody>
-    </table>
+    <section class="status-section">
+      <h2 class="status-heading">Status</h2>
+      <div class="status-table-container">
+        <table class="status-table">
+          <thead>
+            <tr>
+              <th>Type</th>
+              <th>Date</th>
+              <th>Time</th>
+              <th>Purpose / Destination</th>
+              <th>Emergency</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Bookings will be inserted here dynamically -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div id="main5">
+        <div><img src="images/image_1.png" alt="" /></div>
+        <div id="main6">
+          <h5>Contact Info</h5>
+          <p>© 2025 Alkhidmat Foundation</p>
+          <p>Vehicle and Board room reservation</p>
+        </div>
+        <div id="main7">
+          <h5>Quick Links</h5>
+          <p>Rooms</p>
+          <p>Vehicles</p>
+          <p>Status</p>
+        </div>
+      </div>
+      <div id="icons">
+        <img src="images/image_11_2.png" alt="Icon 1" />
+        <img src="images/image_16_1.png" alt="Icon 2" />
+        <img src="images/image_17_1.png" alt="Icon 3" />
+        <img src="images/image_18_1.png" alt="Icon 4" />
+        <img src="images/image_19_1.png" alt="Icon 5" />
+      </div>
+    </footer>
   </div>
-</section>
-<!-- footer start -->
-  <footer>
-    <div id="main5">
-      <div>
-        <img src="images/image_1.png" alt="" />
-      </div>
-      <div id="main6">
-        <h5>Contact Info</h5>
-        <p>© 2025 Alkhidmat Foundation</p>
-        <p>Vehicle and Board room reservation</p>
-      </div>
-      <div id="main7">
-        <h5>Quick Links</h5>
-        <p>Rooms</p>
-        <p>Vehicles</p>
-        <p>Status</p>
-      </div>
-    </div>
-    <div id="icons">
-       <img src="images/image_11_2.png" alt="Icon 1" />
-      <img src="images/image_16_1.png" alt="Icon 2" />
-      <img src="images/image_17_1.png" alt="Icon 3" />
-      <img src="images/image_18_1.png" alt="Icon 4" />
-      <img src="images/image_19_1.png" alt="Icon 5" />
-    </div>
-  </footer>
-  <!-- footer end -->
-  </div>
+
+  <!-- Scripts -->
   <script>
-      const accToggle = document.getElementById("accToggle");
-  const accDropdown = document.getElementById("accDropdown");
+    // Account dropdown toggle
+    const accToggle = document.getElementById("accToggle");
+    const accDropdown = document.getElementById("accDropdown");
 
-  accToggle.addEventListener("click", () => {
-    accDropdown.style.display = accDropdown.style.display === "block" ? "none" : "block";
-  });
+    accToggle.addEventListener("click", () => {
+      accDropdown.style.display = accDropdown.style.display === "block" ? "none" : "block";
+    });
+    window.addEventListener("click", function(e) {
+      if (!accToggle.contains(e.target) && !accDropdown.contains(e.target)) {
+        accDropdown.style.display = "none";
+      }
+    });
 
-  // Close dropdown if clicked outside
-  window.addEventListener("click", function(e) {
-    if (!accToggle.contains(e.target) && !accDropdown.contains(e.target)) {
-      accDropdown.style.display = "none";
+    const tbody = document.querySelector(".status-table tbody");
+
+    // Load all bookings
+    async function loadBookings() {
+      tbody.innerHTML = "";
+
+      try {
+        // Rooms
+        const roomRes = await fetch("http://localhost:5000/reservations_room");
+        const roomBookings = await roomRes.json();
+        roomBookings.forEach(b => {
+          const row = document.createElement("tr");
+          row.innerHTML = `
+            <td>Room</td>
+            <td>${b.booking_date}</td>
+            <td>${b.start_time}</td>
+            <td>${b.department_name}</td>
+            <td>--</td>
+            <td><span class="badge pending">Pending</span></td>
+          `;
+          tbody.appendChild(row);
+        });
+
+        // Vehicles
+        const vehicleRes = await fetch("http://localhost:5000/reservations_vehicle");
+        const vehicleBookings = await vehicleRes.json();
+        vehicleBookings.forEach(b => {
+          const row = document.createElement("tr");
+          row.innerHTML = `
+            <td>Vehicle</td>
+            <td>${b.booking_date}</td>
+            <td>${b.start_time}</td>
+            <td>${b.destination}</td>
+            <td>--</td>
+            <td><span class="badge pending">Pending</span></td>
+          `;
+          tbody.appendChild(row);
+        });
+      } catch (err) {
+        console.error("Error loading bookings:", err);
+      }
     }
-  });
 
+    loadBookings(); // Initial load
   </script>
 </body>
 </html>
