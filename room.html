@@ -13,7 +13,7 @@
 <body>
   <!-- Navbar -->
   <header id="header">
-    <img src="./images/image_1.png" alt="" id="img1" />
+    <img src="images/image_1.png" alt="" id="img1" />
 
     <div id="main">
       <h5 id="heading1"><a href="room.html">Room</a></h5>
@@ -22,7 +22,7 @@
       <button id="btn"><a href="logout.html">Logout</a></button>
       <div class="account-wrapper">
         <div id="acc">
-          <img src="./images/image_30.png" alt="" id="accToggle">
+          <img src="images/image_30.png" alt="" id="accToggle">
         </div>
         <div id="accDropdown" class="dropdown">
           <a href="settings.html">Settings</a>
@@ -42,49 +42,16 @@
   </div>
 
   <!-- Room Section -->
-  <section class="room-container">
-    <div class="room-card">
-      <img src="./images/360_F_80911186_RoBCsyLrNTrG7Y1EOyCsaCJO5DyHgTox_1.png" alt="Conference Room 1" />
-      <div class="room-info">
-        <h3>Conference Room</h3>
-        <p>for 20 members</p>
-        <button class="reserve-btn"><a href="room_reserveform.html">Reserve</a></button>
-      </div>
-    </div>
+  <section class="room-container" id="roomContainer">
+  <!-- Dynamic rooms will be inserted here -->
+</section>
 
-    <div class="room-card">
-      <img src="./images/image_4.png" alt="Conference Room 2" />
-      <div class="room-info">
-        <h3>Conference Room</h3>
-        <p>for 15 members</p>
-        <button class="reserve-btn"><a href="room_reserveform.html">Reserve</a></button>
-      </div>
-    </div>
-
-    <div class="room-card">
-      <img src="./images/image_5.png" alt="Meeting Room A" />
-      <div class="room-info">
-        <h3>Meeting Room A</h3>
-        <p>for 18 members</p>
-        <button class="reserve-btn"><a href="room_reserveform.html">Reserve</a></button>
-      </div>
-    </div>
-
-    <div class="room-card">
-      <img src="./images/image_6.png" alt="Meeting Room B" />
-      <div class="room-info">
-        <h3>Meeting Room B</h3>
-        <p>for 18 members</p>
-        <button class="reserve-btn"><a href="room_reserveform.html">Reserve</a></button>
-      </div>
-    </div>
-  </section>
 
   <!-- Footer -->
   <footer>
     <div id="main5">
       <div>
-        <img src="./images/image_1.png" alt="" />
+        <img src="images/image_1.png" alt="" />
       </div>
       <div id="main6">
         <h5>Contact Info</h5>
@@ -99,11 +66,11 @@
       </div>
     </div>
     <div id="icons">
-      <img src="./images/image_11_2.png" alt="" />
-      <img src="./images/image_16_1.png" alt="" />
-      <img src="./images/image_17_1.png" alt="" />
-      <img src="./images/image_18_1.png" alt="" />
-      <img src="./images/image_19_1.png" alt="" />
+      <img src="images/image_11_2.png" alt="Icon 1" />
+      <img src="images/image_16_1.png" alt="Icon 2" />
+      <img src="images/image_17_1.png" alt="Icon 3" />
+      <img src="images/image_18_1.png" alt="Icon 4" />
+      <img src="images/image_19_1.png" alt="Icon 5" />
     </div>
   </footer>
 
@@ -120,6 +87,31 @@
         accDropdown.style.display = "none";
       }
     });
+
+    document.addEventListener("DOMContentLoaded", async () => {
+  const roomContainer = document.getElementById("roomContainer");
+
+  try {
+    const res = await fetch("http://localhost:5000/rooms");
+    const rooms = await res.json();
+
+    roomContainer.innerHTML = rooms.map(room => `
+      <div class="room-card">
+        <img src="${room.photo_url || 'images/default_room.png'}" alt="${room.room_name}" />
+        <div class="room-info">
+          <h3>${room.room_name}</h3>
+          <p>for ${room.capacity} members</p>
+          <button class="reserve-btn">
+            <a href="room_reserveform.html?room_id=${room.room_id}&room_name=${encodeURIComponent(room.room_name)}">Reserve</a>
+          </button>
+        </div>
+      </div>
+    `).join("");
+  } catch (err) {
+    console.error("Failed to fetch rooms:", err);
+    roomContainer.innerHTML = "<p>Failed to load rooms. Try again later.</p>";
+  }
+});
   </script>
 </body>
 </html>

@@ -48,43 +48,47 @@
       </div>
     </div>
 
-   <script>
-    const loginBtn = document.getElementById("login-btn");
-    loginBtn?.addEventListener("click", async () => {
-      const email = document.getElementById("email-input").value.trim();
-      const password = document.getElementById("pass-input").value.trim();
-      const errorMsg = document.getElementById("error-msg");
+    <script>
+  const loginBtn = document.getElementById("login-btn");
 
-      try {
-        const res = await fetch("http://localhost:3000/login", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email, password })
-        });
+  loginBtn?.addEventListener("click", async () => {
+    const email = document.getElementById("email-input").value.trim();
+    const password = document.getElementById("pass-input").value.trim();
+    const errorMsg = document.getElementById("error-msg");
 
-        const data = await res.json();
+    try {
+      const res = await fetch("http://localhost:5000/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
 
-        if (res.ok) {
-          // Save session
-          localStorage.setItem("isLoggedIn", "true");
-          localStorage.setItem("userFullName", data.full_name);
-          localStorage.setItem("userRole", data.role);
+      const data = await res.json();
 
-          // Role-based redirect
-          if (data.role === "admin") {
-            window.location.href = "admin.html";
-          } else {
-            window.location.href = "home.html";
-          }
+      if (res.ok) {
+        // Save session
+        localStorage.setItem("isLoggedIn", "true");
+        localStorage.setItem("token", data.token);              // ✅ important
+        localStorage.setItem("userFullName", data.full_name);
+        localStorage.setItem("userRoleId", String(data.role_id)); // ✅ use role_id
+
+        // Role-based redirect (1 = admin, 2 = user)
+        if (Number(data.role_id) === 1) {
+          window.location.href = "admin.html";
         } else {
-          errorMsg.innerText = data.error;
-          errorMsg.style.display = "block";
+          window.location.href = "home.html";
         }
-      } catch (err) {
-        errorMsg.innerText = "Server error: " + err.message;
+      } else {
+        errorMsg.innerText = data.error || "Login failed";
         errorMsg.style.display = "block";
       }
-    });
-  </script>
+    } catch (err) {
+      errorMsg.innerText = "Server error: " + err.message;
+      errorMsg.style.display = "block";
+    }
+  });
+</script>
+
+
 </body>
 </html>

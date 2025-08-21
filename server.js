@@ -1,18 +1,40 @@
 import express from "express";
 import mysql from "mysql2/promise";
 import cors from "cors";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 import multer from "multer";
 import path from "path";
 import fs from "fs";
 import { fileURLToPath } from "url";
 
+
+
 // Fix __dirname for ES Modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+
 const app = express();
 app.use(cors());
 app.use(express.json());
+
+// ✅ MySQL Connection
+let db;
+async function connectDB() {
+  try {
+    db = await mysql.createConnection({
+      host: "localhost",
+      user: "root",
+      password: "root",
+      database: "alkhidmat_db",
+    });
+    console.log("✅ MySQL connected");
+  } catch (err) {
+    console.error("❌ DB Connection Error:", err.message);
+  }
+}
+connectDB();
 
 // Serve uploaded images statically
 app.use("/uploads", express.static(path.join(__dirname, "Uploads")));
@@ -34,24 +56,6 @@ const upload = multer({
     cb(ok ? null : new Error("Only image files are allowed"), ok);
   },
 });
-
-// MySQL connection
-let db;
-async function connectDB() {
-  try {
-    db = await mysql.createConnection({
-      host: "localhost",
-      user: "root",
-      password: "root",
-      database: "alkhidmat_db",
-    });
-    console.log("Connected to MySQL");
-  } catch (err) {
-    console.error("Database connection failed:", err.message, err.sqlMessage);
-    process.exit(1);
-  }
-}
-connectDB();
 
 // Check room conflicts
 const checkRoomConflict = async (room_id, booking_date, start_time, hours) => {
@@ -479,8 +483,102 @@ app.get("/reservations_vehicle", async (req, res) => {
   }
 });
 
-// Start server
+
+// ✅ Register Route
+app.post("/register", async (req, res) => {
+  try {
+    let { full_name, email, password } = req.body;
+
+    // Basic sanitation
+    full_name = (full_name || "").trim();
+    email = (email || "").trim().toLowerCase();
+    password = (password || "").trim();
+
+    if (!full_name || !email || !password) {
+      return res.status(400).json({ error: "All fields are required" });
+    }
+
+    if (!email.endsWith("@alkhidmat.org")) {
+      return res
+        .status(400)
+        .json({ error: "Only @alkhidmat.org emails are allowed" });
+    }
+
+    // Check if email exists (case-insensitive)
+    const [rows] = await db.query(
+      "SELECT user_id FROM users WHERE LOWER(email) = ?",
+      [email]
+    );
+    if (rows.length > 0) {
+      return res.status(400).json({ error: "Email already exists" });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const [result] = await db.query(
+      "INSERT INTO users (full_name, email, password, role_id) VALUES (?, ?, ?, ?)",
+      [full_name, email, hashedPassword, 2] // default role_id = 2
+    );
+
+    return res
+      .status(201)
+      .json({ message: "User registered successfully", user_id: result.insertId });
+  } catch (err) {
+    console.error("❌ Register error:", err.message);
+    return res.status(500).json({ error: "Server error" });
+  }
+});
+
+// ✅ Login Route
+app.post("/login", async (req, res) => {
+  try {
+    let { email, password } = req.body;
+
+    email = (email || "").trim().toLowerCase();
+    password = (password || "").trim();
+
+    if (!email || !password) {
+      return res.status(400).json({ error: "All fields are required" });
+    }
+
+    // Grab exactly what we need
+    const [rows] = await db.query(
+      "SELECT user_id, full_name, email, password, role_id FROM users WHERE LOWER(email) = ?",
+      [email]
+    );
+    if (rows.length === 0) {
+      return res.status(400).json({ error: "Invalid email or password" });
+    }
+
+    const user = rows[0];
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(400).json({ error: "Invalid email or password" });
+    }
+
+    const token = jwt.sign(
+      { user_id: user.user_id, email: user.email, role_id: user.role_id },
+      "secretkey", // ⚠️ put in process.env.JWT_SECRET for production
+      { expiresIn: "1h" }
+    );
+
+    return res.json({
+      message: "Login successful",
+      token,
+      user_id: user.user_id,
+      full_name: user.full_name,
+      email: user.email,
+      role_id: user.role_id,
+    });
+  } catch (err) {
+    console.error("❌ Login error:", err.message);
+    return res.status(500).json({ error: "Server error" });
+  }
+});
+
+
 const PORT = 5000;
 app.listen(PORT, () =>
-  console.log(`Server running at http://localhost:${PORT}`)
+  console.log(`🚀 Server running on http://localhost:${PORT}`)
 );
