@@ -387,5 +387,9 @@ app.patch("/update_vehicle_status", async (req, res) => {
   }
 });
 
-const PORT = process.env.PORT || 5000;
+let PORT;
+if (typeof PORT === 'undefined') {
+  PORT = process.env.PORT || 5000; // dynamic port for Replit
+}
+
 app.listen(PORT, () => console.log(`🚀 Server running on http://localhost:${PORT}`));
