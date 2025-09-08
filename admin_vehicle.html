@@ -1,559 +1,293 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Admin Vehicle Management</title>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css"
-    />
-    <style>
-      body {
-        background-color: #f4f7fe;
-        font-family: "Segoe UI", sans-serif;
-        overflow-x: hidden;
-      }
-      .sidebar {
-        width: 240px;
-        position: fixed;
-        height: 100vh;
-        background: linear-gradient(135deg, #004aad, #023e8a);
-        color: white;
-        padding: 30px 20px;
-      }
-      .sidebar h3 {
-        font-weight: bold;
-        margin-bottom: 30px;
-      }
-      .sidebar a {
-        color: white;
-        display: block;
-        margin: 15px 0;
-        text-decoration: none;
-        transition: 0.3s;
-      }
-      .sidebar a:hover {
-        color: #ffd700;
-      }
-      .topbar {
-        height: 70px;
-        background-color: white;
-        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
-        margin-left: 240px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 0 30px;
-      }
-      #car-image {
-        width: calc(100% - 260px);
-        height: 350px;
-        margin-left: 260px;
-        margin-top: 30px;
-        padding-right: 20px;
-      }
-      #car-image img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-      #new {
-        display: flex;
-        align-items: center;
-        margin-left: 260px;
-        margin-top: 20px;
-        margin-bottom: 10px;
-        gap: 20px;
-      }
-      #new h2 {
-        padding-top: 4px;
-        margin-left: 400px;
-      }
-      #new button {
-        width: 110px;
-        height: 36px;
-        background-color: #004aad;
-        color: white;
-        border: none;
-        margin-left: 440px;
-        border-radius: 6px;
-      }
-      .table-wrapper {
-        margin-left: 260px;
-        margin-right: 20px;
-        margin-bottom: 30px;
-        background: white;
-        padding: 12px;
-        border-radius: 8px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-      }
-      .table-custom {
-        width: 100%;
-        border-collapse: collapse;
-        background: white;
-        border-radius: 8px;
-        overflow: hidden;
-      }
-      .table-custom thead {
-        background-color: #004aad;
-        color: white;
-      }
-      .table-custom th,
-      .table-custom td {
-        padding: 14px 20px;
-        text-align: center;
-        font-size: 15px;
-        vertical-align: middle;
-      }
-      .btn-cancel {
-        background-color: #dc3545;
-        border: none;
-        border-radius: 5px;
-        padding: 6px 12px;
-        color: white;
-        font-weight: bold;
-      }
-      .modal-overlay {
-        position: fixed;
-        inset: 0;
-        background: rgba(0, 0, 0, 0.4);
-        backdrop-filter: blur(3px);
-        display: none;
-        align-items: center;
-        justify-content: center;
-        z-index: 2000;
-      }
-      .modal-content-custom {
-        border: 6px solid #004aad;
-        background: #fff;
-        padding: 20px;
-        border-radius: 10px;
-        width: 420px;
-        max-width: 95%;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-        max-height: 90vh;
-        overflow-y: auto;
-      }
-      .modal-content-custom h5 {
-        width: 100%;
-        text-align: center;
-        background-color: #004aad;
-        padding: 10px;
-        color: white;
-        margin: -20px -20px 20px -20px;
-        border-radius: 5px 5px 0 0;
-      }
-      #save {
-        width: 100%;
-        margin-top: 12px;
-        background-color: #004aad;
-      }
-      #cancelForm {
-        width: 100%;
-        margin-top: 8px;
-      }
-      .thumb {
-        width: 80px;
-        height: 60px;
-        object-fit: cover;
-        border-radius: 8px;
-      }
-      .form-text-muted {
-        font-size: 12px;
-        color: #6c757d;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="sidebar">
-      <h3>Admin Panel</h3>
-      <a href="admin.html"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a>
-      <a href="bookings.html"
-        ><i class="bi bi-calendar-check me-2"></i>Bookings</a
-      >
-      <a href="admin_room.html"><i class="bi bi-door-open me-2"></i>Rooms</a>
-      <a href="admin_vehicle.html"
-        ><i class="bi bi-truck-front me-2"></i>Vehicles</a
-      >
-      <a href="admin_setting.html"><i class="bi bi-gear me-2"></i>Settings</a>
-      <a href="admin_logout.html"
-        ><i class="bi bi-box-arrow-right me-2"></i>Logout</a
-      >
-    </div>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Vehicle Management</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 
-    <div class="topbar">
-      <h5>Welcome, Admin</h5>
-      <div class="dropdown">
-        <img
-          src="images/admin.png"
-          class="rounded-circle dropdown-toggle"
-          width="40"
-          height="40"
-          role="button"
-          data-bs-toggle="dropdown"
-          aria-expanded="false"
-          style="cursor: pointer; object-fit: cover"
-        />
-        <ul class="dropdown-menu dropdown-menu-end shadow animated-dropdown">
-          <li>
-            <a class="dropdown-item" href="admin_setting.html"
-              >Account Settings</a
-            >
-          </li>
-          <li>
-            <a class="dropdown-item text-danger" href="admin_logout.html"
-              >Logout</a
-            >
-          </li>
-        </ul>
+<style>
+body { background:#f4f7fe; font-family:'Segoe UI', sans-serif; overflow-x:hidden; }
+
+/* Sidebar */
+.sidebar {
+  width: 240px;
+  position: fixed;
+  height: 100vh;
+  background: linear-gradient(135deg,#004aad,#023e8a);
+  color: white;
+  padding: 30px 20px;
+  transition: transform 0.3s ease;
+  z-index:1055;
+}
+.sidebar h3 { font-weight:bold; margin-bottom:30px; }
+.sidebar a { color:white; display:block; margin:15px 0; text-decoration:none; transition:0.3s; }
+.sidebar a:hover { color:#ffd700; }
+.sidebar.show { transform: translateX(0); }
+.overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.4); z-index:1050; }
+.overlay.active { display:block; }
+
+/* Topbar */
+.topbar {
+  height:70px;
+  background:white;
+  box-shadow:0 1px 4px rgba(0,0,0,0.1);
+  margin-left:240px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 30px;
+  transition: margin-left 0.3s;
+}
+.topbar h5 { margin:0; font-size:18px; }
+
+/* Car Image */
+#car-image {
+  width: calc(100% - 260px);
+  margin-left: 260px;
+  margin-top: 20px;
+  padding-right: 20px;
+  transition: margin-left 0.3s, width 0.3s;
+}
+#car-image img {
+  width: 100%;
+  height: auto;
+  max-height: 400px;
+  object-fit: cover;
+  border-radius: 8px;
+  display: block;
+}
+
+/* Vehicles Section */
+#new {
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  margin-left:260px;
+  margin-top:20px;
+  margin-bottom:10px;
+  gap:15px;
+  padding-right:20px;
+}
+#new h2 { flex:1; margin:0; font-size:22px; }
+#new button {
+  background:#004aad;
+  color:white;
+  border:none;
+  border-radius:6px;
+  padding:8px 16px;
+  min-width:110px;
+  height:36px;
+}
+
+/* Table */
+.table-wrapper {
+  margin-left: 260px;
+  margin-right: 20px;
+  margin-bottom: 30px;
+  background:white;
+  padding:12px;
+  border-radius:8px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.08);
+  overflow-x:auto;
+  transition: margin-left 0.3s;
+}
+.table-custom { width:100%; min-width:700px; border-collapse:collapse; }
+.table-custom thead { background:#004aad; color:white; }
+.table-custom th, .table-custom td { padding:12px 15px; text-align:center; font-size:14px; vertical-align:middle; white-space:nowrap; }
+.btn-cancel { background:#DC3545; border:none; border-radius:5px; padding:6px 12px; color:white; font-weight:bold; }
+
+/* Modal */
+.modal-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.4); backdrop-filter:blur(3px); display:none; align-items:center; justify-content:center; z-index:2000; }
+.modal-content-custom { width:420px; max-width:95%; border:6px solid #004aad; background:#fff; padding:20px; border-radius:10px; max-height:90vh; overflow-y:auto; }
+.modal-content-custom h5 { margin:-20px -20px 20px -20px; text-align:center; background:#004aad; padding:12px; color:white; border-radius:4px 4px 0 0; }
+#save, #cancelForm { width:100%; margin-top:10px; }
+.thumb { width:80px; height:60px; object-fit:cover; border-radius:8px; }
+.form-text-muted { font-size:12px; color:#6c757d; }
+
+/* Responsive */
+@media(max-width:992px){
+  .sidebar { transform:translateX(-100%); }
+  .topbar, #car-image, #new, .table-wrapper { margin-left:0; width:100%; padding:0 15px; }
+  #new { justify-content:space-between; }
+  #new h2 { font-size:20px; }
+  .topbar h5 { font-size:16px; }
+  #car-image img { max-height:300px; }
+  #new button { padding:6px 12px; min-width:80px; height:32px; font-size:14px; }
+  .topbar img.rounded-circle { width:32px; height:32px; }
+}
+
+@media(max-width:576px){
+  #car-image img { max-height:200px; }
+  .table-wrapper { overflow-x:auto; }
+  .table-custom th, .table-custom td { font-size:12px; padding:8px; }
+  .btn-cancel { padding:4px 8px; font-size:12px; }
+  #new button { padding:3px 8px; min-width:60px; height:28px; font-size:12px; }
+  #new h2 { font-size:18px; }
+  .topbar h5 { font-size:14px; }
+  .topbar img.rounded-circle { width:28px; height:28px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Sidebar -->
+<div class="sidebar" id="sidebar">
+  <h3>Admin Panel</h3>
+  <a href="admin.html"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a>
+  <a href="bookings.html"><i class="bi bi-calendar-check me-2"></i>Bookings</a>
+  <a href="admin_room.html"><i class="bi bi-door-open me-2"></i>Rooms</a>
+  <a href="admin_vehicle.html"><i class="bi bi-truck-front me-2"></i>Vehicles</a>
+  <a href="admin_setting.html"><i class="bi bi-gear me-2"></i>Settings</a>
+  <a href="admin_logout.html"><i class="bi bi-box-arrow-right me-2"></i>Logout</a>
+</div>
+<div id="sidebarOverlay" class="overlay"></div>
+
+<!-- Topbar -->
+<div class="topbar">
+  <button class="btn btn-sm btn-outline-primary d-lg-none" id="menuToggle"><i class="bi bi-list"></i></button>
+  <h5>Welcome, Admin</h5>
+  <div class="dropdown">
+    <img src="images/admin.png" class="rounded-circle dropdown-toggle" width="40" height="40" data-bs-toggle="dropdown" aria-expanded="false" style="cursor:pointer; object-fit:cover;">
+    <ul class="dropdown-menu dropdown-menu-end shadow">
+      <li><a class="dropdown-item" href="admin_setting.html">Account Settings</a></li>
+      <li><a class="dropdown-item text-danger" href="admin_logout.html">Logout</a></li>
+    </ul>
+  </div>
+</div>
+
+<!-- Car Image -->
+<div id="car-image"><img src="./images/image_27_1.png" alt="Car Image"></div>
+
+<!-- Vehicles Section -->
+<div id="new">
+  <h2>Vehicles</h2>
+  <button id="addVehicleBtn">Add New</button>
+</div>
+
+<!-- Modal -->
+<div id="modalOverlay" class="modal-overlay">
+  <div class="modal-content-custom">
+    <h5>Add New Vehicle</h5>
+    <form id="vehicleForm">
+      <div class="mb-3"><label class="form-label">Vehicle Type</label><input type="text" id="vehicleType" class="form-control" required></div>
+      <div class="mb-3"><label class="form-label">Vehicle Name</label><input type="text" id="carName" class="form-control" required></div>
+      <div class="mb-3"><label class="form-label">Driver Name</label><input type="text" id="driverName" class="form-control" required></div>
+      <div class="mb-3"><label class="form-label">Driver Phone</label><input type="text" id="driverPhone" class="form-control" required></div>
+      <div class="mb-1">
+        <label class="form-label">Photo</label>
+        <input type="file" id="photoFile" class="form-control" accept="image/*">
+        <div class="form-text-muted">You can upload a file <b>or</b> paste a photo URL below.</div>
       </div>
-    </div>
+      <div class="mb-3"><input type="text" id="photoUrl" class="form-control" placeholder="https://example.com/vehicle.jpg (optional)"></div>
+      <div class="mb-3 d-flex justify-content-center"><img id="preview" class="thumb d-none" alt="preview"></div>
+      <button type="submit" class="btn btn-primary" id="save">Save</button>
+      <button type="button" class="btn btn-secondary" id="cancelForm">Cancel</button>
+    </form>
+  </div>
+</div>
 
-    <div id="car-image">
-      <img src="images/fix image.png" alt="" />
-    </div>
+<!-- Vehicles Table -->
+<div class="table-wrapper">
+  <table class="table-custom">
+    <thead>
+      <tr><th>Photo</th><th>Vehicle Type</th><th>Vehicle Name</th><th>Driver Name</th><th>Driver Phone</th><th>Delete</th></tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</div>
 
-    <div id="new">
-      <h2>Vehicles</h2>
-      <button id="addVehicleBtn" type="button">Add New</button>
-    </div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+// Sidebar toggle
+const sidebar=document.getElementById("sidebar"), menuToggle=document.getElementById("menuToggle"), overlay=document.getElementById("sidebarOverlay");
+menuToggle.addEventListener("click",()=>{sidebar.classList.toggle("show"); overlay.classList.toggle("active");});
+overlay.addEventListener("click",()=>{sidebar.classList.remove("show"); overlay.classList.remove("active");});
+window.addEventListener("resize",()=>{if(window.innerWidth>992){sidebar.classList.remove("show"); overlay.classList.remove("active");}});
 
-    <!-- Modal -->
-    <div id="modalOverlay" class="modal-overlay">
-      <div class="modal-content-custom">
-        <h5>Add New Vehicle</h5>
-        <form id="vehicleForm">
-          <div class="mb-3">
-            <label for="vehicleType" class="form-label">Vehicle Type</label>
-            <input
-              type="text"
-              id="vehicleType"
-              class="form-control"
-              placeholder="Enter vehicle type"
-              required
-            />
-          </div>
-          <div class="mb-3">
-            <label for="carName" class="form-label">Vehicle Name</label>
-            <input
-              type="text"
-              id="carName"
-              class="form-control"
-              placeholder="Enter vehicle name"
-              required
-            />
-          </div>
-          <div class="mb-3">
-            <label for="driverName" class="form-label">Driver Name</label>
-            <input
-              type="text"
-              id="driverName"
-              class="form-control"
-              placeholder="Enter driver name"
-              required
-            />
-          </div>
-          <div class="mb-3">
-            <label for="driverPhone" class="form-label">Driver Phone</label>
-            <input
-              type="text"
-              id="driverPhone"
-              class="form-control"
-              placeholder="Enter driver phone"
-              required
-            />
-          </div>
-          <div class="mb-1">
-            <label class="form-label">Photo</label>
-            <input
-              type="file"
-              id="photoFile"
-              class="form-control"
-              accept="image/*"
-            />
-            <div class="form-text-muted">
-              You can upload a file <b>or</b> paste a photo URL below.
-            </div>
-          </div>
-          <div class="mb-3">
-            <input
-              type="text"
-              id="photoUrl"
-              class="form-control"
-              placeholder="https://example.com/vehicle.jpg (optional)"
-            />
-          </div>
-          <div class="mb-3 d-flex justify-content-center">
-            <img id="preview" class="thumb d-none" alt="preview" />
-          </div>
-          <button type="submit" class="btn btn-primary" id="save">Save</button>
-          <button type="button" class="btn btn-secondary" id="cancelForm">
-            Cancel
-          </button>
-        </form>
-      </div>
-    </div>
+// Vehicle Management
+const addBtn=document.getElementById("addVehicleBtn"),
+      modalOverlay=document.getElementById("modalOverlay"),
+      cancelBtn=document.getElementById("cancelForm"),
+      vehicleForm=document.getElementById("vehicleForm"),
+      tbody=document.querySelector(".table-custom tbody"),
+      photoFile=document.getElementById("photoFile"),
+      photoUrl=document.getElementById("photoUrl"),
+      preview=document.getElementById("preview"),
+      API_URL="http://localhost:5000/vehicles";
 
-    <div class="table-wrapper">
-      <table class="table-custom">
-        <thead>
-          <tr>
-            <th>Photo</th>
-            <th>Vehicle Type</th>
-            <th>Vehicle Name</th>
-            <th>Driver Name</th>
-            <th>Driver Phone</th>
-            <th>Delete</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-    </div>
+window.addEventListener("DOMContentLoaded", loadVehicles);
+addBtn.addEventListener("click",()=>modalOverlay.style.display="flex");
+cancelBtn.addEventListener("click",closeModal);
+modalOverlay.addEventListener("click",(e)=>{if(e.target===modalOverlay) closeModal();});
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script>
-      const addBtn = document.getElementById("addVehicleBtn");
-      const modalOverlay = document.getElementById("modalOverlay");
-      const cancelBtn = document.getElementById("cancelForm");
-      const vehicleForm = document.getElementById("vehicleForm");
-      const tbody = document.querySelector(".table-custom tbody");
-      const photoFile = document.getElementById("photoFile");
-      const photoUrl = document.getElementById("photoUrl");
-      const preview = document.getElementById("preview");
+photoFile.addEventListener("change",()=>{const file=photoFile.files[0]; if(file){const reader=new FileReader(); reader.onload=ev=>{preview.src=ev.target.result; preview.classList.remove("d-none");}; reader.readAsDataURL(file);}else{preview.src=""; preview.classList.add("d-none");}});
+photoUrl.addEventListener("input",()=>{const url=photoUrl.value.trim(); if(url){preview.src=url; preview.classList.remove("d-none");}else if(!photoFile.files.length){preview.src=""; preview.classList.add("d-none");}});
 
-      const API_URL = "http://localhost:5000/vehicles";
+vehicleForm.addEventListener("submit", async e=>{
+  e.preventDefault();
+  const vehicleType=document.getElementById("vehicleType").value.trim(),
+        carName=document.getElementById("carName").value.trim(),
+        driverName=document.getElementById("driverName").value.trim(),
+        driverPhone=document.getElementById("driverPhone").value.trim();
+  if(!vehicleType||!carName||!driverName||!driverPhone){Swal.fire({icon:"error",title:"Validation Error",text:"Please fill all required fields.",confirmButtonColor:"#004aad"}); return;}
+  
+  const fd=new FormData();
+  fd.append("vehicle_type",vehicleType);
+  fd.append("car_name",carName);
+  fd.append("driver_name",driverName);
+  fd.append("driver_phone",driverPhone);
+  if(photoFile.files[0]) fd.append("photo",photoFile.files[0]);
+  else if(photoUrl.value.trim()) fd.append("photo_url",photoUrl.value.trim());
 
-      // Load vehicles on page load
-      window.addEventListener("DOMContentLoaded", loadVehicles);
+  try{
+    const res=await fetch(API_URL,{method:"POST",body:fd});
+    if(!res.ok){const err=await res.json().catch(()=>({})); Swal.fire({icon:"error",title:"Error",text:"Failed to save vehicle"+(err.error?": "+err.error:""),confirmButtonColor:"#004aad"}); return;}
+    const savedVehicle=await res.json();
+    addVehicleToTable(savedVehicle);
+    closeModal();
+    Swal.fire({icon:"success",title:"Success",text:"Vehicle added successfully!",confirmButtonColor:"#004aad"});
+  }catch(err){Swal.fire({icon:"error",title:"Error",text:"Failed to save vehicle: Network error",confirmButtonColor:"#004aad"});}
+});
 
-      addBtn.addEventListener("click", () => {
-        modalOverlay.style.display = "flex";
-      });
+tbody.addEventListener("click", async e=>{
+  if(e.target && e.target.matches(".btn-cancel")){
+    const row=e.target.closest("tr"), vehicleId=row.dataset.id;
+    const result=await Swal.fire({icon:"warning",title:"Are you sure?",text:"Do you want to delete this vehicle?",showCancelButton:true,confirmButtonColor:"#004aad",cancelButtonColor:"#dc3545",confirmButtonText:"Yes, delete it!"});
+    if(!result.isConfirmed) return;
+    try{
+      const res=await fetch(`${API_URL}/${vehicleId}`,{method:"DELETE"});
+      if(!res.ok){const err=await res.json().catch(()=>({})); Swal.fire({icon:"error",title:"Error",text:"Failed to delete"+(err.error?": "+err.error:""),confirmButtonColor:"#004aad"}); return;}
+      row.remove();
+      Swal.fire({icon:"success",title:"Deleted",text:"Vehicle deleted successfully!",confirmButtonColor:"#004aad"});
+    }catch(err){Swal.fire({icon:"error",title:"Error",text:"Failed to delete vehicle: Network error",confirmButtonColor:"#004aad"});}
+  }
+});
 
-      cancelBtn.addEventListener("click", closeModal);
+function addVehicleToTable(vehicle){
+  const tr=document.createElement("tr");
+  tr.dataset.id=vehicle.vehicle_id;
+  tr.innerHTML=`<td>${vehicle.photo_url?`<img src="${escapeHtml(vehicle.photo_url)}" class="thumb">`:"-"}</td><td>${escapeHtml(vehicle.vehicle_type)}</td><td>${escapeHtml(vehicle.car_name)}</td><td>${escapeHtml(vehicle.driver_name)}</td><td>${escapeHtml(vehicle.driver_phone)}</td><td><button class="btn-cancel">Delete</button></td>`;
+  tbody.prepend(tr);
+}
 
-      function closeModal() {
-        modalOverlay.style.display = "none";
-        vehicleForm.reset();
-        preview.src = "";
-        preview.classList.add("d-none");
-      }
+async function loadVehicles(){
+  try{
+    const res=await fetch(API_URL);
+    if(!res.ok){Swal.fire({icon:"error",title:"Error",text:"Failed to load vehicles",confirmButtonColor:"#004aad"}); return;}
+    const vehicles=await res.json();
+    tbody.innerHTML="";
+    vehicles.forEach(addVehicleToTable);
+  }catch(err){Swal.fire({icon:"error",title:"Error",text:"Failed to load vehicles: Network error",confirmButtonColor:"#004aad"});}
+}
 
-      modalOverlay.addEventListener("click", (e) => {
-        if (e.target === modalOverlay) closeModal();
-      });
-
-      // Preview logic
-      photoFile.addEventListener("change", () => {
-        const file = photoFile.files[0];
-        if (file) {
-          const reader = new FileReader();
-          reader.onload = (ev) => {
-            preview.src = ev.target.result;
-            preview.classList.remove("d-none");
-          };
-          reader.readAsDataURL(file);
-        } else {
-          preview.src = "";
-          preview.classList.add("d-none");
-        }
-      });
-
-      photoUrl.addEventListener("input", () => {
-        const url = photoUrl.value.trim();
-        if (url) {
-          preview.src = url;
-          preview.classList.remove("d-none");
-        } else if (!photoFile.files.length) {
-          preview.src = "";
-          preview.classList.add("d-none");
-        }
-      });
-
-      // Add vehicle
-      vehicleForm.addEventListener("submit", async function (e) {
-        e.preventDefault();
-        const vehicleType = document.getElementById("vehicleType").value.trim();
-        const carName = document.getElementById("carName").value.trim();
-        const driverName = document.getElementById("driverName").value.trim();
-        const driverPhone = document.getElementById("driverPhone").value.trim();
-
-        if (!vehicleType || !carName || !driverName || !driverPhone) {
-          Swal.fire({
-            icon: "error",
-            title: "Validation Error",
-            text: "Please fill all required fields.",
-            confirmButtonColor: "#004aad",
-          });
-          return;
-        }
-
-        const fd = new FormData();
-        fd.append("vehicle_type", vehicleType);
-        fd.append("car_name", carName);
-        fd.append("driver_name", driverName);
-        fd.append("driver_phone", driverPhone);
-
-        // Prefer file if chosen; else send URL if provided
-        if (photoFile.files[0]) {
-          fd.append("photo", photoFile.files[0]);
-        } else if (photoUrl.value.trim()) {
-          fd.append("photo_url", photoUrl.value.trim());
-        }
-
-        try {
-          const res = await fetch(API_URL, { method: "POST", body: fd });
-          if (!res.ok) {
-            const err = await res.json().catch(() => ({}));
-            Swal.fire({
-              icon: "error",
-              title: "Error",
-              text: "Failed to save vehicle" + (err.error ? ": " + err.error : ""),
-              confirmButtonColor: "#004aad",
-            });
-            return;
-          }
-
-          const savedVehicle = await res.json();
-          addVehicleToTable(savedVehicle);
-          closeModal();
-          Swal.fire({
-            icon: "success",
-            title: "Success",
-            text: "Vehicle added successfully!",
-            confirmButtonColor: "#004aad",
-          });
-        } catch (err) {
-          console.error("Error saving vehicle:", err);
-          Swal.fire({
-            icon: "error",
-            title: "Error",
-            text: "Failed to save vehicle: Network error",
-            confirmButtonColor: "#004aad",
-          });
-        }
-      });
-
-      // Delete vehicle
-      tbody.addEventListener("click", async function (e) {
-        if (e.target && e.target.matches(".btn-cancel")) {
-          const row = e.target.closest("tr");
-          const vehicleId = row.dataset.id;
-          const result = await Swal.fire({
-            icon: "warning",
-            title: "Are you sure?",
-            text: "Do you want to delete this vehicle?",
-            showCancelButton: true,
-            confirmButtonColor: "#004aad",
-            cancelButtonColor: "#dc3545",
-            confirmButtonText: "Yes, delete it!",
-          });
-
-          if (!result.isConfirmed) return;
-
-          try {
-            const res = await fetch(`${API_URL}/${vehicleId}`, {
-              method: "DELETE",
-            });
-            if (!res.ok) {
-              const err = await res.json().catch(() => ({}));
-              Swal.fire({
-                icon: "error",
-                title: "Error",
-                text: "Failed to delete" + (err.error ? ": " + err.error : ""),
-                confirmButtonColor: "#004aad",
-              });
-              return;
-            }
-            row.remove();
-            Swal.fire({
-              icon: "success",
-              title: "Deleted",
-              text: "Vehicle deleted successfully!",
-              confirmButtonColor: "#004aad",
-            });
-          } catch (err) {
-            console.error("Error deleting vehicle:", err);
-            Swal.fire({
-              icon: "error",
-              title: "Error",
-              text: "Failed to delete vehicle: Network error",
-              confirmButtonColor: "#004aad",
-            });
-          }
-        }
-      });
-
-      function addVehicleToTable(vehicle) {
-        const tr = document.createElement("tr");
-        tr.dataset.id = vehicle.vehicle_id;
-        tr.innerHTML = `
-        <td>${
-          vehicle.photo_url
-            ? `<img src="${escapeHtml(
-                vehicle.photo_url
-              )}" alt="Vehicle" class="thumb">`
-            : "-"
-        }</td>
-        <td>${escapeHtml(vehicle.vehicle_type)}</td>
-        <td>${escapeHtml(vehicle.car_name)}</td>
-        <td>${escapeHtml(vehicle.driver_name)}</td>
-        <td>${escapeHtml(vehicle.driver_phone)}</td>
-        <td><button class="btn-cancel">Delete</button></td>
-      `;
-        tbody.prepend(tr);
-      }
-
-      async function loadVehicles() {
-        try {
-          const res = await fetch(API_URL);
-          if (!res.ok) {
-            console.error("Failed to fetch vehicles:", res.status);
-            Swal.fire({
-              icon: "error",
-              title: "Error",
-              text: "Failed to load vehicles",
-              confirmButtonColor: "#004aad",
-            });
-            return;
-          }
-          const vehicles = await res.json();
-          tbody.innerHTML = "";
-          vehicles.forEach(addVehicleToTable);
-        } catch (err) {
-          console.error("Error loading vehicles:", err);
-          Swal.fire({
-            icon: "error",
-            title: "Error",
-            text: "Failed to load vehicles: Network error",
-            confirmButtonColor: "#004aad",
-          });
-        }
-      }
-
-      function escapeHtml(str) {
-        return str.replace(
-          /[&<>"']/g,
-          (m) =>
-            ({
-              "&": "&amp;",
-              "<": "&lt;",
-              ">": "&gt;",
-              '"': "&quot;",
-              "'": "&#39;",
-            }[m])
-        );
-      }
-    </script>
-  </body>
+function closeModal(){ modalOverlay.style.display="none"; vehicleForm.reset(); preview.src=""; preview.classList.add("d-none"); }
+function escapeHtml(str){return str.replace(/[&<>"']/g,m=>({'&':"&",'<':"<",'>':">",'"':'"',"'":"'"}[m]));}
+</script>
+</body>
 </html>
+
+

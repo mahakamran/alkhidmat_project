@@ -1,77 +1,290 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Admin Dashboard</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-  <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Admin Dashboard</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+<style>
+body {
+  background-color: #f4f7fe;
+  font-family: 'Segoe UI', sans-serif;
+  overflow-x: hidden;
+  transition: all 0.3s;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 240px;
+  position: fixed;
+  height: 100vh;
+  background: linear-gradient(135deg, #004aad, #023e8a);
+  color: white;
+  padding: 30px 20px;
+  transition: transform 0.3s ease;
+  z-index: 1050;
+  transform: translateX(0);
+}
+.sidebar h3 { font-weight: bold; margin-bottom: 30px; font-size:1.2rem; }
+.sidebar a { color: white; display: block; margin: 15px 0; text-decoration: none; transition: 0.3s; font-size:0.95rem; }
+.sidebar a:hover { color: #ffd700; }
+.sidebar.show { transform: translateX(0); }
+
+/* Overlay */
+#overlay { position: fixed; inset:0; background: rgba(0,0,0,0.4); display: none; z-index: 1040; }
+#overlay.active { display: block; }
+
+/* Topbar */
+.topbar {
+  height: 70px;
+  background-color: white;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+  margin-left: 240px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 30px;
+  transition: margin-left 0.3s ease;
+}
+.topbar .toggle-btn { display: none; font-size: 24px; cursor: pointer; }
+
+/* Main content */
+.main { margin-left: 240px; padding: 40px; transition: margin-left 0.3s ease; }
+
+/* Cards */
+.stat-card {
+  background: linear-gradient(145deg, #ffffff, #e3e9f7);
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+  padding: 20px;
+  text-align: center;
+  transition: 0.3s;
+}
+.stat-card:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(0,0,0,0.1); }
+.stat-card h3 { margin-top: 10px; font-size: 28px; color: #004aad; font-weight: bold; }
+.stat-card p { font-size: 14px; color: #555; margin-bottom: 0; }
+
+/* Charts */
+.chart-container { background: white; border-radius: 16px; box-shadow: 0 8px 25px rgba(0,0,0,0.05); padding: 20px; margin-top: 30px; }
+.chart-container canvas { max-height: 250px; }
+
+/* Mobile adjustments */
+@media (max-width: 992px) {
+  .sidebar { transform: translateX(-100%); padding: 20px; }
+  .main, .topbar { margin-left: 0; padding: 15px; }
+  .topbar .toggle-btn { display: block; }
+  .topbar h5 { font-size: 0.9rem; }
+  .stat-card h3 { font-size: 22px; }
+  .stat-card p { font-size: 12px; }
+  .chart-container { padding: 15px; }
+  .chart-container canvas { max-height: 200px; }
+  .topbar img { width: 30px; height: 30px; }
+}
+</style>
 </head>
 <body>
-  <!-- Sidebar -->
-  <div class="sidebar">
-    <h3>Admin Panel</h3>
-    <a href="admin.html"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a>
-    <a href="bookings.html"><i class="bi bi-calendar-check me-2"></i>Bookings</a>
-    <a href="admin_room.html"><i class="bi bi-door-open me-2"></i>Rooms</a>
-    <a href="admin_vehicle.html"><i class="bi bi-truck-front me-2"></i>Vehicles</a>
-    <a href="admin_setting.html"><i class="bi bi-gear me-2"></i>Settings</a>
-    <a href="#" id="adminLogout"><i class="bi bi-box-arrow-right me-2"></i>Logout</a>
+
+<!-- Sidebar -->
+<div class="sidebar" id="sidebar">
+  <h3>Admin Panel</h3>
+  <a href="admin.html"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a>
+  <a href="bookings.html"><i class="bi bi-calendar-check me-2"></i>Bookings</a>
+  <a href="admin_room.html"><i class="bi bi-door-open me-2"></i>Rooms</a>
+  <a href="admin_vehicle.html"><i class="bi bi-truck-front me-2"></i>Vehicles</a>
+  <a href="admin_setting.html"><i class="bi bi-gear me-2"></i>Settings</a>
+  <a href="#" id="adminLogout"><i class="bi bi-box-arrow-right me-2"></i>Logout</a>
+</div>
+
+<!-- Overlay -->
+<div id="overlay"></div>
+
+<!-- Topbar -->
+<div class="topbar">
+  <i class="bi bi-list toggle-btn" id="toggleSidebar"></i>
+  <h5 id="welcomeAdmin">Welcome, Admin</h5>
+  <div class="dropdown">
+    <img src="images/admin.png" class="rounded-circle dropdown-toggle" width="40" height="40"
+         role="button" data-bs-toggle="dropdown" aria-expanded="false" style="cursor:pointer; object-fit:cover;" />
+    <ul class="dropdown-menu dropdown-menu-end shadow">
+      <li><a class="dropdown-item" href="admin_setting.html">Account Settings</a></li>
+      <li><a class="dropdown-item text-danger" href="#" id="accLogoutAdmin">Logout</a></li>
+    </ul>
+  </div>
+</div>
+
+<!-- Main content -->
+<div class="main">
+  <div class="row g-3">
+    <div class="col-6 col-md-3"><div class="stat-card"><h3 id="count1">0</h3><p>Total Bookings</p></div></div>
+    <div class="col-6 col-md-3"><div class="stat-card"><h3 id="count2">0</h3><p>Approved</p></div></div>
+    <div class="col-6 col-md-3"><div class="stat-card"><h3 id="count3">0</h3><p>Pending</p></div></div>
+    <div class="col-6 col-md-3"><div class="stat-card"><h3 id="count4">0</h3><p>Cancelled</p></div></div>
   </div>
 
-  <!-- Topbar -->
-  <div class="topbar">
-    <h5 id="welcomeAdmin">Welcome, Admin</h5>
-    <div class="dropdown">
-      <img src="images/admin.png" 
-           class="rounded-circle dropdown-toggle" 
-           width="40" height="40"
-           role="button" 
-           data-bs-toggle="dropdown" 
-           aria-expanded="false" 
-           style="cursor:pointer; object-fit:cover;" />
-      <ul class="dropdown-menu dropdown-menu-end shadow animated-dropdown">
-        <li><a class="dropdown-item" href="admin_setting.html">Account Settings</a></li>
-        <li><a class="dropdown-item text-danger" href="#" id="accLogoutAdmin">Logout</a></li>
-      </ul>
+  <div class="row chart-container mt-4">
+    <div class="col-12 col-md-6"><canvas id="modernBarChart"></canvas></div>
+    <div class="col-12 col-md-6 position-relative mt-3 mt-md-0">
+      <canvas id="modernDonutChart"></canvas>
+      <div id="donutPercent" style="position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); font-size:18px; font-weight:bold; color:#004aad;">0%</div>
     </div>
   </div>
+</div>
 
-  <!-- Main content -->
-  <div class="main">
-    <!-- Dashboard stats, tables, charts remain same -->
-  </div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+// -------------------- SIDEBAR --------------------
+const toggleBtn = document.getElementById('toggleSidebar');
+const sidebar = document.getElementById('sidebar');
+const overlay = document.getElementById('overlay');
 
-  <!-- Scripts -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="auth.js"></script>
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      // ✅ Role check (using role_id instead of string "admin")
-      const roleId = localStorage.getItem("userRoleId");
-      if (roleId !== "1") {
-        alert("Access Denied! Only Admins allowed.");
-        window.location.href = "home.html";
-        return;
+toggleBtn.addEventListener('click', () => {
+  sidebar.classList.toggle('show');
+  overlay.classList.toggle('active');
+});
+overlay.addEventListener('click', () => {
+  sidebar.classList.remove('show');
+  overlay.classList.remove('active');
+});
+window.addEventListener('resize', () => {
+  if(window.innerWidth > 992){
+    sidebar.classList.remove('show');
+    overlay.classList.remove('active');
+  }
+});
+
+// -------------------- ANIMATE COUNTER --------------------
+function animateCounter(id, target){
+  let element = document.getElementById(id);
+  let start = parseInt(element.innerText) || 0;
+  const increment = target > 100 ? 2 : 10;
+  const step = () => {
+    if(start < target){
+      start += increment;
+      if(start > target) start = target;
+      element.innerText = start;
+      requestAnimationFrame(step);
+    } else {
+      element.innerText = target;
+    }
+  };
+  step();
+}
+
+// Animate donut percentage
+function animatePercent(id, target){
+  let element = document.getElementById(id);
+  let start = parseInt(element.innerText) || 0;
+  const stepVal = target > 50 ? 1 : 2;
+  const step = () => {
+    if(start < target){
+      start += stepVal;
+      if(start > target) start = target;
+      element.innerText = start + '%';
+      requestAnimationFrame(step);
+    } else {
+      element.innerText = target + '%';
+    }
+  };
+  step();
+}
+
+// Animate bar chart
+function animateBarChart(chart, newData){
+  chart.data.datasets[0].data.forEach((value, index) => {
+    let start = value;
+    const target = newData[index];
+    const step = () => {
+      if(start < target){
+        start += Math.ceil((target - start)/10);
+        if(start > target) start = target;
+        chart.data.datasets[0].data[index] = start;
+        chart.update();
+        requestAnimationFrame(step);
       }
+    };
+    step();
+  });
+}
 
-      // ✅ Show welcome text
-      const storedName = localStorage.getItem("userFullName") || "Admin";
-      document.getElementById("welcomeAdmin").innerText = `Welcome, ${storedName} to Admin Panel`;
+// -------------------- CHARTS --------------------
+const barCtx = document.getElementById('modernBarChart').getContext('2d');
+const modernBarChart = new Chart(barCtx,{
+  type:'bar',
+  data:{
+    labels:['Marketing','IT','HR','Admin','Diagnostic'],
+    datasets:[{label:'Department Usage',data:[0,0,0,0,0],backgroundColor:['#6366f1','#10b981','#f59e0b','#3b82f6','#ef4444'],borderRadius:8,barThickness:28}]
+  },
+  options:{
+    responsive:true,
+    plugins:{legend:{display:false}},
+    scales:{
+      x:{grid:{display:false}},
+      y:{beginAtZero:true,grid:{color:'#eee'}}
+    }
+  }
+});
 
-      // ✅ Logout buttons
-      document.getElementById("adminLogout").addEventListener("click", () => {
-        localStorage.clear();
-        window.location.href = "login.html";
-      });
+const donutCtx = document.getElementById('modernDonutChart').getContext('2d');
+const modernDonutChart = new Chart(donutCtx,{
+  type:'doughnut',
+  data:{labels:['Used','Free'],datasets:[{data:[0,100],backgroundColor:['#3b82f6','#e5e7eb'],borderWidth:0}]},
+  options:{responsive:true,cutout:'78%',plugins:{legend:{display:false},tooltip:{enabled:false}}}
+});
 
-      document.getElementById("accLogoutAdmin").addEventListener("click", () => {
-        localStorage.clear();
-        window.location.href = "login.html";
-      });
-    });
-  </script>
+// -------------------- LIVE DASHBOARD --------------------
+async function updateDashboard() {
+  try {
+    const response = await fetch('http://localhost:5000/dashboard');
+    const data = await response.json();
+
+    const totalBookings = data.room.totalBookings + data.vehicle.totalBookings;
+    const approved = data.room.approved + data.vehicle.approved;
+    const pending = data.room.pending + data.vehicle.pending;
+    const cancelled = data.room.cancelled + data.vehicle.cancelled;
+
+    animateCounter('count1', totalBookings);
+    animateCounter('count2', approved);
+    animateCounter('count3', pending);
+    animateCounter('count4', cancelled);
+
+    // Animate bar chart
+    animateBarChart(modernBarChart, data.departmentUsage);
+
+    // Donut chart
+    const used = totalBookings;
+    const free = Math.max(100 - used, 0);
+    modernDonutChart.data.datasets[0].data = [used, free];
+    modernDonutChart.update();
+
+    const percent = Math.round((used / (used + free)) * 100);
+    animatePercent('donutPercent', percent);
+
+  } catch(err){
+    console.error("Error fetching dashboard data:", err);
+  }
+}
+
+// -------------------- PAGE LOAD --------------------
+document.addEventListener("DOMContentLoaded", () => {
+  const storedName = localStorage.getItem("userFullName") || "Admin";
+  document.getElementById("welcomeAdmin").innerText = `Welcome, ${storedName} to Admin Panel`;
+
+  document.getElementById("adminLogout").addEventListener("click", () => { 
+    localStorage.clear(); 
+    window.location.href="login.html"; 
+  });
+  document.getElementById("accLogoutAdmin").addEventListener("click", () => { 
+    localStorage.clear(); 
+    window.location.href="login.html"; 
+  });
+
+  updateDashboard();
+  setInterval(updateDashboard, 10000);
+});
+</script>
 </body>
 </html>
+

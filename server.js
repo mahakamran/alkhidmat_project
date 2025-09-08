@@ -23,7 +23,7 @@ async function connectDB() {
     db = await mysql.createConnection({
       host: "localhost",
       user: "root",
-      password: "root",
+      password: "16092004",
       database: "alkhidmat_db",
     });
     console.log("✅ MySQL connected");
@@ -36,7 +36,7 @@ connectDB();
 // Serve uploaded images statically
 app.use("/uploads", express.static(path.join(__dirname, "Uploads")));
 
-// Multer storage (unique filenames)
+// Multer storage
 const storage = multer.diskStorage({
   destination: (req, file, cb) => cb(null, path.join(__dirname, "Uploads")),
   filename: (req, file, cb) => {
@@ -55,7 +55,6 @@ const upload = multer({
 });
 
 // --------------------- CONFLICT CHECKS ---------------------
-
 const checkRoomConflict = async (room_id, booking_date, start_time, hours) => {
   const sql = `
     SELECT * FROM room_bookings
@@ -95,7 +94,6 @@ const checkVehicleConflict = async (vehicle_id, booking_date, start_time, hours)
 };
 
 // --------------------- ROOMS ---------------------
-
 app.get("/rooms", async (req, res) => {
   try {
     const [results] = await db.query("SELECT * FROM rooms ORDER BY room_id DESC");
@@ -203,7 +201,6 @@ app.get("/reservations_room", async (req, res) => {
 });
 
 // --------------------- VEHICLES ---------------------
-
 app.get("/vehicles", async (req, res) => {
   try {
     const [results] = await db.query("SELECT * FROM vehicles ORDER BY vehicle_id DESC");
@@ -310,7 +307,6 @@ app.get("/reservations_vehicle", async (req, res) => {
 });
 
 // --------------------- USERS ---------------------
-
 app.post("/register", async (req, res) => {
   try {
     let { full_name, email, password } = req.body;
@@ -360,7 +356,6 @@ app.post("/login", async (req, res) => {
 });
 
 // --------------------- UPDATE STATUS ---------------------
-
 app.patch("/update_room_status", async (req, res) => {
   try {
     const { booking_id, status } = req.body;
@@ -387,9 +382,70 @@ app.patch("/update_vehicle_status", async (req, res) => {
   }
 });
 
-let PORT;
-if (typeof PORT === 'undefined') {
-  PORT = process.env.PORT || 5000; // dynamic port for Replit
-}
+// Backend endpoint: GET /dashboard (Fully Dynamic)
+app.get('/dashboard', async (req, res) => {
+  try {
+    // ---------------- Department Usage ----------------
+    const [deptRows] = await db.execute(`
+      SELECT department_name, COUNT(*) AS count
+      FROM (
+          SELECT department_name FROM room_bookings
+          UNION ALL
+          SELECT department_name FROM vehicle_bookings
+      ) AS all_bookings
+      GROUP BY department_name
+      ORDER BY count DESC
+    `);
 
+    const departmentLabels = deptRows.map(r => r.department_name);
+    const departmentUsage  = deptRows.map(r => r.count);
+
+    // ---------------- Room Bookings Stats ----------------
+    const [roomStats] = await db.execute(`
+      SELECT 
+        COUNT(*) AS totalBookings,
+        SUM(status='Approved') AS approved,
+        SUM(status='Pending') AS pending,
+        SUM(status='Cancelled') AS cancelled
+      FROM room_bookings
+    `);
+
+    // ---------------- Vehicle Bookings Stats ----------------
+    const [vehicleStats] = await db.execute(`
+      SELECT 
+        COUNT(*) AS totalBookings,
+        SUM(status='Approved') AS approved,
+        SUM(status='Pending') AS pending,
+        SUM(status='Cancelled') AS cancelled
+      FROM vehicle_bookings
+    `);
+
+    // ---------------- Build Response ----------------
+    const data = {
+      room: {
+        totalBookings: Number(roomStats[0].totalBookings),
+        approved: Number(roomStats[0].approved),
+        pending: Number(roomStats[0].pending),
+        cancelled: Number(roomStats[0].cancelled)
+      },
+      vehicle: {
+        totalBookings: Number(vehicleStats[0].totalBookings),
+        approved: Number(vehicleStats[0].approved),
+        pending: Number(vehicleStats[0].pending),
+        cancelled: Number(vehicleStats[0].cancelled)
+      },
+      departmentLabels,
+      departmentUsage
+    };
+
+    res.json(data);
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
+// --------------------- START SERVER ---------------------
+const PORT = 5000;
 app.listen(PORT, () => console.log(`🚀 Server running on http://localhost:${PORT}`));
