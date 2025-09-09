@@ -3,38 +3,57 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Document</title>
+  <title>Registration</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="responsive.css">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Koh+Santepheap:wght@100;300;400;700;900&display=swap" rel="stylesheet"/>
   <link href="https://fonts.googleapis.com/css2?family=Konkhmer+Sleokchher&display=swap" rel="stylesheet"/>
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
- <!-- navbar start -->
-  <header id="header">
-    <img src="./images/image_1.png" alt="" id="img1" />
-    <div id="main">
-      <h5 id="heading1"><a href="room.html">Room</a></h5>
-      <h5 id="heading2"><a href="status.html">Status</a></h5>
-      <h5 id="heading3"><a href="vehicle.html">Vehicles</a></h5>
-      <button id="btn"><a href="logout.html">Logout</a></button>
-           <div class="account-wrapper">
-  <div id="acc">
-asna-contribution
-    <img src="./images/image_30.png" alt="" id="accToggle">
-    
+   <!-- Sidebar (mobile only) -->
+  <aside class="sidebar" id="sidebar">
+    <div class="close-btn" id="closeSidebar">&times;</div>
+    <ul>
+      <li><a href="room.html"><i class="fa-solid fa-door-open"></i> Room</a></li>
+      <li><a href="status.html"><i class="fa-solid fa-list-check"></i> Status</a></li>
+      <li><a href="vehicle.html"><i class="fa-solid fa-car"></i> Vehicles</a></li>
+      <li><a href="logout.html"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
+    </ul>
+  </aside>
+  <div class="overlay" id="overlay"></div>
 
+<header id="header">
+  <!-- Logo -->
+  <img src="./images/image_1.png" alt="logo" id="img1" />
 
+  <!-- Hamburger (mobile only) -->
+  <div id="menu-toggle">
+    <span id="open-menu">&#9776;</span>
   </div>
-  <div id="accDropdown" class="dropdown">
-    <a href="settings.html">Settings</a>
-    <a href="logout.html">Logout</a>
-  </div>
-</div>
+    <!-- Account dropdown -->
+    <div class="account-wrapper" id="ac">
+      <div id="acc">
+        <img src="./images/image_30.png" alt="Account" id="accToggle">
+      </div>
+      <div id="accDropdown" class="dropdown">
+        <a href="settings.html">Settings</a>
+        <a href="logout.html">Logout</a>
+      </div>
     </div>
-  </header>
-  <!-- navbar end -->
+  </div>
+  <!-- Navigation links -->
+  <div id="main" class="nav-links">
+    <h5><a href="room.html">Room</a></h5>
+    <h5><a href="status.html">Status</a></h5>
+    <h5><a href="vehicle.html">Vehicles</a></h5>
+    <button id="btn"><a href="logout.html">Logout</a></button>
+
+
+</header>
 
   <!-- register form start -->
   <div id="main1">
@@ -73,54 +92,42 @@ asna-contribution
       </div>
     </div>
     <div id="icons">
- <img src="./images/image_11_2.png" alt="" />
-<img src="./images/image_16_1.png" alt="" />
-<img src="./images/image_17_1.png" alt="" />
-<img src="./images/image_18_1.png" alt="" />
-<img src="./images/image_19_1.png" alt="" />
-
+      <img src="./images/image_11_2.png" alt="" />
+      <img src="./images/image_16_1.png" alt="" />
+      <img src="./images/image_17_1.png" alt="" />
+      <img src="./images/image_18_1.png" alt="" />
+      <img src="./images/image_19_1.png" alt="" />
     </div>
   </footer>
   <!-- footer end -->
 
   <!-- script -->
- <script>
-  const form = document.getElementById("registerForm");
-  form.addEventListener("submit", function (e) {
-    e.preventDefault();
-    // ✅ Redirect to success page after submit
-    window.location.href = "success.html";
-  });
-</script>
+  <script>
+    // Sidebar toggle
+    const openMenu = document.getElementById("open-menu");
+    const closeSidebar = document.getElementById("closeSidebar");
+    const sidebar = document.getElementById("sidebar");
+    const overlay = document.getElementById("overlay");
 
-</body>
-</html>
-<script>
-    const registerForm = document.getElementById("registerForm");
-    registerForm?.addEventListener("submit", async e => {
-      e.preventDefault();
-      const full_name = registerForm.querySelector('input[type="text"]').value.trim();
-      const email = registerForm.querySelector('input[type="email"]').value.trim();
-      const password = registerForm.querySelector('input[type="password"]').value.trim();
+    openMenu.addEventListener("click", () => {
+      sidebar.classList.add("show");
+      overlay.classList.add("active");
+    });
+    closeSidebar.addEventListener("click", () => {
+      sidebar.classList.remove("show");
+      overlay.classList.remove("active");
+    });
+    overlay.addEventListener("click", () => {
+      sidebar.classList.remove("show");
+      overlay.classList.remove("active");
+    });
 
-      try {
-        const res = await fetch("http://localhost:5000/register", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ full_name, email, password })
-        });
-        const data = await res.json();
-        if (res.ok) {
-          alert("Registration successful! You can now login.");
-          window.location.href = "login.html";
-        } else {
-          alert(data.error);
-        }
-      } catch (err) {
-        alert("Server error: " + err.message);
-      }
+    // Desktop dropdown
+    const accToggleDesktop = document.getElementById("accToggleDesktop");
+    const accDropdownDesktop = document.getElementById("accDropdownDesktop");
+    accToggleDesktop?.addEventListener("click", () => {
+      accDropdownDesktop.classList.toggle("show");
     });
   </script>
 </body>
 </html>
-

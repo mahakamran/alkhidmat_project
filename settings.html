@@ -6,11 +6,14 @@
   <title>User Account</title>
 <link rel="stylesheet" href="style.css" />
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="responsive.css">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Koh+Santepheap:wght@100;300;400;700;900&display=swap" rel="stylesheet"/>
   <link href="https://fonts.googleapis.com/css2?family=Konkhmer+Sleokchher&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
   <style>
     body {
       margin: 0;
@@ -124,28 +127,50 @@
   </style>
 </head>
 <body>
- <header id="header">
-    <img src="images/image_1.png" alt="" id="img1" />
-    <div id="main">
-      <h5 id="heading1"><a href="room.html">Room</a></h5>
-      <h5 id="heading2"><a href="status.html">Status</a></h5>
-      <h5 id="heading3"><a href="vehicle.html">Vehicles</a></h5>
-      <button id="btn"><a href="logout.html">Logout</a></button>
-           <div class="account-wrapper">
-  <div id="acc">
-    <img src="images/image 30.png" alt="" id="accToggle">
+ <!-- Sidebar (mobile only) -->
+  <aside class="sidebar" id="sidebar">
+    <div class="close-btn" id="closeSidebar">&times;</div>
+    <ul>
+      <li><a href="room.html"><i class="fa-solid fa-door-open"></i> Room</a></li>
+      <li><a href="status.html"><i class="fa-solid fa-list-check"></i> Status</a></li>
+      <li><a href="vehicle.html"><i class="fa-solid fa-car"></i> Vehicles</a></li>
+      <li><a href="logout.html"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
+    </ul>
+  </aside>
+  <div class="overlay" id="overlay"></div>
+
+<header id="header">
+  <!-- Logo -->
+  <img src="./images/image_1.png" alt="logo" id="img1" />
+
+  <!-- Hamburger (mobile only) -->
+  <div id="menu-toggle">
+    <span id="open-menu">&#9776;</span>
   </div>
-  <div id="accDropdown" class="dropdown">
-    <a href="settings.html">Settings</a>
-    <a href="logout.html">Logout</a>
-  </div>
-</div>
+    <!-- Account dropdown -->
+    <div class="account-wrapper" id="ac">
+      <div id="acc">
+        <img src="./images/image_30.png" alt="Account" id="accToggle">
+      </div>
+      <div id="accDropdown" class="dropdown">
+        <a href="settings.html">Settings</a>
+        <a href="logout.html">Logout</a>
+      </div>
     </div>
-  </header>
+  </div>
+  <!-- Navigation links -->
+  <div id="main" class="nav-links">
+    <h5><a href="room.html">Room</a></h5>
+    <h5><a href="status.html">Status</a></h5>
+    <h5><a href="vehicle.html">Vehicles</a></h5>
+    <button id="btn"><a href="logout.html">Logout</a></button>
+
+
+</header>
   <div class="account-container">
     <div class="profile-section">
       <div class="profile-pic">
-        <img id="profileImage" src="pic/image 30.png" alt="Profile Image">
+        <img id="profileImage" src="./images/image_30.png" alt="Profile Image">
       </div>
      <label for="imageUpload" class="custom-upload-btn">Upload Photo</label>
 <input type="file" id="imageUpload" accept="image/*" style="display: none;" />
@@ -195,8 +220,9 @@
     </div>
   </footer>
   <!-- Footer End -->
-<script src="setting.js"></script>
+   
 
+<script src="setting.js"></script>
 
 </body>
 </html>

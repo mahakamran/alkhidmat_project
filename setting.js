@@ -79,16 +79,36 @@
     }
   });
 
-  // Navbar dropdown logic
+   // Account dropdown (works for both desktop + mobile)
+
   const accDropdown = document.getElementById("accDropdown");
 
-  accToggle.addEventListener("click", () => {
-    accDropdown.style.display = accDropdown.style.display === "block" ? "none" : "block";
+  accToggle.addEventListener("click", (e) => {
+    e.stopPropagation(); // prevent immediate close
+    accDropdown.classList.toggle("show");
   });
 
-  // Close dropdown if clicked outside
-  window.addEventListener("click", function (e) {
+  window.addEventListener("click", function(e) {
     if (!accToggle.contains(e.target) && !accDropdown.contains(e.target)) {
-      accDropdown.style.display = "none";
+      accDropdown.classList.remove("show");
     }
+  });
+
+  // Sidebar toggle
+  const openMenu = document.getElementById("open-menu");
+  const closeSidebar = document.getElementById("closeSidebar");
+  const sidebar = document.getElementById("sidebar");
+  const overlay = document.getElementById("overlay");
+
+  openMenu.addEventListener("click", () => {
+    sidebar.classList.add("show");
+    overlay.classList.add("active");
+  });
+  closeSidebar.addEventListener("click", () => {
+    sidebar.classList.remove("show");
+    overlay.classList.remove("active");
+  });
+  overlay.addEventListener("click", () => {
+    sidebar.classList.remove("show");
+    overlay.classList.remove("active");
   });
