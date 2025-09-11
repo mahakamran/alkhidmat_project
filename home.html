@@ -11,7 +11,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Koh+Santepheap:wght@100;300;400;700;900&display=swap" rel="stylesheet"/>
   <link href="https://fonts.googleapis.com/css2?family=Konkhmer+Sleokchher&display=swap" rel="stylesheet"/>
-  <!-- Font Awesome for icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
@@ -35,25 +34,25 @@
   <div id="menu-toggle">
     <span id="open-menu">&#9776;</span>
   </div>
-    <!-- Account dropdown -->
-    <div class="account-wrapper" id="ac">
-      <div id="acc">
-        <img src="./images/image_30.png" alt="Account" id="accToggle">
-      </div>
-      <div id="accDropdown" class="dropdown">
-        <a href="settings.html">Settings</a>
-        <a href="logout.html">Logout</a>
-      </div>
+  
+  <!-- Account dropdown -->
+  <div class="account-wrapper" id="ac">
+    <div id="acc">
+      <img src="./images/image_30.png" alt="Account" id="accToggle">
+    </div>
+    <div id="accDropdown" class="dropdown">
+      <a href="settings.html">Settings</a>
+      <a href="logout.html">Logout</a>
     </div>
   </div>
+
   <!-- Navigation links -->
   <div id="main" class="nav-links">
     <h5><a href="room.html">Room</a></h5>
     <h5><a href="status.html">Status</a></h5>
     <h5><a href="vehicle.html">Vehicles</a></h5>
     <button id="btn"><a href="logout.html">Logout</a></button>
-
-
+  </div>
 </header>
 
 <!-- main start -->
@@ -63,7 +62,7 @@
 <div id="box2">
   <p id="welcome1">Welcome to the </p>
   <h1 id="room-text1">Boardroom And Vehicle Reservation</h1>
-  <button>Reserve now</button>
+  <button onclick="location.href='room.html'">Reserve now</button>
 </div>
 
 <br><br><br><br>
@@ -76,7 +75,7 @@
     <p>
       Book a professional meeting space equipped with all essentials—ideal for discussions, interviews, and presentations.
     </p>
-    <button>Learn More</button>
+    <button onclick="location.href='room.html'">Learn More</button>
   </div>
 
   <!-- Card 2 -->
@@ -86,7 +85,7 @@
     <p>
       Reserve official vehicles for business trips, meetings, field visits, or pickups with time and distance tracking.
     </p>
-    <button>Learn More</button>
+    <button onclick="location.href='vehicle.html'">Learn More</button>
   </div>
 
   <!-- Card 3 -->
@@ -96,7 +95,7 @@
     <p>
       Host corporate events, training sessions, or team-building activities in a fully equipped event hall.
     </p>
-    <button id="more">Learn More</button>
+    <button onclick="location.href='events.html'" id="more">Learn More</button>
   </div>
 </div>
 
@@ -110,7 +109,7 @@
     <p>
       Alkhidmat provides a well-equipped meeting space ideal for organizational discussions, strategic planning, and community outreach sessions.
     </p>
-    <button class="book-btn">Reserve a room</button>
+    <button class="book-btn" onclick="location.href='room.html'">Reserve a room</button>
   </div>
 </div>
 
@@ -124,7 +123,7 @@
     <p>
       Alkhidmat staff can now conveniently reserve official vehicles for field visits, operations, or transport needs.
     </p>
-    <button class="book-btn">Reserve a vehicle</button>
+    <button class="book-btn" onclick="location.href='vehicle.html'">Reserve a vehicle</button>
   </div>
 </div>
 
@@ -164,7 +163,7 @@
       <p>High-speed internet across the premises.</p>
     </div>
     <div class="facility-box">
-     <span class="iconify" data-icon="mdi:application-cog-outline" style="color:#8e44ad; font-size:60px;"></span>
+      <span class="iconify" data-icon="mdi:application-cog-outline" style="color:#8e44ad; font-size:60px;"></span>
       <h3>Internal Staff App</h3>
       <p>For booking rooms & vehicle reservations.</p>
     </div>
@@ -223,12 +222,12 @@
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
-  // Account dropdown (works for both desktop + mobile)
+  // Account dropdown
   const accToggle = document.getElementById("accToggle");
   const accDropdown = document.getElementById("accDropdown");
 
   accToggle.addEventListener("click", (e) => {
-    e.stopPropagation(); // prevent immediate close
+    e.stopPropagation();
     accDropdown.classList.toggle("show");
   });
 
@@ -257,7 +256,6 @@
     overlay.classList.remove("active");
   });
 </script>
-
 
 </body>
 </html>

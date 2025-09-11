@@ -1,96 +1,213 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login</title>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Koh+Santepheap:wght@100;300;400;700;900&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="responsive.css">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login</title>
+  <link href="https://fonts.googleapis.com/css2?family=Koh+Santepheap:wght@300;400;700&display=swap" rel="stylesheet" />
 
-  </head>
-  <body>
-    <div id="login">
-      <!-- left side -->
-      <div id="login1">
-        <div id="icon">
-          <img src="./images/image_1_1.png" alt="" id="image" />
-          <img src="./images/image_2.png" alt="" />
-        </div>
-        <p id="para2">Ease Your Booking <span id="span">With The </span></p>
-        <h3 id="heading5">Board Room</h3>
-        <h1 id="heading6">RESERVATION</h1>
-        <h1 id="heading7">PORTAL !</h1>
-        <p id="para3">Our Gateway For Seamless Bookings</p>
+  <style>
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Koh Santepheap", sans-serif;
+      background: #fff;
+    }
+
+    /* Login Wrapper */
+    #login {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 40px;
+      padding: 40px;
+      min-height: 100vh;
+      flex-wrap: wrap;
+    }
+
+    /* Left side (text + logo) */
+    #login1 {
+      flex: 1;
+      min-width: 280px;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    #login1 img {
+      height: 100px;
+      margin: 10px;
+    }
+
+    #login1 h1,
+    #login1 h3,
+    #login1 p {
+      margin: 10px 0;
+    }
+
+    /* Right side (form) */
+    #login2 {
+      flex: 1;
+      min-width: 280px;
+      max-width: 400px;
+      background: #f8f8f8;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    }
+
+    #login2 h2 {
+      font-size: 18px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    /* Input wrapper */
+    .input-wrapper {
+      position: relative;
+      margin-bottom: 15px;
+    }
+
+    .input-wrapper input {
+      width: 100%;
+      padding: 12px 40px 12px 12px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    .input-icon,
+    .input-icon2 {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      height: 20px;
+      width: 20px;
+    }
+
+    /* Login button */
+    #login-btn {
+      width: 100%;
+      padding: 12px;
+      background: #0662ab;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: 0.3s;
+    }
+
+    #login-btn:hover {
+      background: #054a80;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      #login {
+        flex-direction: column;
+        padding: 20px;
+      }
+
+      #login1,
+      #login2 {
+        max-width: 100%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      #login {
+        padding: 10px;
+      }
+
+      #login2 {
+        padding: 20px;
+      }
+
+      #login2 h2 {
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="login">
+    <!-- left side -->
+    <div id="login1">
+      <div id="icon">
+        <img src="./images/image_1_1.png" alt="" id="image" />
+        <img src="./images/image_2.png" alt="" />
       </div>
-
-      <!-- right side -->
-      <div id="login2">
-        <img src="./images/verify_box.png" alt="" id="boxes" />
-        <h2 id="heading8">Welcome To Boardroom And Transportation</h2>
-
-        <div class="input-wrapper">
-          <input type="text" placeholder="Enter your email" id="email-input">
-          <img src="./images/frame_1.png" alt="Icon" class="input-icon">
-        </div>
-
-        <div class="input-wrapper">
-          <input type="password" placeholder="Enter your password" id="pass-input">
-          <img src="./images/frame_2.png" alt="Icon" class="input-icon2">
-        </div>
-
-        <button id="login-btn">Login</button>
-        <p id="error-msg" style="color:red; display:none; margin-top:10px;">
-          Invalid email or password
-        </p>
-      </div>
+      <p id="para2">Ease Your Booking <span id="span">With The </span></p>
+      <h3 id="heading5">Board Room</h3>
+      <h1 id="heading6">RESERVATION</h1>
+      <h1 id="heading7">PORTAL !</h1>
+      <p id="para3">Our Gateway For Seamless Bookings</p>
     </div>
 
-    <script>
-  const loginBtn = document.getElementById("login-btn");
+    <!-- right side -->
+    <div id="login2">
+      <img src="./images/verify_box.png" alt="" id="boxes" />
+      <h2 id="heading8">Welcome To Boardroom And Transportation</h2>
 
-  loginBtn?.addEventListener("click", async () => {
-    const email = document.getElementById("email-input").value.trim();
-    const password = document.getElementById("pass-input").value.trim();
-    const errorMsg = document.getElementById("error-msg");
+      <div class="input-wrapper">
+        <input type="text" placeholder="Enter your email" id="email-input">
+        <img src="./images/frame_1.png" alt="Icon" class="input-icon">
+      </div>
 
-    try {
-      const res = await fetch("http://localhost:5000/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
-      });
+      <div class="input-wrapper">
+        <input type="password" placeholder="Enter your password" id="pass-input">
+        <img src="./images/frame_2.png" alt="Icon" class="input-icon2">
+      </div>
 
-      const data = await res.json();
+      <button id="login-btn">Login</button>
+      <p id="error-msg" style="color:red; display:none; margin-top:10px;">
+        Invalid email or password
+      </p>
+    </div>
+  </div>
 
-      if (res.ok) {
-        // Save session
-        localStorage.setItem("isLoggedIn", "true");
-        localStorage.setItem("token", data.token);              // ✅ important
-        localStorage.setItem("userFullName", data.full_name);
-        localStorage.setItem("userRoleId", String(data.role_id)); // ✅ use role_id
+  <script>
+    const loginBtn = document.getElementById("login-btn");
 
-        // Role-based redirect (1 = admin, 2 = user)
-        if (Number(data.role_id) === 1) {
-          window.location.href = "admin.html";
+    loginBtn?.addEventListener("click", async () => {
+      const email = document.getElementById("email-input").value.trim();
+      const password = document.getElementById("pass-input").value.trim();
+      const errorMsg = document.getElementById("error-msg");
+
+      try {
+        const res = await fetch("http://localhost:5000/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, password }),
+        });
+
+        const data = await res.json();
+
+        if (res.ok) {
+          localStorage.setItem("isLoggedIn", "true");
+          localStorage.setItem("token", data.token);
+          localStorage.setItem("userFullName", data.full_name);
+          localStorage.setItem("userRoleId", String(data.role_id));
+
+          if (Number(data.role_id) === 1) {
+            window.location.href = "admin.html";
+          } else {
+            window.location.href = "home.html";
+          }
         } else {
-          window.location.href = "home.html";
+          errorMsg.innerText = data.error || "Login failed";
+          errorMsg.style.display = "block";
         }
-      } else {
-        errorMsg.innerText = data.error || "Login failed";
+      } catch (err) {
+        errorMsg.innerText = "Server error: " + err.message;
         errorMsg.style.display = "block";
       }
-    } catch (err) {
-      errorMsg.innerText = "Server error: " + err.message;
-      errorMsg.style.display = "block";
-    }
-  });
-</script>
-
-
+    });
+  </script>
 </body>
 </html>

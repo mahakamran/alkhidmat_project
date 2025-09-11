@@ -5,29 +5,53 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Vehicle Booking</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="responsive.css" />
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Koh+Santepheap:wght@100;300;400;700;900&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+
+  <!-- Sidebar (mobile only) -->
+  <aside class="sidebar" id="sidebar">
+    <div class="close-btn" id="closeSidebar">&times;</div>
+    <ul>
+      <li><a href="room.html"><i class="fa-solid fa-door-open"></i> Room</a></li>
+      <li><a href="status.html"><i class="fa-solid fa-list-check"></i> Status</a></li>
+      <li><a href="vehicle.html"><i class="fa-solid fa-car"></i> Vehicles</a></li>
+      <li><a href="logout.html"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
+    </ul>
+  </aside>
+  <div class="overlay" id="overlay"></div>
+
   <!-- Navbar -->
   <header id="header">
-    <img src="images/image_1.png" alt="Logo" id="img1" />
-    <div id="main">
-      <h5 id="heading1"><a href="room.html">Room</a></h5>
-      <h5 id="heading2"><a href="status.html">Status</a></h5>
-      <h5 id="heading3"><a href="vehicle.html">Vehicles</a></h5>
-      <button id="btn"><a href="logout.html">Logout</a></button>
-      <div class="account-wrapper">
-        <div id="acc">
-          <img src="images/admin.png" alt="Account" id="accToggle" />
-        </div>
-        <div id="accDropdown" class="dropdown">
-          <a href="settings.html">Settings</a>
-          <a href="logout.html">Logout</a>
-        </div>
+    <img src="images/image_1.png" alt="logo" id="img1" />
+
+    <!-- Hamburger for mobile -->
+    <div id="menu-toggle">
+      <span id="open-menu">&#9776;</span>
+    </div>
+
+    <!-- Account dropdown -->
+    <div class="account-wrapper" id="ac">
+      <div id="acc">
+        <img src="images/admin.png" alt="Account" id="accToggle">
       </div>
+      <div id="accDropdown" class="dropdown">
+        <a href="settings.html">Settings</a>
+        <a href="logout.html">Logout</a>
+      </div>
+    </div>
+
+    <!-- Desktop nav links -->
+    <div id="main" class="nav-links">
+      <h5><a href="room.html">Room</a></h5>
+      <h5><a href="status.html">Status</a></h5>
+      <h5><a href="vehicle.html">Vehicles</a></h5>
+      <button id="btn"><a href="logout.html">Logout</a></button>
     </div>
   </header>
 
@@ -45,7 +69,7 @@
   <footer>
     <div id="main5">
       <div>
-        <img src="images/image_1.png"alt="" Logo= " "/>
+        <img src="images/image_1.png" alt="" />
       </div>
       <div id="main6">
         <h5>Contact Info</h5>
@@ -68,95 +92,121 @@
     </div>
   </footer>
 
+  <!-- Scroll to Top Button -->
+  <button onclick="scrollToTop()" id="scrollTopBtn">
+    <span class="iconify" data-icon="mdi:arrow-up" style="color:white; font-size:24px;"></span>
+  </button>
+
+  <!-- Script -->
   <script>
-    const API_VEHICLES = "http://localhost:5000/vehicles";
-    const vehicleContainer = document.getElementById("vehicleContainer");
-    const filterBar = document.querySelector(".filter-buttons");
-    let allVehicles = [];
-
-    // Load vehicles from backend
-    async function loadVehicles() {
-      try {
-        const res = await fetch(API_VEHICLES);
-        if (!res.ok) throw new Error("Server error or not found");
-        allVehicles = await res.json();
-        if (allVehicles.length === 0) {
-          vehicleContainer.innerHTML = `<p style="padding:16px;color:#333;">No vehicles available</p>`;
-          filterBar.style.display = "none";
-        } else {
-          renderVehicles(allVehicles);
-          addFilterButtons(allVehicles);
-          filterBar.style.display = "flex";
-        }
-      } catch (e) {
-        vehicleContainer.innerHTML = `<p style="padding:16px;color:red;">Failed to load vehicles: ${e.message}</p>`;
-        filterBar.style.display = "none";
-        console.error('Error loading vehicles:', e.message);
+    // Scroll to Top
+    window.onscroll = function () {
+      let btn = document.getElementById("scrollTopBtn");
+      if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+        btn.style.display = "block";
+      } else {
+        btn.style.display = "none";
       }
+    };
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
-
-    // Render vehicles dynamically
-    function renderVehicles(list) {
-      vehicleContainer.innerHTML = "";
-      list.forEach(vehicle => {
-        const card = document.createElement("div");
-        card.className = "vehicle-card";
-        const imgSrc = vehicle.photo_url || "pic/default-vehicle.jpg";
-        card.innerHTML = `
-          <img src="${imgSrc}" alt="${vehicle.car_name}" />
-          <div class="vehicle-info">
-            <h3>${vehicle.car_name} (${vehicle.vehicle_type})</h3>
-            <p>Driver: ${vehicle.driver_name}</p>
-            <p>Phone: ${vehicle.driver_phone}</p>
-            <button class="reserve-btn">
-              <a href="vehicle_reserveform.html?vehicle_id=${encodeURIComponent(vehicle.vehicle_id)}&car_name=${encodeURIComponent(vehicle.car_name)}">Reserve</a>
-            </button>
-          </div>
-        `;
-        vehicleContainer.appendChild(card);
-      });
-    }
-
-    // Add filter buttons dynamically
-    function addFilterButtons(vehicles) {
-      filterBar.innerHTML = `<button class="filter-btn active" data-filter="all">All</button>`;
-      const uniqueTypes = [...new Set(vehicles.map(v => v.vehicle_type))];
-      uniqueTypes.forEach(type => {
-        const btn = document.createElement("button");
-        btn.className = "filter-btn";
-        btn.dataset.filter = type;
-        btn.textContent = type;
-        filterBar.appendChild(btn);
-        btn.addEventListener("click", () => {
-          filterBar.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
-          btn.classList.add("active");
-          renderVehicles(allVehicles.filter(v => v.vehicle_type === type));
-        });
-      });
-    }
-
-    // Show all vehicles when 'All' clicked
-    filterBar.addEventListener("click", (e) => {
-      if (e.target.classList.contains("filter-btn") && e.target.dataset.filter === "all") {
-        filterBar.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
-        e.target.classList.add("active");
-        renderVehicles(allVehicles);
-      }
-    });
 
     // Account dropdown
     const accToggle = document.getElementById("accToggle");
     const accDropdown = document.getElementById("accDropdown");
-    accToggle.addEventListener("click", () => {
-      accDropdown.style.display = accDropdown.style.display === "block" ? "none" : "block";
+    accToggle.addEventListener("click", (e) => {
+      e.stopPropagation();
+      accDropdown.classList.toggle("show");
     });
-    window.addEventListener("click", e => {
+    window.addEventListener("click", function(e) {
       if (!accToggle.contains(e.target) && !accDropdown.contains(e.target)) {
-        accDropdown.style.display = "none";
+        accDropdown.classList.remove("show");
       }
     });
 
-    window.addEventListener("DOMContentLoaded", loadVehicles);
+    // Sidebar toggle
+    const openMenu = document.getElementById("open-menu");
+    const closeSidebar = document.getElementById("closeSidebar");
+    const sidebar = document.getElementById("sidebar");
+    const overlay = document.getElementById("overlay");
+
+    openMenu.addEventListener("click", () => {
+      sidebar.classList.add("show");
+      overlay.classList.add("active");
+    });
+    closeSidebar.addEventListener("click", () => {
+      sidebar.classList.remove("show");
+      overlay.classList.remove("active");
+    });
+    overlay.addEventListener("click", () => {
+      sidebar.classList.remove("show");
+      overlay.classList.remove("active");
+    });
+
+    // Vehicles fetch + filtering
+    document.addEventListener("DOMContentLoaded", async () => {
+      const vehicleContainer = document.getElementById("vehicleContainer");
+      const filterBar = document.querySelector(".filter-buttons");
+      let allVehicles = [];
+
+      try {
+        const res = await fetch("http://localhost:5000/vehicles");
+        allVehicles = await res.json();
+        renderVehicles(allVehicles);
+        addFilterButtons(allVehicles);
+      } catch (err) {
+        console.error("Failed to fetch vehicles:", err);
+        vehicleContainer.innerHTML = "<p>Failed to load vehicles. Try again later.</p>";
+        filterBar.style.display = "none";
+      }
+
+      function renderVehicles(list) {
+        if (!list.length) {
+          vehicleContainer.innerHTML = "<p>No vehicles available.</p>";
+          return;
+        }
+        vehicleContainer.innerHTML = list.map(vehicle => `
+          <div class="vehicle-card" data-category="${vehicle.vehicle_type}">
+            <img src="${vehicle.photo_url || 'images/default-vehicle.jpg'}" alt="${vehicle.car_name}" />
+            <div class="vehicle-info">
+              <h3>${vehicle.car_name} (${vehicle.vehicle_type})</h3>
+              <p>Driver: ${vehicle.driver_name}</p>
+              <p>Phone: ${vehicle.driver_phone}</p>
+              <div class="reserve-btn">
+                <a href="vehicle_reserveform.html?vehicle_id=${encodeURIComponent(vehicle.vehicle_id)}&car_name=${encodeURIComponent(vehicle.car_name)}">Reserve</a>
+              </div>
+            </div>
+          </div>
+        `).join("");
+      }
+
+      function addFilterButtons(vehicles) {
+        filterBar.innerHTML = `<button class="filter-btn active" data-filter="all">All</button>`;
+        const uniqueTypes = [...new Set(vehicles.map(v => v.vehicle_type))];
+        uniqueTypes.forEach(type => {
+          const btn = document.createElement("button");
+          btn.className = "filter-btn";
+          btn.dataset.filter = type;
+          btn.textContent = type;
+          filterBar.appendChild(btn);
+
+          btn.addEventListener("click", () => {
+            filterBar.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+            renderVehicles(allVehicles.filter(v => v.vehicle_type === type));
+          });
+        });
+      }
+
+      filterBar.addEventListener("click", (e) => {
+        if (e.target.classList.contains("filter-btn") && e.target.dataset.filter === "all") {
+          filterBar.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+          e.target.classList.add("active");
+          renderVehicles(allVehicles);
+        }
+      });
+    });
   </script>
 </body>
 </html>

@@ -5,30 +5,54 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Room Booking</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="responsive.css" />
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Koh+Santepheap:wght@100;300;400;700;900&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
 </head>
 <body>
+  <!-- Sidebar (mobile only) -->
+  <aside class="sidebar" id="sidebar">
+    <div class="close-btn" id="closeSidebar">&times;</div>
+    <ul>
+      <li><a href="room.html"><i class="fa-solid fa-door-open"></i> Room</a></li>
+      <li><a href="status.html"><i class="fa-solid fa-list-check"></i> Status</a></li>
+      <li><a href="vehicle.html"><i class="fa-solid fa-car"></i> Vehicles</a></li>
+      <li><a href="logout.html"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
+    </ul>
+  </aside>
+  <div class="overlay" id="overlay"></div>
+
   <!-- Navbar -->
   <header id="header">
-    <img src="images/image_1.png" alt="" id="img1" />
+    <!-- Logo -->
+    <img src="images/image_1.png" alt="logo" id="img1" />
 
-    <div id="main">
-      <h5 id="heading1"><a href="room.html">Room</a></h5>
-      <h5 id="heading2"><a href="status.html">Status</a></h5>
-      <h5 id="heading3"><a href="vehicle.html">Vehicles</a></h5>
-      <button id="btn"><a href="logout.html">Logout</a></button>
-      <div class="account-wrapper">
-        <div id="acc">
-          <img src="images/image_30.png" alt="" id="accToggle">
-        </div>
-        <div id="accDropdown" class="dropdown">
-          <a href="settings.html">Settings</a>
-          <a href="logout.html">Logout</a>
-        </div>
+    <!-- Hamburger (mobile only) -->
+    <div id="menu-toggle">
+      <span id="open-menu">&#9776;</span>
+    </div>
+
+    <!-- Account dropdown -->
+    <div class="account-wrapper" id="ac">
+      <div id="acc">
+        <img src="images/image_30.png" alt="Account" id="accToggle">
       </div>
+      <div id="accDropdown" class="dropdown">
+        <a href="settings.html">Settings</a>
+        <a href="logout.html">Logout</a>
+      </div>
+    </div>
+
+    <!-- Navigation links (desktop) -->
+    <div id="main" class="nav-links">
+      <h5><a href="room.html">Room</a></h5>
+      <h5><a href="status.html">Status</a></h5>
+      <h5><a href="vehicle.html">Vehicles</a></h5>
+      <button id="btn"><a href="logout.html">Logout</a></button>
     </div>
   </header>
   <!-- navbar end -->
@@ -43,9 +67,8 @@
 
   <!-- Room Section -->
   <section class="room-container" id="roomContainer">
-  <!-- Dynamic rooms will be inserted here -->
-</section>
-
+    <!-- Dynamic rooms will be inserted here -->
+  </section>
 
   <!-- Footer -->
   <footer>
@@ -74,44 +97,106 @@
     </div>
   </footer>
 
+  <!-- Scroll to Top Button -->
+  <button onclick="scrollToTop()" id="scrollTopBtn">
+    <span class="iconify" data-icon="mdi:arrow-up" style="color:white; font-size:24px;"></span>
+  </button>
+
   <!-- Script -->
   <script>
+    // Scroll to Top
+    window.onscroll = function () {
+      let btn = document.getElementById("scrollTopBtn");
+      if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+        btn.style.display = "block";
+      } else {
+        btn.style.display = "none";
+      }
+    };
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
     // Account dropdown
     const accToggle = document.getElementById("accToggle");
     const accDropdown = document.getElementById("accDropdown");
-    accToggle.addEventListener("click", () => {
-      accDropdown.style.display = accDropdown.style.display === "block" ? "none" : "block";
+    accToggle.addEventListener("click", (e) => {
+      e.stopPropagation();
+      accDropdown.classList.toggle("show");
     });
-    window.addEventListener("click", e => {
+    window.addEventListener("click", function(e) {
       if (!accToggle.contains(e.target) && !accDropdown.contains(e.target)) {
-        accDropdown.style.display = "none";
+        accDropdown.classList.remove("show");
       }
     });
 
+    // Sidebar toggle
+    const openMenu = document.getElementById("open-menu");
+    const closeSidebar = document.getElementById("closeSidebar");
+    const sidebar = document.getElementById("sidebar");
+    const overlay = document.getElementById("overlay");
+
+    openMenu.addEventListener("click", () => {
+      sidebar.classList.add("show");
+      overlay.classList.add("active");
+    });
+    closeSidebar.addEventListener("click", () => {
+      sidebar.classList.remove("show");
+      overlay.classList.remove("active");
+    });
+    overlay.addEventListener("click", () => {
+      sidebar.classList.remove("show");
+      overlay.classList.remove("active");
+    });
+
+    // Rooms fetch + filtering
     document.addEventListener("DOMContentLoaded", async () => {
-  const roomContainer = document.getElementById("roomContainer");
+      const roomContainer = document.getElementById("roomContainer");
+      const filterButtons = document.querySelectorAll(".filter-btn");
+      let allRooms = [];
 
-  try {
-    const res = await fetch("http://localhost:5000/rooms");
-    const rooms = await res.json();
+      try {
+        const res = await fetch("http://localhost:5000/rooms");
+        allRooms = await res.json();
+        renderRooms(allRooms);
+      } catch (err) {
+        console.error("Failed to fetch rooms:", err);
+        roomContainer.innerHTML = "<p>Failed to load rooms. Try again later.</p>";
+      }
 
-    roomContainer.innerHTML = rooms.map(room => `
-      <div class="room-card">
-        <img src="${room.photo_url || 'images/default_room.png'}" alt="${room.room_name}" />
-        <div class="room-info">
-          <h3>${room.room_name}</h3>
-          <p>for ${room.capacity} members</p>
-          <button class="reserve-btn">
-            <a href="room_reserveform.html?room_id=${room.room_id}&room_name=${encodeURIComponent(room.room_name)}">Reserve</a>
-          </button>
-        </div>
+      function renderRooms(rooms) {
+        if (!rooms.length) {
+          roomContainer.innerHTML = "<p>No rooms available.</p>";
+          return;
+        }
+       roomContainer.innerHTML = rooms.map(room => `
+  <div class="room-card" data-category="${room.room_name}">
+    <img src="${room.photo_url || 'images/default_room.png'}" alt="${room.room_name}" />
+    <div class="room-info">
+      <h3>${room.room_name}</h3>
+      <p>for ${room.capacity} members</p>
+      <div class="reserve-btn">
+        <a href="room_reserveform.html?room_id=${room.room_id}&room_name=${encodeURIComponent(room.room_name)}">Reserve</a>
       </div>
-    `).join("");
-  } catch (err) {
-    console.error("Failed to fetch rooms:", err);
-    roomContainer.innerHTML = "<p>Failed to load rooms. Try again later.</p>";
-  }
-});
+    </div>
+  </div>
+`).join("");
+
+      }
+
+      filterButtons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const filterValue = btn.getAttribute("data-filter");
+          if (filterValue === "all") {
+            renderRooms(allRooms);
+          } else {
+            const filtered = allRooms.filter(room => room.room_name === filterValue);
+            renderRooms(filtered);
+          }
+        });
+      });
+    });
   </script>
 </body>
-</html>
+</html>  
+

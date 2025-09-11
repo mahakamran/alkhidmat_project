@@ -317,10 +317,16 @@ app.post("/register", async (req, res) => {
     if (!full_name || !email || !password) return res.status(400).json({ error: "All fields required" });
     if (!email.endsWith("@alkhidmat.org")) return res.status(400).json({ error: "Only @alkhidmat.org allowed" });
 
-    const [rows] = await db.query("SELECT user_id FROM users WHERE LOWER(email)=?", [email]);
-    if (rows.length) return res.status(400).json({ error: "Email exists" });
 
-    const hashedPassword = await bcrypt.hash(password, 10);
+    // Determine role_id automatically
+    let role_id = 2; // Default: User
+    if (email === "admin@alkhidmat.org") role_id = 1;
+    
+   const hashedPassword = await bcrypt.hash(password, 10);
+
+
+
+    // Direct insert, no uniqueness check
     const [result] = await db.query(
       "INSERT INTO users (full_name, email, password, role_id) VALUES (?, ?, ?, ?)",
       [full_name, email, hashedPassword, 2]

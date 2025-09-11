@@ -344,6 +344,7 @@
     width: 40px;
     height: 40px;
 }
+ 
 
 }
 /* ===== Sidebar Styles (Mobile) ===== */
@@ -939,3 +940,1775 @@ footer {
   padding-top: 10px;
   padding-left: 10px;
 }
+
+
+
+
+
+/* === Reservation (Room.html specific CSS) === */
+#reserve {
+  width: 100%;
+  height: 100vh;
+  background: url("./images/res.png") no-repeat center/cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#transparent {
+  width: 440px;
+  padding: 30px;
+  backdrop-filter: blur(1000px);
+  background-color: rgba(255, 255, 255, 0.411);
+  border-radius: 10px;
+  height: 600px;
+}
+
+#transparent h2 {
+  text-align: center;
+  color: #0662AB;
+  margin-bottom: 20px;
+}
+
+#transparent input, #room-btn {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+#room-btn {
+  background: #0662AB;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+/* === Room checkboxes === */
+#room-check input {
+  width: 20px;
+  height: 20px;
+}
+#room-check {
+  display: flex;
+  margin-left: 10px;
+  margin-top: 10px;
+}
+#room-check p {
+  padding-top: 10px;
+  padding-left: 10px;
+}
+
+/* === Responsive for room form === */
+@media(max-width: 768px) {
+  #transparent {
+    width: 90%;
+  }
+  footer #main5 {
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
+  }
+}
+@media(max-width: 480px) {
+  #transparent {
+    padding: 20px;
+    height: auto;
+  }
+}
+
+/* Room container fix */
+.room-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* Desktop - 4 cards */
+  gap: 20px;
+  padding: 20px;
+  max-width: 100%;     /* container kabhi screen se bahar na jaye */
+  box-sizing: border-box;
+}
+
+/* Room card fix */
+.room-card {
+  width: 100%;         /* har card apne column ke andar hi rahe */
+  max-width: 100%;
+  overflow: hidden;    /* andar ka content bahar na nikle */
+}
+
+/* Tablet */
+@media (max-width: 992px) {
+  .room-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Mobile */
+@media (max-width: 576px) {
+  .room-container {
+    grid-template-columns: 1fr;
+  }
+}
+/* Room Container */
+.room-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* Desktop */
+  gap: 20px;
+  padding: 20px;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Room Card */
+.room-card {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+  height: auto;
+}
+
+/* Room Image */
+.room-card img {
+  width: 100%;
+  height: 200px; /* desktop */
+  object-fit: cover;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+/* Room Info */
+.room-info {
+  width: 100%;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Reserve Button */
+.reserve-btn {
+  margin-top: 10px;
+  padding: 10px 20px;
+  background: #004aad;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  width: auto;
+}
+
+.reserve-btn a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* Tablet */
+@media (max-width: 992px) {
+  .room-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .room-card img {
+    height: 150px;
+  }
+
+  .room-info h3 {
+    font-size: 16px;
+  }
+
+  .room-info p {
+    font-size: 14px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 576px) {
+  .room-container {
+    grid-template-columns: 1fr;
+    gap: 15px;
+    padding: 10px;
+  }
+
+  .room-card img {
+    height: 120px;
+  }
+
+  .room-info h3 {
+    font-size: 15px;
+  }
+
+  .room-info p {
+    font-size: 13px;
+  }
+
+  .reserve-btn {
+    width: 100%; /* button full width on mobile */
+    padding: 12px 0;
+  }
+}
+
+
+
+
+/* === Vehicle Container === */
+.vehicle-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* Desktop */
+  gap: 20px;
+  padding: 20px;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Vehicle Card */
+.vehicle-card {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+  height: auto;
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Vehicle Image */
+.vehicle-card img {
+  width: 100%;
+  height: 200px; /* desktop */
+  object-fit: cover;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+/* Vehicle Info */
+.vehicle-info {
+  width: 100%;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Reserve Button */
+.reserve-btn {
+  margin-top: 10px;
+  padding: 10px 20px;
+  background: #004aad;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  width: auto;
+}
+
+.reserve-btn a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* === Tablet === */
+@media (max-width: 992px) {
+  .vehicle-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .vehicle-card img {
+    height: 150px;
+  }
+
+  .vehicle-info h3 {
+    font-size: 16px;
+  }
+
+  .vehicle-info p {
+    font-size: 14px;
+  }
+}
+
+/* === Mobile === */
+@media (max-width: 576px) {
+  .vehicle-container {
+    grid-template-columns: 1fr;
+    gap: 15px;
+    padding: 10px;
+  }
+
+  .vehicle-card img {
+    height: 120px;
+  }
+
+  .vehicle-info h3 {
+    font-size: 15px;
+  }
+
+  .vehicle-info p {
+    font-size: 13px;
+  }
+
+  .reserve-btn {
+    width: 100%;
+    padding: 12px 0;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+.logout-container {
+  max-width: 380px;
+  width: 90%;
+  margin: 40px auto;       /* upar se thoda gap */
+  padding: 20px 15px;      /* andar ka space */
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.08);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;  /* 👈 content upar rahe */
+  min-height: 250px;            /* box height maintain ho */
+}
+
+.logout-container .logos {
+  margin-top: 5px;   /* 👈 bohot upar ka gap hata diya */
+  margin-bottom: 15px;
+}
+
+.logout-container .logos img {
+  max-width: 140px;
+  width: 40%;
+  height: auto;
+}
+
+
+/* Message text */
+.logout-container .message {
+  font-size: 18px;
+  margin: 20px 0;
+  font-weight: 600;
+  color: #333;
+}
+
+/* Logout button */
+.logout-container .logout-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background: #d9534f;
+  color: #fff;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 16px;
+  transition: background 0.3s;
+}
+
+.logout-container .logout-btn:hover {
+  background: #c9302c;
+}
+
+/* Desktop */
+#transparent {
+  width: 440px;
+  margin-top: 20px; /* upar bahut chhota */
+}
+
+/* Tablet */
+@media (max-width: 992px) {
+  #transparent {
+    width: 80%;
+    margin-top: 15px; /* upar chhota */
+    padding: 25px;
+  }
+  #reserve {
+    height: 90vh; /* image screen ke hisaab se */
+    background-size: cover;
+  }
+}
+
+/* Mobile */
+@media (max-width: 576px) {
+  #transparent {
+    width: 90%;
+    margin-top: 10px; /* upar aur chhota */
+    padding: 20px;
+  }
+  #reserve {
+    height: 85vh; /* mobile pe image thodi aur chhoti */
+    background-size: cover;
+  }
+}
+
+
+/* Responsive styles for mobile and tablets */
+@media (max-width: 1200px) {
+    body{
+        overflow-x: hidden;
+    }
+  #main {
+    margin-left: 0;
+    gap: 30px;
+    flex-wrap: wrap;
+  }
+  #main1, #main2 {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  #main6, #main7 {
+    margin-left: 50px;
+  }
+  #icons {
+    margin-left: 0;
+    justify-content: center;
+  }
+  #ac{
+    margin-left:0px !important;
+  }
+
+  #main{
+    margin-left: 450px;
+  }
+
+ 
+}
+
+@media (max-width: 900px) {
+  #header {
+    height: auto;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+  }
+  #img1 {
+    margin-left: 10px;
+    margin-top: 10px;
+  }
+  #main {
+    flex-direction: column;
+    margin-top: 10px;
+    gap: 15px;
+    margin-left: 0;
+  }
+  #main1 {
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+    height: auto;
+    min-width: 0;
+  }
+  #main2, #main3 input, #btn2 {
+    width: 100% !important;
+    margin-left: 0 !important;
+  }
+  #main2 {
+    height: auto;
+  }
+  #main3 input, #btn2 {
+    max-width: 100%;
+  }
+  #main6, #main7 {
+    margin-left: 0;
+    margin-top: 30px;
+  }
+  #main5 {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+  #icons {
+    margin-left: 0;
+    justify-content: flex-start;
+    gap: 15px;
+  }
+  footer {
+    height: auto;
+    padding: 20px 10px;
+  }
+}
+
+@media (max-width: 600px) {
+  #header {
+    height: auto;
+    padding: 8px;
+  }
+  #img1 {
+    width: 50px;
+    height: 40px;
+    margin-left: 0;
+    margin-top: 0;
+  }
+  #main {
+    flex-direction: column;
+    gap: 10px;
+    margin-left: 0;
+    margin-top: 0;
+    align-items: flex-start;
+  }
+  #btn {
+    width: 100%;
+    margin-top: 0;
+  }
+  #main1 {
+    width: 100%;
+    margin: 20px auto;
+    height: auto;
+    border-width: 2px;
+    padding: 10px;
+  }
+  #main2, #main3 input, #btn2 {
+    width: 100% !important;
+    margin-left: 0 !important;
+  }
+  #main3 input, #btn2 {
+    font-size: 14px;
+    height: 40px;
+  }
+  #main2 {
+    height: auto;
+  }
+  #main6, #main7 {
+    margin-left: 0;
+    margin-top: 20px;
+  }
+  #main5 {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  #icons {
+    margin-left: 0;
+    justify-content: flex-start;
+    gap: 10px;
+  }
+  footer {
+    height: auto;
+    padding: 10px 5px;
+    font-size: 14px;
+  }
+  .hide{
+    display: block;
+  }
+}
+
+/* Responsive for cards and containers */
+@media (max-width: 900px) {
+  .cards-container {
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 40px;
+  }
+  .card {
+    width: 95%;
+    height: auto;
+    margin: 0 auto;
+  }
+  .meeting-wrapper,
+  .vehicle-wrapper {
+    flex-direction: column;
+    padding: 20px;
+  }
+  .meeting-image img,
+  .vehicle-image img {
+    width: 100%;
+    max-width: 350px;
+    margin-left: 0;
+  }
+  .meeting-card,
+  .vehicle-cards {
+    position: static;
+    max-width: 100%;
+    margin: 20px auto 0;
+    left: 0;
+    right: 0;
+  }
+}
+
+/* Responsive for forms and containers */
+@media (max-width: 600px) {
+  #main1,
+  #transparent-vehicle,
+  #transparent-room {
+    width: 92% !important;
+    min-width: 0;
+    margin-left: 5 !important;
+    margin-top: 20px;
+    padding: 10px;
+    height: auto;
+  }
+  #transparent-vehicle input,
+  #transparent-room input {
+    width: 100% !important;
+    margin-left: 0 !important;
+    font-size: 14px;
+    height: 38px;
+  }
+  #room-btn {
+    width: 100% !important;
+    margin-left: 0 !important;
+  }
+}
+
+/* Responsive for tables */
+@media (max-width: 700px) {
+  .status-table {
+    min-width: 0;
+    font-size: 12px;
+  }
+  .status-table th,
+  .status-table td {
+    padding: 8px 6px;
+  }
+  .status-heading {
+    font-size: 1.2rem;
+    padding-top: 100px;
+  }
+}
+#menu-toggle {
+  display: none;
+  cursor: pointer;
+  font-size: 32px;
+  color: white;
+  margin-right: 20px;
+}
+
+@media (max-width: 900px) {
+  #menu-toggle {
+    display: block;
+    position: absolute;
+    top: 15px;
+    right: 10px;
+    z-index: 1001;
+  }
+  #main {
+    position: fixed;
+    top: 70px;
+    left: 0;
+    width: 100vw;
+    background: #0662ab;
+    flex-direction: column;
+    gap: 20px;
+    padding: 30px 0;
+    margin-left: 0;
+    margin-top: 0;
+    color: white;
+    display: none; /* Hide by default on mobile */
+    z-index: 1000;
+    padding-left: 20px;
+  }
+  #btn{
+   width: 100px;
+   height: 40px;
+  }
+  #main.open {
+    display: flex;
+  }
+  #img1{
+    display: none;
+    margin-top: 10px;
+  }
+  #registerForm input{
+     margin-left: -5px !important;
+  }
+   #login{
+    flex-direction: column;
+  }
+  #login1{
+    width: 370px;
+    margin-left: -0px;
+    margin-left: -20px;
+    }
+    #login1 p{
+      padding-left: -0px;
+      padding-left: 50px;
+    }
+    #login1 img{
+      height: 120px;
+      width: 120px;
+    }
+   
+    #login1 h3{
+      padding-left: -0px;
+      padding-left: 50px;
+    }
+    #login{
+      overflow-x: hidden;
+    }
+    #login1 h1{
+      padding-left: -0px;
+    padding-left: 50px;
+    }
+    #login1 p{
+      padding-top: 20px;
+    }
+  #login2{
+    width: 370px;
+    margin-top: -50px;
+  }
+ #login2 #verify_box{
+    margin-left: -0px;
+    margin-left: 30px;
+  }
+  #login2 #heading8{
+    padding: -0px;
+    padding-left:20px ;
+    padding-top: 30px;
+    line-height: 35px;
+
+  }
+#login2 input{
+  width: 70vw;
+  margin-left: -70px;
+
+}
+ #login2 .input-icon,#login2 .input-icon2{
+    margin-left: -0px;
+    margin-left: 10px;
+}
+#login2 button{
+  margin-left: -0px;
+  width: 90vw;
+   margin-left: 10px;
+  height: 45px;
+}
+#boxes{
+  margin-left: 30px !important;
+}
+#heading6{
+  font-size: 39px;
+}
+#heading8{
+  font-size: 20px;
+}
+.account-wrapper{
+    margin-top: 15px;
+    margin-left: 10px;
+    width: 40px;
+    height: 40px;
+}
+ 
+
+}
+/* ===== Sidebar Styles (Mobile) ===== */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -290px;
+  width: 250px;
+  height: 100%;
+  background: #0662ab;
+  box-shadow: 2px 0 6px rgba(0,0,0,0.1);
+  padding: 20px;
+  transition: left 0.3s ease;
+  z-index: 1000;
+}
+.sidebar.show { left: 0; }
+
+.sidebar .close-btn {
+  font-size: 24px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  display: block;
+  text-align: right;
+}
+.sidebar ul { list-style: none; padding: 0; margin: 0; }
+.sidebar ul li { margin: 15px 0; }
+.sidebar ul li a { text-decoration: none; color: white; font-size: 16px; display: block; }
+
+/* Dropdown inside sidebar */
+.sidebar ul li .dropdown-menu {
+  display: none;
+  padding-left: 15px;
+}
+.sidebar ul li .dropdown-menu li { margin: 10px 0; }
+.sidebar ul li .dropdown-menu.show { display: block; }
+
+/* Overlay */
+.overlay {
+  /* position: fixed; */
+  top:0; left:0; width:100%; height:100%;
+  background: rgba(0,0,0,0.4);
+  display: none;
+  z-index: 999;
+}
+.overlay.active { display: block; }
+
+/* Hide hamburger on desktop */
+#menu-toggle { display: none; cursor: pointer; font-size: 22px; }
+#open-menu { font-size: 26px; }
+
+/* Responsive */
+@media (max-width: 900px) {
+  #menu-toggle { display: block; }
+  .nav-links { display: none; }
+  #closeSidebar {color: white;}
+}
+
+/* ===== Responsive for Hero Section ===== */
+@media (max-width: 900px) {
+  #box1 {
+    height: auto;
+    position: relative;
+  }
+  #room-img {
+    height: 60vh;
+    object-fit: cover;
+  }
+  #box2 {
+    height: auto;
+    padding: 40px 20px;
+    text-align: center;
+  }
+  #welcome1 {
+    padding: 0;
+    font-size: 18px;
+    padding-top: 50px;
+  }
+  #room-text1 {
+    font-size: 26px;
+    line-height: 1.4;
+    padding: 15px 10px;
+  }
+  #box2 button {
+    margin: 20px auto 0;
+    display: block;
+  }
+}
+
+@media (max-width: 600px) {
+  #room-text1 {
+    font-size: 22px;
+  }
+  #welcome1 {
+    font-size: 16px;
+  }
+}
+
+/* ===== Responsive for Cards Section ===== */
+@media (max-width: 900px) {
+  .cards-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+  }
+  .card {
+    width: 90%;
+    height: auto;
+    padding: 25px 15px;
+  }
+}
+
+/* ===== Responsive for Meeting & Vehicle Wrappers ===== */
+@media (max-width: 1000px) {
+  .meeting-wrapper,
+  .vehicle-wrapper {
+    flex-direction: column;
+    text-align: center;
+    padding: 30px 20px;
+  }
+  .meeting-image img,
+  .vehicle-image img {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  .meeting-card,
+  .vehicle-cards {
+    margin: 20px auto 0;
+    max-width: 95%;
+    text-align: center;
+  }
+  .meeting-card .icon,
+  .vehicle-cards .icon {
+    margin: 0 auto 15px;
+    display: block;
+  }
+}
+
+/* ===== Responsive for Facility Section ===== */
+@media (max-width: 1000px) {
+  .facility-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+  }
+}
+@media (max-width: 600px) {
+  .facility-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .facility-section h2 {
+    font-size: 22px;
+    text-align: center;
+  }
+  #respon3 {
+    font-size: 14px;
+    text-align: center;
+    padding: 0 10px;
+  }
+ #ac{
+    margin-left:0px !important;
+  }
+}
+/* ====== Base Footer (Desktop) ====== */
+footer {
+  background: #0662ab;
+  height: auto;
+}
+#main5 {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+#main6, #main7 {
+  flex: 1;
+  min-width: 250px;
+  max-width: 350px;
+}
+#icons {
+  margin-top: 20px;
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+/* ====== 1200px ====== */
+@media (max-width: 1200px) {
+  #main5 {
+    gap: 30px;
+    justify-content: space-around;
+  }
+  #main6, #main7 {
+    max-width: 300px;
+  }
+   #box1{
+    position: absolute;
+  }
+  #box2{
+    position: relative;
+  }
+}
+
+/* ====== 1000px ====== */
+@media (max-width: 1000px) {
+  #main5 {
+    justify-content: center;
+    gap: 30px;
+  }
+  #main6, #main7 {
+    margin: 0 auto;
+    text-align: center;
+  }
+  #icons {
+    justify-content: center;
+  }
+   #box1{
+    position: absolute;
+  }
+  #box2{
+    position: relative;
+  }
+}
+
+/* ====== 900px ====== */
+@media (max-width: 900px) {
+  #main5 {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+  }
+  #main6, #main7 {
+    flex: 1 1 45%;
+    margin: 10px;
+  }
+   #box1{
+    position: absolute;
+  }
+  #box2{
+    position: relative;
+  }
+}
+
+/* ====== 700px ====== */
+@media (max-width: 700px) {
+  #main5 {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 25px;
+  }
+  #main6, #main7 {
+    width: 90%;
+    margin: 0 auto;
+  }
+   #box1{
+    position: absolute;
+  }
+  #box2{
+    position: relative;
+  }
+}
+
+/* ====== 600px ====== */
+@media (max-width: 600px) {
+  footer {
+    padding: 20px 15px;
+    font-size: 14px;
+  }
+  #main5 {
+    gap: 20px;
+  }
+  #main6, #main7 {
+    width: 100%;
+  }
+  #icons {
+    gap: 12px;
+  }
+  #box1{
+    position: absolute;
+  }
+  #box2{
+    position: relative;
+  }
+}
+
+
+.logout-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 0 auto;
+  width: 220px;
+  padding: 14px;
+  background: rgb(216, 32, 32);
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 16px;
+}
+.logout-btn i {
+  font-size: 18px;
+}
+
+/* Tablet (max 900px) */
+@media (max-width: 900px) {
+  .logos {
+    flex-direction: row;
+    gap: 25px;
+    margin: 40px 0 25px;
+    margin-top: 200px;
+  }
+  .logos img {
+    height: 60px;
+  }
+  .message {
+    font-size: 20px;
+    padding: 0 15px;
+  }
+  .logout-btn {
+    width: 180px;
+    font-size: 15px;
+    padding: 12px;
+  }
+}
+
+/* Mobile (max 600px) */
+@media (max-width: 600px) {
+  .logos {
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+    margin: 30px 0 20px;
+    margin-top: 200px;
+
+  }
+  .logos img {
+    height: 50px;
+  }
+  .message {
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+  .logout-btn {
+    width: 160px;
+    font-size: 14px;
+    padding: 10px;
+  }
+}
+/* ===========================
+   📱 Responsive Styles
+   =========================== */
+
+/* Tablet aur mobile ke liye */
+@media (max-width: 992px) {
+  .account-container {
+    flex-direction: column;
+    gap: 30px;
+    padding: 0 20px;
+    margin: 40px auto;
+    text-align: center;
+  }
+
+  .profile-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .form-section {
+    width: 100%;
+    max-width: 500px;
+  }
+
+  .form-section input {
+    font-size: 14px;
+    padding: 10px 14px;
+  }
+
+  .form-section h2 {
+    font-size: 20px;
+  }
+
+  .button-group {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .btn {
+    width: 100%;
+  }
+}
+
+/* Mobile chhote screens ke liye */
+@media (max-width: 576px) {
+  .account-container {
+    margin: 20px auto;
+    gap: 20px;
+  }
+
+  .profile-pic {
+    width: 120px;
+    height: 120px;
+  }
+
+  .form-section input {
+    font-size: 13px;
+    padding: 9px 12px;
+  }
+
+  .form-section h2 {
+    font-size: 18px;
+  }
+}
+@media (max-width:600px) {
+  .status-section{
+    margin-top: 400px;
+  }
+  #Alkhidmat{
+    width:100%;
+    margin-left: 0px;
+  }
+  .status-table-container{
+   width: 100%;
+   margin-left: -10px;
+   background-color: transparent;
+  }
+   .status-table{
+    width: 100%;
+    font-size:18px ;
+
+   }
+   .status-heading{
+    font-size:30px ;
+   }
+}
+@media (max-width:700px) {
+  .status-section{
+    margin-top: 400px;
+  }
+  #Alkhidmat{
+    width:100%;
+    margin-left: 0px;
+  }
+  .status-table-container{
+   width: 100%;
+   margin-left: -10px;
+   background-color: transparent;
+  }
+   .status-table{
+    width: 100%;
+    font-size:18px ;
+
+   }
+   .status-heading{
+    font-size:30px ;
+   }
+}
+@media (max-width:900px) {
+
+  #Alkhidmat{
+    width:100%;
+    margin-left: 0px;
+  }
+  .status-table-container{
+   width: 100%;
+   margin-left: -10px;
+   background-color: transparent;
+  }
+   .status-table{
+    width: 100%;
+    font-size:18px ;
+
+   }
+   .status-heading{
+    font-size:30px ;
+   }
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Koh Santepheap", sans-serif;
+  background: #fff;
+}
+
+
+/* Reservation Section */
+#reserve {
+  width: 100%;
+  height: 100vh;
+  background: url("./images/res.png") no-repeat center/cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+#transparent {
+  width: 440px;
+  padding: 30px;
+  backdrop-filter: blur(1000px);
+  background-color: rgba(255, 255, 255, 0.411);
+  border-radius: 10px;
+  height: 600px;
+}
+
+#transparent h2 {
+  text-align: center;
+  color: #0662AB;
+  margin-bottom: 20px;
+}
+
+#transparent input, #room-btn {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+#room-btn {
+  background: #0662AB;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+/* Footer */
+footer {
+  background-color: #0662AB;
+  color: white;
+  padding: 30px;
+}
+
+#main5 {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+
+#icons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+#icons img {
+  width: 30px;
+  height: 30px;
+}
+
+/* ✅ Responsive */
+@media(max-width: 768px) {
+  #main {
+    display: none; /* hide nav links */
+  }
+  
+  #transparent {
+    width: 90%;
+  }
+
+  footer #main5 {
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
+  }
+}
+
+@media(max-width: 480px) {
+
+  #transparent {
+    padding: 20px;
+  }
+}
+#room-check input{
+  width: 20px;
+  height: 20px;
+}
+#room-check{
+  display: flex;
+  margin-left: 10px;
+  margin-top: 10px;
+}
+#room-check p{
+  padding-top: 10px;
+  padding-left: 10px;
+}
+
+
+
+
+
+/* === Reservation (Room.html specific CSS) === */
+#reserve {
+  width: 100%;
+  height: 100vh;
+  background: url("./images/res.png") no-repeat center/cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#transparent {
+  width: 440px;
+  padding: 30px;
+  backdrop-filter: blur(1000px);
+  background-color: rgba(255, 255, 255, 0.411);
+  border-radius: 10px;
+  height: 600px;
+}
+
+#transparent h2 {
+  text-align: center;
+  color: #0662AB;
+  margin-bottom: 20px;
+}
+
+#transparent input, #room-btn {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+#room-btn {
+  background: #0662AB;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+/* === Room checkboxes === */
+#room-check input {
+  width: 20px;
+  height: 20px;
+}
+#room-check {
+  display: flex;
+  margin-left: 10px;
+  margin-top: 10px;
+}
+#room-check p {
+  padding-top: 10px;
+  padding-left: 10px;
+}
+
+/* === Responsive for room form === */
+@media(max-width: 768px) {
+  #transparent {
+    width: 90%;
+  }
+  footer #main5 {
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
+  }
+}
+@media(max-width: 480px) {
+  #transparent {
+    padding: 20px;
+    height: auto;
+  }
+}
+
+/* Room container fix */
+.room-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* Desktop - 4 cards */
+  gap: 20px;
+  padding: 20px;
+  max-width: 100%;     /* container kabhi screen se bahar na jaye */
+  box-sizing: border-box;
+}
+
+/* Room card fix */
+.room-card {
+  width: 100%;         /* har card apne column ke andar hi rahe */
+  max-width: 100%;
+  overflow: hidden;    /* andar ka content bahar na nikle */
+}
+
+/* Tablet */
+@media (max-width: 992px) {
+  .room-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Mobile */
+@media (max-width: 576px) {
+  .room-container {
+    grid-template-columns: 1fr;
+  }
+}
+/* Room Container */
+.room-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* Desktop */
+  gap: 20px;
+  padding: 20px;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Room Card */
+.room-card {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+  height: auto;
+}
+
+/* Room Image */
+.room-card img {
+  width: 100%;
+  height: 200px; /* desktop */
+  object-fit: cover;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+/* Room Info */
+.room-info {
+  width: 100%;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Reserve Button */
+.reserve-btn {
+  margin-top: 10px;
+  padding: 10px 20px;
+  background: #004aad;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  width: auto;
+}
+
+.reserve-btn a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* Tablet */
+@media (max-width: 992px) {
+  .room-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .room-card img {
+    height: 150px;
+  }
+
+  .room-info h3 {
+    font-size: 16px;
+  }
+
+  .room-info p {
+    font-size: 14px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 576px) {
+  .room-container {
+    grid-template-columns: 1fr;
+    gap: 15px;
+    padding: 10px;
+  }
+
+  .room-card img {
+    height: 120px;
+  }
+
+  .room-info h3 {
+    font-size: 15px;
+  }
+
+  .room-info p {
+    font-size: 13px;
+  }
+
+  .reserve-btn {
+    width: 100%; /* button full width on mobile */
+    padding: 12px 0;
+  }
+}
+
+
+
+
+/* === Vehicle Container === */
+.vehicle-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* Desktop */
+  gap: 20px;
+  padding: 20px;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Vehicle Card */
+.vehicle-card {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+  height: auto;
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Vehicle Image */
+.vehicle-card img {
+  width: 100%;
+  height: 200px; /* desktop */
+  object-fit: cover;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+/* Vehicle Info */
+.vehicle-info {
+  width: 100%;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Reserve Button */
+.reserve-btn {
+  margin-top: 10px;
+  padding: 10px 20px;
+  background: #004aad;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  width: auto;
+}
+
+.reserve-btn a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* === Tablet === */
+@media (max-width: 992px) {
+  .vehicle-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .vehicle-card img {
+    height: 150px;
+  }
+
+  .vehicle-info h3 {
+    font-size: 16px;
+  }
+
+  .vehicle-info p {
+    font-size: 14px;
+  }
+}
+
+/* === Mobile === */
+@media (max-width: 576px) {
+  .vehicle-container {
+    grid-template-columns: 1fr;
+    gap: 15px;
+    padding: 10px;
+  }
+
+  .vehicle-card img {
+    height: 120px;
+  }
+
+  .vehicle-info h3 {
+    font-size: 15px;
+  }
+
+  .vehicle-info p {
+    font-size: 13px;
+  }
+
+  .reserve-btn {
+    width: 100%;
+    padding: 12px 0;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+.logout-container {
+  max-width: 380px;
+  width: 90%;
+  margin: 40px auto;       /* upar se thoda gap */
+  padding: 20px 15px;      /* andar ka space */
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.08);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;  /* 👈 content upar rahe */
+  min-height: 250px;            /* box height maintain ho */
+}
+
+.logout-container .logos {
+  margin-top: 5px;   /* 👈 bohot upar ka gap hata diya */
+  margin-bottom: 15px;
+}
+
+.logout-container .logos img {
+  max-width: 140px;
+  width: 40%;
+  height: auto;
+}
+
+
+/* Message text */
+.logout-container .message {
+  font-size: 18px;
+  margin: 20px 0;
+  font-weight: 600;
+  color: #333;
+}
+
+/* Logout button */
+.logout-container .logout-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background: #d9534f;
+  color: #fff;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 16px;
+  transition: background 0.3s;
+}
+
+.logout-container .logout-btn:hover {
+  background: #c9302c;
+}
+
+/* Desktop */
+#transparent {
+  width: 440px;
+  margin-top: 20px; /* upar bahut chhota */
+}
+
+/* Tablet */
+@media (max-width: 992px) {
+  #transparent {
+    width: 80%;
+    margin-top: 15px; /* upar chhota */
+    padding: 25px;
+  }
+  #reserve {
+    height: 90vh; /* image screen ke hisaab se */
+    background-size: cover;
+  }
+}
+
+/* Mobile */
+@media (max-width: 576px) {
+  #transparent {
+    width: 90%;
+    margin-top: 10px; /* upar aur chhota */
+    padding: 20px;
+  }
+  #reserve {
+    height: 85vh; /* mobile pe image thodi aur chhoti */
+    background-size: cover;
+  }
+
+}
+
+
+
+

@@ -10,11 +10,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Koh+Santepheap:wght@100;300;400;700;900&display=swap" rel="stylesheet"/>
   <link href="https://fonts.googleapis.com/css2?family=Konkhmer+Sleokchher&display=swap" rel="stylesheet"/>
-  <!-- Font Awesome for icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
-   <!-- Sidebar (mobile only) -->
+  <!-- Sidebar (mobile only) -->
   <aside class="sidebar" id="sidebar">
     <div class="close-btn" id="closeSidebar">&times;</div>
     <ul>
@@ -26,15 +25,12 @@
   </aside>
   <div class="overlay" id="overlay"></div>
 
-<header id="header">
-  <!-- Logo -->
-  <img src="./images/image_1.png" alt="logo" id="img1" />
-
-  <!-- Hamburger (mobile only) -->
-  <div id="menu-toggle">
-    <span id="open-menu">&#9776;</span>
-  </div>
-    <!-- Account dropdown -->
+  <!-- Header -->
+  <header id="header">
+    <img src="./images/image_1.png" alt="logo" id="img1" />
+    <div id="menu-toggle">
+      <span id="open-menu">&#9776;</span>
+    </div>
     <div class="account-wrapper" id="ac">
       <div id="acc">
         <img src="./images/image_30.png" alt="Account" id="accToggle">
@@ -44,36 +40,32 @@
         <a href="logout.html">Logout</a>
       </div>
     </div>
-  </div>
-  <!-- Navigation links -->
-  <div id="main" class="nav-links">
-    <h5><a href="room.html">Room</a></h5>
-    <h5><a href="status.html">Status</a></h5>
-    <h5><a href="vehicle.html">Vehicles</a></h5>
-    <button id="btn"><a href="logout.html">Logout</a></button>
+    <div id="main" class="nav-links">
+      <h5><a href="room.html">Room</a></h5>
+      <h5><a href="status.html">Status</a></h5>
+      <h5><a href="vehicle.html">Vehicles</a></h5>
+      <button id="btn"><a href="logout.html">Logout</a></button>
+    </div>
+  </header>
 
-
-</header>
-
-  <!-- register form start -->
+  <!-- Register Form -->
   <div id="main1">
     <div id="main2">
       <h2 id="heading4">Registration</h2>
     </div>
     <div id="main3">
       <form id="registerForm">
-        <input type="text" placeholder="Enter Your FullName" required />
-        <input type="email" placeholder="Enter Your Email" required />
-        <input type="password" placeholder="Enter Your Password" required />
-        <input type="password" placeholder="Enter Your ConfirmPassword" required />
+        <input type="text" id="full_name" name="full_name" placeholder="Enter Your FullName" required />
+        <input type="email" id="email" name="email" placeholder="Enter Your Email" required />
+        <input type="password" id="password" name="password" placeholder="Enter Your Password" required />
+        <input type="password" id="confirm_password" name="confirm_password" placeholder="Enter Your ConfirmPassword" required />
         <button type="submit" id="btn2">Register</button>
       </form>
-      <p id="para1">Already have an account ? <span><a href="login.html">Login</a></span></p>
+      <p id="para1">Already have an account? <span><a href="login.html">Login</a></span></p>
     </div>
   </div>
-  <!-- register form end -->
-   
-  <!-- footer start -->
+
+  <!-- Footer -->
   <footer>
     <div id="main5">
       <div>
@@ -99,9 +91,8 @@
       <img src="./images/image_19_1.png" alt="" />
     </div>
   </footer>
-  <!-- footer end -->
 
-  <!-- script -->
+  <!-- Scripts -->
   <script>
     // Sidebar toggle
     const openMenu = document.getElementById("open-menu");
@@ -122,12 +113,54 @@
       overlay.classList.remove("active");
     });
 
-    // Desktop dropdown
-    const accToggleDesktop = document.getElementById("accToggleDesktop");
-    const accDropdownDesktop = document.getElementById("accDropdownDesktop");
-    accToggleDesktop?.addEventListener("click", () => {
-      accDropdownDesktop.classList.toggle("show");
+    // Account dropdown (mobile/desktop)
+    const accToggle = document.getElementById("accToggle");
+    const accDropdown = document.getElementById("accDropdown");
+    accToggle.addEventListener("click", () => {
+      accDropdown.classList.toggle("show");
+    });
+
+    // ---------------- Register Form Submit ----------------
+    const registerForm = document.getElementById("registerForm");
+    registerForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const full_name = document.getElementById("full_name").value.trim();
+      const email = document.getElementById("email").value.trim().toLowerCase();
+      const password = document.getElementById("password").value.trim();
+      const confirm_password = document.getElementById("confirm_password").value.trim();
+
+      if (!email.endsWith("@alkhidmat.org")) {
+        alert("Email must be @alkhidmat.org");
+        return;
+      }
+
+      if (password !== confirm_password) {
+        alert("Passwords do not match");
+        return;
+      }
+
+      try {
+        const res = await fetch("http://localhost:5000/register", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ full_name, email, password }),
+        });
+
+        const data = await res.json();
+
+        if (res.ok) {
+          alert("Registration Successful");
+          window.location.href = "login.html";
+        } else {
+          alert(data.error);
+        }
+      } catch (err) {
+        console.error(err);
+        alert("Server error");
+      }
     });
   </script>
 </body>
 </html>
+
