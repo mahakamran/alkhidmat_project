@@ -7,131 +7,193 @@
   <link href="https://fonts.googleapis.com/css2?family=Koh+Santepheap:wght@300;400;700&display=swap" rel="stylesheet" />
 
   <style>
-    /* Reset */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-    body {
-      font-family: "Koh Santepheap", sans-serif;
-      background: #fff;
-    }
+body {
+  font-family: "Koh Santepheap", sans-serif;
+  background: #fff;
+}
 
-    /* Login Wrapper */
-    #login {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 40px;
-      padding: 40px;
-      min-height: 100vh;
-      flex-wrap: wrap;
-    }
+/* Login Wrapper */
+#login {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 40px 80px;
+  min-height: 100vh;
+  flex-wrap: nowrap;
+  gap: 100px;
+}
 
-    /* Left side (text + logo) */
-    #login1 {
-      flex: 1;
-      min-width: 280px;
-      max-width: 400px;
-      text-align: center;
-    }
+/* Left side (text + logo) */
+#login1 {
+  flex: 1;
+  min-width: 320px;
+  max-width: 600px;  
+  text-align: center;
+}
 
-    #login1 img {
-      height: 100px;
-      margin: 10px;
-    }
+#login1 img {
+  max-width: 180px;
+  margin: 10px;
+}
 
-    #login1 h1,
-    #login1 h3,
-    #login1 p {
-      margin: 10px 0;
-    }
+#login1 #para2 {
+  font-size: 1.4rem;
+  margin: 15px 0;
+}
 
-    /* Right side (form) */
-    #login2 {
-      flex: 1;
-      min-width: 280px;
-      max-width: 400px;
-      background: #f8f8f8;
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-    }
+#heading5 {
+  font-size: 2rem;
+  margin: 10px 0;
+}
 
-    #login2 h2 {
-      font-size: 18px;
-      margin-bottom: 20px;
-      text-align: center;
-    }
+#heading6 {
+  font-size: 3rem;
+  font-weight: bold;
+  margin: 10px 0;
+}
 
-    /* Input wrapper */
-    .input-wrapper {
-      position: relative;
-      margin-bottom: 15px;
-    }
+#heading7 {
+  font-size: 3rem;
+  font-weight: bold;
+  margin: 10px 0;
+}
 
-    .input-wrapper input {
-      width: 100%;
-      padding: 12px 40px 12px 12px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-    }
+#para3 {
+  font-size: 1.3rem;
+  margin-top: 15px;
+}
 
-    .input-icon,
-    .input-icon2 {
-      position: absolute;
-      right: 10px;
-      top: 50%;
-      transform: translateY(-50%);
-      height: 20px;
-      width: 20px;
-    }
+/* Right side (form) */
+#login2 {
+  flex: 1;
+  min-width: 320px;
+  max-width: 450px;
+  background: #f8f8f8;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
 
-    /* Login button */
-    #login-btn {
-      width: 100%;
-      padding: 12px;
-      background: #0662ab;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 16px;
-      transition: 0.3s;
-    }
+#login2 h2 {
+  font-size: 20px;
+  margin-bottom: 25px;
+  text-align: center;
+}
 
-    #login-btn:hover {
-      background: #054a80;
-    }
+/* Input wrapper */
+.input-wrapper {
+  position: relative;
+  margin-bottom: 15px;
+}
 
-    /* Responsive */
-    @media (max-width: 768px) {
-      #login {
-        flex-direction: column;
-        padding: 20px;
-      }
+.input-wrapper input {
+  width: 100%;
+  padding: 12px 40px 12px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
 
-      #login1,
-      #login2 {
-        max-width: 100%;
-      }
-    }
+.input-icon,
+.input-icon2 {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 20px;
+  width: 20px;
+}
 
-    @media (max-width: 480px) {
-      #login {
-        padding: 10px;
-      }
+/* Login button */
+#login-btn {
+  width: 100%;
+  padding: 12px;
+  background: #0662ab;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: 0.3s;
+}
 
-      #login2 {
-        padding: 20px;
-      }
+#login-btn:hover {
+  background: #054a80;
+}
 
-      #login2 h2 {
-        font-size: 16px;
-      }
-    }
+/* Responsive */
+@media (max-width: 768px) {
+  #login {
+    flex-direction: column;
+    padding: 20px;
+    gap: 40px;
+  }
+
+  #login1 img {
+    max-width: 120px; /* 👈 mobile/tablet me chhota logo */
+  }
+
+  #heading5 {
+    font-size: 1.5rem; /* 👈 chhoti heading */
+  }
+
+  #heading6,
+  #heading7 {
+    font-size: 2rem; /* 👈 text small */
+  }
+
+  #para2, #para3 {
+    font-size: 1rem;
+  }
+
+  #login1,
+  #login2 {
+    max-width: 100%;
+  }
+}
+@media (max-width: 480px) {
+  #login {
+    padding: 10px;
+    gap: 20px;
+  }
+
+  #login1 img {
+    max-width: 90px; /* logo aur chhota */
+  }
+
+  #heading5 {
+    font-size: clamp(1rem, 4vw, 1.3rem);
+  }
+
+  #heading6,
+  #heading7 {
+    font-size: clamp(1.2rem, 5vw, 1.6rem); /* responsive size */
+  }
+
+  #para2 {
+    font-size: clamp(0.9rem, 3.5vw, 1.1rem);
+  }
+
+  #para3 {
+    font-size: clamp(0.8rem, 3.2vw, 1rem);
+  }
+
+  #login2 {
+    padding: 18px;
+  }
+
+  #login2 h2 {
+    font-size: clamp(0.85rem, 3vw, 1rem);
+  }
+}
+
+
   </style>
 </head>
 <body>

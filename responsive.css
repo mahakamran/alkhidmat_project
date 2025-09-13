@@ -2617,31 +2617,37 @@ footer {
 }
 
 
-
-
-
-
-
-
+#reserve {
+  display: flex;
+  justify-content: center;      /* horizontally center */
+  align-items: center;          /* vertically center */
+  min-height: calc(100vh - 70px);  
+  box-sizing: border-box;
+  padding: 0;   
+}
 
 
 .logout-container {
   max-width: 380px;
   width: 90%;
-  margin: 40px auto;       /* upar se thoda gap */
-  padding: 20px 15px;      /* andar ka space */
+  padding: 30px 20px;
   background: #fff;
   border-radius: 12px;
   box-shadow: 0px 4px 10px rgba(0,0,0,0.08);
   text-align: center;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;  /* 👈 content upar rahe */
-  min-height: 250px;            /* box height maintain ho */
+  justify-content: flex-start;
+  min-height: 250px;
+  margin-bottom: 0;
+  position: relative;
+  top: 40px;   
 }
 
+
+
+
 .logout-container .logos {
-  margin-top: 5px;   /* 👈 bohot upar ka gap hata diya */
   margin-bottom: 15px;
 }
 
@@ -2651,8 +2657,6 @@ footer {
   height: auto;
 }
 
-
-/* Message text */
 .logout-container .message {
   font-size: 18px;
   margin: 20px 0;
@@ -2660,7 +2664,6 @@ footer {
   color: #333;
 }
 
-/* Logout button */
 .logout-container .logout-btn {
   display: inline-block;
   padding: 10px 20px;
@@ -2679,19 +2682,14 @@ footer {
 /* Desktop */
 #transparent {
   width: 440px;
-  margin-top: 20px; /* upar bahut chhota */
+  padding: 20px;
 }
 
 /* Tablet */
 @media (max-width: 992px) {
   #transparent {
     width: 80%;
-    margin-top: 15px; /* upar chhota */
     padding: 25px;
-  }
-  #reserve {
-    height: 90vh; /* image screen ke hisaab se */
-    background-size: cover;
   }
 }
 
@@ -2699,16 +2697,6 @@ footer {
 @media (max-width: 576px) {
   #transparent {
     width: 90%;
-    margin-top: 10px; /* upar aur chhota */
     padding: 20px;
   }
-  #reserve {
-    height: 85vh; /* mobile pe image thodi aur chhoti */
-    background-size: cover;
-  }
-
 }
-
-
-
-
